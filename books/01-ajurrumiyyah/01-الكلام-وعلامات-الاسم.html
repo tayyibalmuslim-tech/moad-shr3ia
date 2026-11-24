@@ -118,7 +118,7 @@ strong{color:var(--navy)}
 .exs{display:flex;flex-direction:column;gap:8px;margin:14px 0}
 .ex{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 14px}
 .ex .s{flex:1 1 220px}
-.ex .r{flex:0 0 auto;font-weight:800;color:var(--teal);font-size:15.5px}
+.ex .r{flex:0 1 auto;min-width:0;font-weight:800;color:var(--teal);font-size:15.5px}
 
 /* جداول وهياكل (div لا table) */
 .cmp{display:flex;flex-wrap:wrap;margin:16px -6px}
@@ -220,6 +220,7 @@ strong{color:var(--navy)}
   .bayt{font-size:19px}
   .bayt span{padding:0 6px}
   .td.n{flex-basis:100%}
+  .ex .r{flex-basis:100%}
   .chain .arw{flex-basis:100%;transform:rotate(-90deg)}
   .src .k{flex-basis:100%}
 }
