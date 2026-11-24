@@ -73,3 +73,27 @@ const PLAN = {
 PLAN.books.forEach(function (b) {
   b.folder = "books/" + String(b.n).padStart(2, "0") + "-" + b.key;
 });
+
+// =========================================================
+// جسر أداة بطاقات Anki المشتركة ilm-anki.js (آلية العمل 5.11 — البند 9-ص)
+// الأداة نسخة مطابقة من مستودع Albinaa_Almanhaji ولا تُعدَّل هنا.
+// الجسر ده بيبني لها SITE_DATA من PLAN، فيطلع الوسم والرزمة آليًا:
+//   الوسم:  مواد_شرعية::المستوى_الأساسي::النحو::الآجرومية::محاضرة_01  + أولوية_N
+//   الرزمة: فوائد::🔴🔴🔴::مواد شرعية::<رزمة الأولوية>
+// اسم الكتاب في الوسم = عنوانه بعد حذف ما بين القوسين وعلامات «»، ولو عايز اسم أقصر
+// ضيف للكتاب حقل ankiName. ما تغيّرش أي حاجة هنا بعد استيراد بطاقات، عشان الوسوم تفضل ثابتة.
+// =========================================================
+var SITE_DATA = (function () {
+  var LEVEL_NAMES = { basic: "المستوى الأساسي", mid: "المستوى المتوسط", adv: "المستوى المتقدم" };
+  var stages = {};
+  PLAN.books.forEach(function (b) {
+    var lectures = [];
+    for (var i = 1; i <= 99; i++) lectures.push({ id: "moad_" + b.key + "_" + String(i).padStart(2, "0") });
+    stages["moad" + b.n] = {
+      name: b.science,
+      level: LEVEL_NAMES[b.level],
+      subjects: [{ key: b.key, name: b.ankiName || b.title.replace(/\([^)]*\)/g, "").replace(/[«»]/g, "").trim(), lectures: lectures }]
+    };
+  });
+  return { anki: { program: "مواد شرعية", deck: "مواد شرعية" }, stages: stages };
+})();

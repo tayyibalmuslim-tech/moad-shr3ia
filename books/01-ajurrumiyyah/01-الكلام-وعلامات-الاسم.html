@@ -1,0 +1,1741 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>المحاضرة 01: الكلام وعلامات الاسم — شرح الآجرومية | مواد شرعية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;800&family=Reem+Kufi:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* ===== هوية «دفتر النحو» — سلسلة شرح الآجرومية ===== */
+:root{
+  --paper:#faf8f3; --card:#ffffff; --ink:#1f2937; --ink2:#4b5563; --line:#e6e1d6;
+  --navy:#1d2b4f; --lapis:#2f5fb3; --lapis-l:#eaf0fb; --terra:#c0612b; --terra-l:#fbefe7;
+  --teal:#0f7a7a; --teal-l:#e6f4f3; --steel:#4a5a8a; --steel-l:#edf0f7;
+  --fix:#b45309; --fix-l:#fdf3e7; --edit-l:#f4f4f4;
+  /* ألوان الأقسام */
+  --c1:#2f5fb3; --c2:#0f7a7a; --c3:#4a5a8a; --c4:#c0612b; --c5:#1f86a8; --c6:#3b4cc0; --c7:#2a6f97; --c8:#4b5563;
+  /* الطبقة الدلالية (5-ب) — محجوزة */
+  --sem-aya:#14532d; --sem-hadith:#5b2d90; --sem-sahabi:#8a5a00; --sem-scholar:#8f1d21;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Cairo','Noto Sans Arabic',Tahoma,sans-serif;font-size:18px;line-height:1.9;text-align:right}
+.wrap{max-width:800px;margin:0 auto;padding:0 18px 60px}
+a{color:var(--lapis)}
+h1,h2,h3,h4{font-family:'Reem Kufi','Cairo',sans-serif;color:var(--navy);line-height:1.5;margin:0}
+h1{font-size:38px}
+h2{font-size:29px}
+h3{font-size:22px;margin:30px 0 10px}
+h4{font-size:19px;margin:20px 0 8px}
+p{margin:0 0 14px}
+strong{color:var(--navy)}
+
+/* ===== رأس الصفحة (خارج منطقة الهايلايت) ===== */
+.top{background:var(--navy);color:#fff;padding:34px 0 26px;margin-bottom:26px;position:relative;overflow:hidden}
+.top:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0 1px,transparent 1px 38px)}
+.top .wrap{position:relative;padding-bottom:0}
+.top .series{font-size:14px;letter-spacing:.3px;color:#c9d6f2;font-weight:700}
+.top h1{color:#fff;margin:6px 0 8px}
+.top .sub{color:#dbe3f5;font-size:16px;margin:0}
+.chips{display:flex;flex-wrap:wrap;margin:16px -4px 0}
+.chips a{display:inline-block;margin:4px;padding:5px 12px;border-radius:999px;background:rgba(255,255,255,.1);color:#fff;text-decoration:none;font-size:14px;border:1px solid rgba(255,255,255,.18)}
+.chips a:hover{background:rgba(255,255,255,.2)}
+.ai-note{background:#fff7e6;border:1px solid #f0d9a8;color:#6b4b10;border-radius:12px;padding:10px 14px;font-size:15px;margin:0 0 14px}
+#ilm-completion-box{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin:0 0 18px;font-weight:700;color:var(--navy);cursor:pointer;font-size:16px}
+#ilm-completion-box input{width:20px;height:20px;accent-color:var(--lapis)}
+
+/* ===== بطاقة المصدر ولوحة التوجيه ===== */
+.src{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:0 0 18px;font-size:16px}
+.src .row{display:flex;flex-wrap:wrap;border-bottom:1px dashed var(--line);padding:6px 0}
+.src .row:last-child{border-bottom:0}
+.src .k{flex:0 0 120px;color:var(--ink2);font-weight:700}
+.src .v{flex:1 1 240px}
+.orient{background:linear-gradient(180deg,#f1f5fd,#fff);border:1px solid #d6e0f3;border-radius:18px;padding:18px 20px;margin:0 0 26px}
+.orient .lab{font-size:13px;font-weight:800;color:var(--lapis);margin:0 0 2px}
+.orient .cq{font-family:'Reem Kufi','Cairo',sans-serif;font-size:23px;color:var(--navy);margin:0 0 12px;line-height:1.6}
+.orient .idea{background:#fff;border-right:4px solid var(--lapis);border-radius:10px;padding:10px 14px;margin:0 0 14px}
+.orient .order{display:flex;flex-wrap:wrap;margin:6px -4px 0}
+.orient .order span{margin:4px;padding:4px 11px;border-radius:8px;background:#fff;border:1px solid #d6e0f3;font-size:15px}
+.tag-ed{display:inline-block;font-size:11.5px;font-weight:700;color:#5f5f5f;background:#eee;border-radius:6px;padding:0 7px;margin-inline-start:6px;vertical-align:2px}
+
+/* ===== الخريطة الذهنية ===== */
+.mindmap{margin:12px 0 0;display:flex;align-items:center;gap:14px}
+.mm-center{flex:0 0 150px;background:var(--navy);color:#fff;border-radius:16px;padding:14px;text-align:center;font-weight:800;font-family:'Reem Kufi','Cairo',sans-serif;font-size:18px}
+.mm-branches{flex:1;display:flex;flex-direction:column;gap:8px;border-right:3px solid #c3d1ee;padding-right:14px}
+.mm-node{display:block;background:#fff;border:1px solid #d6e0f3;border-radius:12px;padding:7px 12px;text-decoration:none;color:var(--navy);font-weight:700;font-size:16px}
+.mm-node:hover{border-color:var(--lapis)}
+.mm-kids{display:flex;flex-wrap:wrap;margin:5px -3px 0}
+.mm-kids a{margin:3px;padding:2px 9px;border-radius:7px;background:var(--lapis-l);color:var(--navy);text-decoration:none;font-size:14px;font-weight:600}
+
+/* ===== الأقسام ===== */
+.sec{--c:var(--c1);margin:46px 0 0;padding-top:8px;border-top:5px double var(--line)}
+.sec-h{display:flex;align-items:center;gap:12px;margin:10px 0 14px}
+.sec-n{flex:0 0 46px;height:46px;border-radius:14px;background:var(--c);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:21px;font-family:'Cairo',sans-serif}
+.sec-h h2{color:var(--c)}
+.sec h3{color:var(--navy);border-right:4px solid var(--c);padding-right:10px}
+.where,.next{font-size:16px;border-radius:12px;padding:10px 14px;margin:0 0 16px;background:var(--steel-l);color:#2f3a5c}
+.where b,.next b{color:var(--c)}
+.next{margin:16px 0 0}
+
+/* ===== البلوكات ===== */
+.box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:16px 0}
+.box .bl{display:block;font-size:13px;font-weight:800;margin:0 0 4px}
+.def{border-right:5px solid var(--c);background:linear-gradient(90deg,#fff,#fff)}
+.def .bl{color:var(--c)}
+.def .dt{font-weight:800;color:var(--navy);font-size:19px}
+.key{background:var(--lapis-l);border-color:#cfdcf5}
+.key .bl{color:var(--lapis)}
+.warn{background:#fdf6ec;border-color:#f0dcbc}
+.warn .bl{color:#8a5a20}
+.fix{background:var(--fix-l);border:1px solid #f1d3b0;border-right:5px solid var(--fix)}
+.fix .bl{color:var(--fix)}
+.edit{background:var(--edit-l);border:1px dashed #b9b9b9}
+.edit .bl{color:#5f5f5f}
+.story{background:#fff;border:1px solid #e3dccb;border-right:5px solid var(--terra)}
+.story .bl{color:var(--terra)}
+.ponder{background:#f6f7fb;border:1px solid #dfe3ef}
+.ponder .bl{color:var(--steel)}
+.ponder .pq{display:block;padding:6px 0;border-bottom:1px dashed #dfe3ef}
+.ponder .pq:last-child{border-bottom:0}
+
+/* الآية والنظم والشعر */
+.aya-block{background:#f2f7f2;border:1px solid #d8e7d9;border-right:4px solid #2f7a4f;border-radius:12px;padding:10px 16px;margin:14px 0;text-align:center}
+.aya-block .ref{display:block;font-size:13px;color:#4b5563;margin-top:2px}
+.aya{font-family:'Amiri','Noto Naskh Arabic',serif;font-size:1.22em;line-height:2;color:var(--sem-aya)}
+.poem{background:#fffdf8;border:1px solid #eadfc8;border-radius:14px;padding:12px 16px;margin:16px 0}
+.poem .bl{font-size:13px;font-weight:800;color:var(--terra);margin:0 0 6px;display:block}
+.bayt{display:flex;flex-wrap:wrap;justify-content:center;font-family:'Amiri','Noto Naskh Arabic',serif;font-size:22px;line-height:2.1;color:#2b2b2b;padding:2px 0}
+.bayt span{flex:0 1 auto;padding:0 18px;text-align:center}
+.bayt .num{flex:0 0 auto;font-family:'Cairo',sans-serif;font-size:12px;color:#9a8a6a;padding:0 4px;align-self:center}
+.gloss{font-size:15.5px;color:#4a4237;background:#f8f3e8;border-radius:10px;padding:8px 12px;margin:6px 0 10px}
+.gloss b{color:#7a4a1c}
+
+/* أمثلة نحوية مشكولة */
+.nx{font-family:'Amiri','Noto Naskh Arabic',serif;font-size:1.2em;line-height:2;color:#1b2a4a}
+.tgt{background:#fff1c7;border-bottom:2px solid #d6a21e;border-radius:3px;padding:0 2px}
+.exs{display:flex;flex-direction:column;gap:8px;margin:14px 0}
+.ex{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 14px}
+.ex .s{flex:1 1 220px}
+.ex .r{flex:0 0 auto;font-weight:800;color:var(--teal);font-size:15.5px}
+
+/* جداول وهياكل (div لا table) */
+.cmp{display:flex;flex-wrap:wrap;margin:16px -6px}
+.cmp .col{flex:1 1 230px;margin:6px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;border-top:5px solid var(--c)}
+.cmp .col:nth-child(2){border-top-color:var(--terra)}
+.cmp .col .ch{font-weight:800;color:var(--navy);margin:0 0 6px;font-size:17px}
+.tbl{margin:16px 0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
+.tr{display:flex;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+.tr:last-child{border-bottom:0}
+.tr.th{background:var(--navy);color:#fff;font-weight:800;font-size:15px}
+.td{flex:1 1 150px;padding:9px 12px;min-width:0}
+.td.n{flex:0 0 150px;font-weight:800;color:var(--navy);background:#f7f5ef}
+.tr.th .td.n{background:transparent;color:#fff}
+.tree{margin:16px 0}
+.tree .root{display:inline-block;background:var(--c);color:#fff;border-radius:12px;padding:6px 16px;font-weight:800}
+.tree .kids{border-right:3px solid var(--c);margin:8px 18px 0 0;padding-right:14px;display:flex;flex-direction:column;gap:10px}
+.tree .kid{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px;position:relative}
+.tree .kid:before{content:"";position:absolute;right:-17px;top:20px;width:14px;border-top:3px solid var(--c)}
+.tree .kh{font-weight:800;color:var(--c);display:block;margin:0 0 2px}
+.chain{display:flex;flex-wrap:wrap;align-items:stretch;margin:16px 0}
+.chain .lnk{flex:1 1 170px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:4px}
+.chain .lnk .kh{display:block;font-size:13px;font-weight:800;color:var(--c)}
+.chain .arw{flex:0 0 24px;align-self:center;text-align:center;color:var(--c);font-weight:800;font-size:22px}
+.num-list{counter-reset:nl;display:flex;flex-direction:column;gap:10px;margin:14px 0}
+.num-item{counter-increment:nl;display:flex;gap:12px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.num-item:before{content:counter(nl);flex:0 0 30px;height:30px;border-radius:9px;background:var(--c);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.num-item .b{flex:1;min-width:0}
+.num-item .kh{font-weight:800;color:var(--navy)}
+
+/* الخلاصة */
+.takeaway{background:var(--navy);color:#eef2fb;border-radius:16px;padding:16px 20px;margin:26px 0 0}
+.takeaway .bl{display:block;font-weight:800;color:#c9d6f2;margin:0 0 6px;font-size:14px}
+.takeaway .tk{display:block;padding:5px 0 5px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.takeaway .tk:last-child{border-bottom:0}
+.takeaway .tk:before{content:"◆";color:#9fb5e6;font-size:12px;margin-left:8px}
+.takeaway .nx{color:#fff}
+
+/* ===== الأسئلة التفاعلية ===== */
+.quiz{background:#fff;border:1px solid #d9e1f0;border-radius:16px;padding:14px 16px;margin:20px 0;box-shadow:0 2px 0 #e7ecf6}
+.quiz .qh{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:800;color:var(--lapis);margin:0 0 6px}
+.quiz .qh .tr2{color:var(--terra)}
+.quiz .qq{font-weight:700;color:var(--navy);margin:0 0 10px;font-size:18px}
+.quiz .opts{display:flex;flex-direction:column;gap:8px}
+.quiz button.op{min-height:44px;text-align:right;font:inherit;font-size:17px;background:#f7f9fd;border:1px solid #d9e1f0;border-radius:12px;padding:8px 14px;cursor:pointer;color:var(--ink);white-space:normal}
+.quiz button.op:hover{border-color:var(--lapis)}
+.quiz button.op.ok{background:#e7f5ec;border-color:#5aa678;color:#174a2b;font-weight:700}
+.quiz button.op.no{background:#fbecec;border-color:#d99;color:#7a2020}
+.quiz .fb{display:none;margin:10px 0 0;padding:9px 12px;border-radius:10px;font-size:16px}
+.quiz .fb.show{display:block}
+.quiz .fb.ok{background:#e7f5ec;color:#174a2b}
+.quiz .fb.no{background:#fbecec;color:#7a2020}
+.quiz .retry{display:none;margin-top:8px;font:inherit;font-size:14px;background:none;border:0;color:var(--lapis);cursor:pointer;text-decoration:underline}
+.quiz.done-no .retry{display:inline-block}
+.score{display:inline-block;background:#fff;color:var(--navy);border-radius:8px;padding:1px 10px;font-weight:800;font-size:14px;margin-inline-start:8px}
+
+/* ===== بطاقات المراجعة ===== */
+.deck{background:#eef1f6;border-radius:20px;padding:18px;margin:46px 0 0}
+.deck h2{margin:0 0 6px}
+.deck .note{font-size:15px;color:var(--ink2);margin:0 0 12px}
+.dk-filters{display:flex;flex-wrap:wrap;margin:0 -4px 12px}
+.dk-filters button{margin:4px;font:inherit;font-size:14px;padding:4px 12px;border-radius:999px;border:1px solid #c9d3e6;background:#fff;cursor:pointer;color:var(--navy)}
+.dk-filters button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.dk-stage{background:#fff;border:1px solid #dde3ee;border-radius:18px;padding:20px 22px;min-height:220px;cursor:pointer}
+.dk-stage .flip-hint{font-size:12.5px;color:#7b8497;margin-top:12px;text-align:center}
+.dk-back{margin-top:16px;padding-top:16px;border-top:1px solid #e1e0d8}
+.dk-ctrl{display:flex;justify-content:space-between;align-items:center;margin:12px 0 0;gap:8px;flex-wrap:wrap}
+.dk-ctrl button{font:inherit;min-height:44px;padding:6px 16px;border-radius:12px;border:1px solid #c9d3e6;background:#fff;cursor:pointer;color:var(--navy);font-weight:700}
+.dk-ctrl .pos{font-weight:800;color:var(--ink2)}
+.dk-dl{display:block;width:100%;margin:14px 0 0;font:inherit;font-weight:800;min-height:48px;border-radius:14px;border:0;background:var(--lapis);color:#fff;cursor:pointer}
+.dk-err{color:#7a2020;font-size:14px;margin-top:8px}
+
+/* الطبقة الدلالية (5-ب) */
+.sem-aya{color:var(--sem-aya)}
+.sem-hadith{color:var(--sem-hadith)}
+.sem-name{color:var(--sem-scholar)}
+.sem-sahabi{color:var(--sem-sahabi);font-weight:700}
+.sem-scholar{color:var(--sem-scholar);font-weight:700}
+
+
+/* عناصر تفاعلية مستثناة من الهايلايت: تُلغى عنها تنسيقات لوحة التصدير التي يحقنها ilm-highlight.js */
+.ilm-export-section.nohl{max-width:none;margin:0;padding:0;background:none;border:0;border-radius:0;box-shadow:none;overflow:visible;font-family:inherit}
+.mindmap.nohl{margin:12px 0 0;display:flex}
+.study-tip.nohl{background:#eef4ff;border:1px solid #cddcf7;border-radius:12px;padding:8px 14px;margin:0 0 14px}
+.scorebar.nohl{font-size:14.5px;color:var(--ink2);margin:24px 0 -14px;font-weight:700}
+.deck.nohl{background:#eef1f6;border-radius:20px;padding:18px;margin:46px 0 0}
+@media (max-width:580px){.mindmap.nohl{flex-direction:column}}
+.foot{margin:40px 0 0;font-size:14px;color:var(--ink2);text-align:center}
+.study-tip{background:#eef4ff;border:1px solid #cddcf7;border-radius:12px;padding:8px 14px;font-size:15px;margin:0 0 14px;color:#2b3d66}
+
+@media (max-width:580px){
+  body{font-size:17px}
+  h1{font-size:30px} h2{font-size:25px} h3{font-size:20px}
+  .mindmap{flex-direction:column;align-items:stretch}
+  .mm-center{flex-basis:auto}
+  .mm-branches{border-right:0;padding-right:0}
+  .bayt{font-size:19px}
+  .bayt span{padding:0 6px}
+  .td.n{flex-basis:100%}
+  .chain .arw{flex-basis:100%;transform:rotate(-90deg)}
+  .src .k{flex-basis:100%}
+}
+@media print{.top .chips,#ilm-completion-box,.quiz,.deck{display:none}}
+</style>
+<style id="anki-card-css">
+/* ===== anki/final.css — قسم mz- (آلية العمل 5.11 — 9-م و9-ص) =====
+   منسوخ حرفيًا من «reference_cards_5.11» في مشروع تلخيص المحاضرات.
+   هذا هو التنسيق الذي تعرض به صفحاتُ المحاضرات البطاقاتِ المولَّدة بـ ilm-anki.js،
+   وهو نفسه ما يُلصق في نوع الملاحظة «أساسي» في Anki بعد قسم legacy.
+   قسم legacy (bm2/bm3) يعيش في نوع الملاحظة ولا تحتاجه الصفحات. لا يُعدَّل هنا إلا مع المرجع. */
+.mz-calm{--mz-title:#293c35;--mz-ink:#33423c;--mz-accent:#296257;--mz-sub:#66766f;--mz-line:#e1e0d8;--mz-b1:#e9f3ef;--mz-b1bd:#cfe3da;--mz-b2:#f5f5f1;--mz-b2bd:#e1e0d8;--mz-b2lab:#7d6338;--mz-alert:#f5f0e4;--mz-alertbd:#e6dcc4;--mz-alertlab:#7d6338;--mz-icon:url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2024%2024%22%20fill=%22none%22%20stroke=%22%23000%22%20stroke-width=%221.8%22%20stroke-linecap=%22round%22%20stroke-linejoin=%22round%22%3E%3Cpath%20d=%22M4%2019.5A2.5%202.5%200%200%201%206.5%2017H20%22/%3E%3Cpath%20d=%22M6.5%202H20v20H6.5A2.5%202.5%200%200%201%204%2019.5v-15A2.5%202.5%200%200%201%206.5%202z%22/%3E%3C/svg%3E");--mz-warn:url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2024%2024%22%20fill=%22none%22%20stroke=%22%23000%22%20stroke-width=%221.8%22%20stroke-linecap=%22round%22%20stroke-linejoin=%22round%22%3E%3Cpath%20d=%22M10.3%203.9%201.8%2018a2%202%200%200%200%201.7%203h17a2%202%200%200%200%201.7-3L13.7%203.9a2%202%200%200%200-3.4%200z%22/%3E%3Cpath%20d=%22M12%209v4M12%2017h.01%22/%3E%3C/svg%3E");--mz-aya:#edf5ed;--mz-ayabar:#2f7a4f;--mz-ayaink:#14532d;--mz-ayalab:#2c6a43;--mz-had:#f1ecf8;--mz-hadbar:#7d52b5;--mz-hadink:#5b2d90;--mz-hadlab:#5b2d90}
+.mz-compare{--mz-title:#273e5d;--mz-ink:#2f3f55;--mz-accent:#47668c;--mz-sub:#62748b;--mz-line:#d8e1ec;--mz-b1:#e9f1ed;--mz-b1bd:#c9dcd2;--mz-b1lab:#2c6a55;--mz-b2:#f5eee7;--mz-b2bd:#e5d6c6;--mz-b2lab:#9a5a2a;--mz-alert:#eff3f9;--mz-alertbd:#d3dded;--mz-alertlab:#273e5d;--mz-icon:url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2024%2024%22%20fill=%22none%22%20stroke=%22%23000%22%20stroke-width=%221.8%22%20stroke-linecap=%22round%22%20stroke-linejoin=%22round%22%3E%3Cpath%20d=%22M12%203v18M6%2021h12M5%206h14%22/%3E%3Cpath%20d=%22M5%206l-3%207a3%203%200%200%200%206%200L5%206zM19%206l-3%207a3%203%200%200%200%206%200l-3-7z%22/%3E%3C/svg%3E");--mz-warn:url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2024%2024%22%20fill=%22none%22%20stroke=%22%23000%22%20stroke-width=%221.8%22%20stroke-linecap=%22round%22%20stroke-linejoin=%22round%22%3E%3Cpath%20d=%22M10.3%203.9%201.8%2018a2%202%200%200%200%201.7%203h17a2%202%200%200%200%201.7-3L13.7%203.9a2%202%200%200%200-3.4%200z%22/%3E%3Cpath%20d=%22M12%209v4M12%2017h.01%22/%3E%3C/svg%3E");--mz-aya:#edf5ed;--mz-ayabar:#2f7a4f;--mz-ayaink:#14532d;--mz-ayalab:#2c6a43;--mz-had:#f1ecf8;--mz-hadbar:#7d52b5;--mz-hadink:#5b2d90;--mz-hadlab:#5b2d90}
+.mz-quran{--mz-title:#3a3426;--mz-ink:#3a3426;--mz-accent:#7a6030;--mz-sub:#7a7060;--mz-line:#dfd9c8;--mz-b1:#f0ede5;--mz-b1bd:#dfd9c8;--mz-b2:#f0ede5;--mz-b2bd:#dfd9c8;--mz-b2lab:#7a6030;--mz-alert:#f6f1e2;--mz-alertbd:#e6dcc0;--mz-alertlab:#7a6030;--mz-icon:url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2024%2024%22%20fill=%22none%22%20stroke=%22%23000%22%20stroke-width=%221.8%22%20stroke-linecap=%22round%22%20stroke-linejoin=%22round%22%3E%3Cpath%20d=%22M2%203h6a4%204%200%200%201%204%204v14a3%203%200%200%200-3-3H2z%22/%3E%3Cpath%20d=%22M22%203h-6a4%204%200%200%200-4%204v14a3%203%200%200%201%203-3h7z%22/%3E%3C/svg%3E");--mz-warn:url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2024%2024%22%20fill=%22none%22%20stroke=%22%23000%22%20stroke-width=%221.8%22%20stroke-linecap=%22round%22%20stroke-linejoin=%22round%22%3E%3Cpath%20d=%22M10.3%203.9%201.8%2018a2%202%200%200%200%201.7%203h17a2%202%200%200%200%201.7-3L13.7%203.9a2%202%200%200%200-3.4%200z%22/%3E%3Cpath%20d=%22M12%209v4M12%2017h.01%22/%3E%3C/svg%3E");--mz-aya:#edf5ed;--mz-ayabar:#2f7a4f;--mz-ayaink:#14532d;--mz-ayalab:#2c6a43;--mz-had:#f1ecf8;--mz-hadbar:#7d52b5;--mz-hadink:#5b2d90;--mz-hadlab:#5b2d90}
+.mz-method{--mz-title:#332d49;--mz-ink:#3a3550;--mz-accent:#605785;--mz-sub:#6e6890;--mz-line:#e0dcec;--mz-b1:#f2f0f9;--mz-b1bd:#e0dcec;--mz-b2:#e8e5f4;--mz-b2bd:#d5cfe8;--mz-b2lab:#605785;--mz-alert:#f4f0e6;--mz-alertbd:#e6dcc0;--mz-alertlab:#7a6030;--mz-step:#e8e5f4;--mz-conn:#9891b4;--mz-num:#605785;--mz-numink:#ffffff;--mz-err:#f7ebe5;--mz-errbd:#ecd2c3;--mz-errlab:#995531;--mz-ex:#f5f3fb;--mz-exbd:#e0dcec;--mz-res:#2c6a55;--mz-icon:url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2024%2024%22%20fill=%22none%22%20stroke=%22%23000%22%20stroke-width=%221.8%22%20stroke-linecap=%22round%22%20stroke-linejoin=%22round%22%3E%3Cpolygon%20points=%2212%202%202%207%2012%2012%2022%207%2012%202%22/%3E%3Cpolyline%20points=%222%2017%2012%2022%2022%2017%22/%3E%3Cpolyline%20points=%222%2012%2012%2017%2022%2012%22/%3E%3C/svg%3E");--mz-warn:url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2024%2024%22%20fill=%22none%22%20stroke=%22%23000%22%20stroke-width=%221.8%22%20stroke-linecap=%22round%22%20stroke-linejoin=%22round%22%3E%3Cpath%20d=%22M10.3%203.9%201.8%2018a2%202%200%200%200%201.7%203h17a2%202%200%200%200%201.7-3L13.7%203.9a2%202%200%200%200-3.4%200z%22/%3E%3Cpath%20d=%22M12%209v4M12%2017h.01%22/%3E%3C/svg%3E");--mz-aya:#edf5ed;--mz-ayabar:#2f7a4f;--mz-ayaink:#14532d;--mz-ayalab:#2c6a43;--mz-had:#f1ecf8;--mz-hadbar:#7d52b5;--mz-hadink:#5b2d90;--mz-hadlab:#5b2d90}
+.sem-aya{color:#14532d}
+.sem-hadith{color:#5b2d90}
+.sem-sahabi{color:#8a5a00;font-weight:700}
+.sem-scholar{color:#8f1d21;font-weight:700}
+.sem-name{color:#8f1d21}
+
+.mz-v{font-family:'Amiri','Noto Naskh Arabic','Traditional Arabic',serif;font-weight:700;font-size:1.15em;line-height:2}
+.mz-ref{font-weight:400;font-size:.8em;opacity:.85}
+.sem-aya,.sem-hadith{font-weight:700}
+
+/* ---- frame-level helpers (scoped to mz- content only; the legacy frame is untouched) ---- */
+.mz-face,.mz-ans{direction:rtl;text-align:right;font-family:'Cairo','Noto Sans Arabic','Segoe UI',Tahoma,sans-serif;color:var(--mz-ink);line-height:1.95;font-size:18px;overflow-wrap:break-word;word-break:normal;white-space:normal}
+.mz-face *,.mz-ans *{box-sizing:border-box}
+.mz-face p,.mz-ans p{margin:0}
+
+/* ---- head: subject (with icon) on one side, lecture on the other, thin divider ---- */
+.mz-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:0 0 12px;margin:0 0 16px;border-bottom:1px solid var(--mz-line)}
+.mz-subject{display:flex;align-items:center;font-size:14.5px;font-weight:800;color:var(--mz-accent);line-height:1.5}
+.mz-kicker{font-size:12.5px;font-weight:600;color:var(--mz-sub);line-height:1.5}
+.mz-ico{display:inline-block;width:22px;height:22px;margin-left:9px;flex:0 0 22px}
+@supports ((-webkit-mask-image:url(x)) or (mask-image:url(x))){
+  .mz-ico{background-color:var(--mz-accent);-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-image:var(--mz-icon);mask-image:var(--mz-icon)}
+}
+
+/* ---- question ---- */
+.mz-label{font-size:12.5px;font-weight:700;color:var(--mz-sub);margin:0 0 4px;line-height:1.6}
+.mz-q{font-size:22px;line-height:1.95;font-weight:700;color:var(--mz-title);margin:0}
+.mz-q .mz-qt{margin:0 0 4px}
+.mz-quran .mz-q,.mz-quran.mz-ans{text-align:right}
+
+/* ---- boxes ---- */
+.mz-ans{margin:0}
+.mz-box{margin:0 0 12px;padding:13px 18px 14px;border:1px solid var(--mz-b1bd);border-radius:14px;background:var(--mz-b1);font-weight:400}
+.mz-box:last-child{margin-bottom:0}
+.mz-box[data-label]:before{content:attr(data-label);display:block;font-size:13px;font-weight:800;color:var(--mz-accent);margin:0 0 4px;line-height:1.7}
+.mz-b-excl,.mz-b-wajh{background:var(--mz-b2);border-color:var(--mz-b2bd)}
+.mz-b-excl[data-label]:before,.mz-b-wajh[data-label]:before{color:var(--mz-b2lab)}
+.mz-q .mz-box{margin:8px 0 10px;font-size:18px;color:var(--mz-ink)}
+.mz-em{font-weight:800;color:var(--mz-title)}
+
+/* alert-like boxes: the label is an inline lead ("تنبيه مهم:") */
+.mz-b-alert,.mz-b-exc{background:var(--mz-alert);border-color:var(--mz-alertbd)}
+.mz-b-alert[data-label]:before,.mz-b-exc[data-label]:before{display:inline;margin:0;font-size:inherit;color:var(--mz-alertlab);content:attr(data-label) ": "}
+.mz-b-exc[data-label]:before{content:attr(data-label) ": "}
+.mz-b-err{background:var(--mz-err);border-color:var(--mz-errbd)}
+.mz-b-err[data-label]:before{color:var(--mz-errlab);display:inline;margin:0;font-size:inherit;content:attr(data-label) ": "}
+.mz-b-nolabel[data-label]:before{display:none}
+@supports ((-webkit-mask-image:url(x)) or (mask-image:url(x))){
+  .mz-b-err.mz-b-nolabel[data-label]:before{content:"";display:inline-block;width:18px;height:18px;margin:0 0 0 8px;vertical-align:-3px;background-color:var(--mz-errlab);-webkit-mask:var(--mz-warn) center/contain no-repeat;mask:var(--mz-warn) center/contain no-repeat}
+}
+
+/* ---- Quran / hadith boxes ---- */
+.mz-b-aya,.mz-b-hadith{text-align:center;padding:12px 18px 14px}
+.mz-b-aya{background:var(--mz-aya);border-color:var(--mz-aya);border-right:4px solid var(--mz-ayabar)}
+.mz-b-hadith{background:var(--mz-had);border-color:var(--mz-had);border-right:4px solid var(--mz-hadbar)}
+.mz-b-aya[data-label]:before{color:var(--mz-ayalab);text-align:right}
+.mz-b-hadith[data-label]:before{color:var(--mz-hadlab);text-align:right}
+.mz-lead{display:block;font-size:16px;font-weight:600;color:var(--mz-ink);text-align:right;margin:0 0 2px;line-height:1.8}
+.mz-aya,.mz-had{display:block;font-family:'Amiri','Noto Naskh Arabic','Traditional Arabic',serif;font-size:26px;line-height:2.05;font-weight:400;text-align:center}
+.mz-aya{color:var(--mz-ayaink)}
+.mz-had{color:var(--mz-hadink);font-size:23px}
+.mz-ref{display:block;font-size:13px;color:var(--mz-sub);margin-top:2px}
+
+/* ---- comparison columns (flex-wrap, no gap for old WebView) ---- */
+.mz-cols{display:flex;flex-wrap:wrap;margin:0 -6px 6px}
+.mz-col{flex:1 1 220px;min-width:0;margin:0 6px 12px;padding:13px 16px 14px;border:1px solid var(--mz-b1bd);border-radius:14px;background:var(--mz-b1)}
+.mz-col2{background:var(--mz-b2);border-color:var(--mz-b2bd)}
+.mz-col[data-label]:before{content:attr(data-label);display:block;font-size:14.5px;font-weight:800;padding:0 0 7px;margin:0 0 8px;color:var(--mz-b1lab);border-bottom:1px solid var(--mz-b1bd)}
+.mz-col2[data-label]:before{color:var(--mz-b2lab);border-bottom-color:var(--mz-b2bd)}
+
+/* ---- numbered path (steps / stages) ---- */
+.mz-steps{margin:0 0 12px;padding:0}
+.mz-steps-cap{font-size:13px;font-weight:800;color:var(--mz-accent);margin:0 0 8px}
+.mz-step{display:flex;align-items:flex-start;padding:12px 14px;border-radius:14px;background:var(--mz-step);border:1px solid var(--mz-b2bd)}
+.mz-step-n{flex:0 0 34px;width:34px;height:34px;margin-left:12px;border-radius:50%;background:var(--mz-num);color:var(--mz-numink);font-weight:800;font-size:16px;line-height:34px;text-align:center}
+.mz-step-b{flex:1 1 auto;min-width:0}
+.mz-step-t{font-weight:800;color:var(--mz-title);line-height:1.8}
+.mz-step-d{margin-top:2px;line-height:1.9}
+.mz-steps-list{counter-reset:mzstep}
+.mz-steps-list .mz-step{counter-increment:mzstep;margin:0 0 10px}
+.mz-steps-list .mz-step:last-child{margin-bottom:0}
+.mz-steps-list .mz-step-n:before{content:counter(mzstep)}
+.mz-arrow{height:20px;padding:5px 15px 0 0;line-height:0}
+.mz-arrow:before{content:"";display:inline-block;width:0;height:0;border-right:6px solid transparent;border-left:6px solid transparent;border-top:9px solid var(--mz-conn);margin-right:5px}
+
+/* ---- application rows ---- */
+.mz-ex-intro{font-size:16px;font-weight:600;color:var(--mz-ink);margin:2px 0 8px}
+.mz-ex-intro[data-label]:before{content:attr(data-label);display:block;font-size:13px;font-weight:800;color:var(--mz-accent);margin:0 0 2px}
+.mz-ex{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;margin:0 0 8px;padding:10px 16px;border-radius:14px;background:var(--mz-ex);border:1px solid var(--mz-exbd)}
+.mz-ex-s{flex:1 1 200px;min-width:0;padding-left:12px}
+.mz-ex-r{flex:0 0 auto;font-weight:800;color:var(--mz-res);text-align:left}
+.mz-conj{opacity:.65}
+
+/* ---- phones ---- */
+@media (max-width:580px){
+  .mz-q{font-size:20px}
+  .mz-face,.mz-ans{font-size:17px}
+  .mz-box{padding:12px 14px 13px}
+  .mz-aya{font-size:23px}
+  .mz-had{font-size:21px}
+  .mz-col{flex-basis:100%}
+}
+
+/* ---- 5.10–5.11: محور السؤال، والجواب المباشر، والإضافة التحريرية، ورابط المصدر (anki/anki-css-5.11.css) ---- */
+.mz-focus{color:var(--mz-accent);font-weight:800;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
+.mz-box.mz-core{font-weight:700;color:var(--mz-title)}
+.mz-corelead{font-weight:800;color:var(--mz-title)}
+.mz-b-edit{background:#f4f4f4;border:1px dashed #b9b9b9}
+.mz-b-edit[data-label]:before{color:#5f5f5f}
+.mz-srcl{margin-top:10px;text-align:left;font-size:12.5px}
+.mz-srcl a{color:var(--mz-sub);text-decoration:none;border-bottom:1px dotted var(--mz-sub)}
+
+</style>
+</head>
+<body data-lecture-id="moad_ajurrumiyyah_01">
+
+<header class="top">
+  <div class="wrap">
+    <div class="series">مواد شرعية · النحو · شرح الآجرومية</div>
+    <h1>المحاضرة 01: الكلام وعلامات الاسم</h1>
+    <p class="sub">شرح «التحفة السَّنِيَّة» على متن الآجرومية — للأستاذ الدكتور محمد حسن عثمان</p>
+    <nav class="chips" aria-label="أقسام المحاضرة">
+      <a href="#s1">١· لماذا النحو؟</a><a href="#s2">٢· الكلام</a><a href="#s3">٣· أقسامه</a><a href="#s4">٤· الخفض</a><a href="#s5">٥· التنوين</a><a href="#s6">٦· أل والنداء والإسناد</a><a href="#s7">٧· حروف الخفض</a><a href="#s8">٨· شرح النظم</a><a href="#deck">البطاقات</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="ai-note">⚠️ أُعدّ هذا المحتوى بمساعدة الذكاء الاصطناعي، وقد يحتوي أخطاء، ويُرجى مراجعته.</div>
+
+  <label id="ilm-completion-box">
+    <input type="checkbox" data-lecture-id="moad_ajurrumiyyah_01">
+    <span>تحديد هذا الدرس كمكتمل</span>
+  </label>
+
+  <div class="study-tip ilm-export-section nohl">طريقة المذاكرة المقترحة: اسمع المحاضرة أولًا بلا الملف، ثم اقرأ الملف، ثم حُلّ الأسئلة، ثم راجع البطاقات بعد يومين.</div>
+
+<main data-ilm-highlight-zone>
+
+  <div class="src" id="about">
+    <div class="row"><div class="k">المادة</div><div class="v">النحو — شرح متن «الآجُرُّومِيَّة» من كتاب «التحفة السَّنِيَّة بشرح المقدمة الآجرومية» للشيخ <span class="sem-scholar">محمد محيي الدين عبد الحميد</span></div></div>
+    <div class="row"><div class="k">الشارح</div><div class="v">الأستاذ الدكتور محمد حسن عثمان، أستاذ ورئيس قسم اللغة العربية بجامعة الأزهر</div></div>
+    <div class="row"><div class="k">المجلس</div><div class="v">المحاضرة الأولى — يوم الاثنين 27 نوفمبر 2017م، الموافق 9 ربيع الأول 1439هـ، بعد صلاة العصر، بمدرسة شيخ العمود، حي <span class="sem-name">العباسية</span>، <span class="sem-name">القاهرة</span></div></div>
+    <div class="row"><div class="k">تصحيح</div><div class="v">ورد في التفريغ «عام 1438 من الهجرة»، والصواب 1439هـ: فالمحاضرة الثانية بعدها بأسبوع يوم 4 ديسمبر 2017م = 16 ربيع الأول 1439هـ كما ورد فيها، فيكون يوم الاثنين قبلها 27 نوفمبر = 9 ربيع الأول 1439هـ.</div></div>
+  </div>
+
+  <section class="orient" id="orient">
+    <div class="lab">السؤال المركزي</div>
+    <div class="cq">ما «الكلام» الذي يدرسه النحويّ؟ وبأيّ علامة نعرف أن الكلمة اسمٌ؟</div>
+    <div class="idea"><b>الفكرة المحورية</b><span class="tag-ed">صياغة تحريرية</span><br>الكلامُ عند النحاة لفظٌ مركّبٌ مفيدٌ بالوضع، وأقسامه ثلاثة: اسمٌ وفعلٌ وحرفٌ. والاسمُ يُعرَف بأربع علامات ذكرها المصنّف: الخفض، والتنوين، ودخول «أل»، ودخول حروف الخفض.</div>
+    <div class="lab">خريطة المحاضرة</div>
+    <div id="mindmap" class="mindmap ilm-export-section nohl"></div>
+    <div class="lab" style="margin-top:12px">ترتيب السير</div>
+    <div class="order"><span>لماذا ندرس النحو؟</span><span>ما الكلام؟</span><span>أقسامه</span><span>علامات الاسم واحدةً واحدةً</span><span>النظم والقصر</span></div>
+  </section>
+
+  <!-- ================= القسم 1 ================= -->
+  <section class="sec" id="s1" style="--c:var(--c1)">
+    <div class="sec-h"><div class="sec-n">١</div><h2>قبل أن نبدأ: لماذا ندرس النحو؟ وكيف؟</h2></div>
+    <div class="where"><b>أين نحن؟</b> هذا أول مجلس في شرح كتاب «التحفة السَّنِيَّة بشرح المقدمة الآجرومية»، وبدأه الشيخ بالتعريف بنفسه وبمنهجه في الشرح قبل الدرس.</div>
+
+    <p>عرّف الشيخ بنفسه: <b>محمد حسن عثمان</b>، أستاذ ورئيس قسم اللغة العربية بجامعة الأزهر. ثم قرّر قاعدته في الشرح: <b>الغاية هي الفهم</b>؛ فلا يحب أن يجلس أحدٌ أمامه وهو لا يفهم، وأيُّ كلام لا تفهمه منه فلا تتجاوزه حتى تسأل عنه.</p>
+    <p>وسبب استصعاب كثير من طلبة العلم للنحو — بل كراهيتهم له — أنهم <b>لم يفهموه</b>. فإذا فُهم بصورة سلسة بسيطة صار الطالب يعرف كيف <b>يُعرِب</b>، وكيف <b>يستخرج القاعدة</b>، بل كيف <b>يتدبّر القرآن الكريم</b>؛ فإذا قرأ الآيات عرف معناها ومغزاها.</p>
+
+    <h3 id="s1-tadabbur">النحو طريقٌ إلى تدبّر القرآن</h3>
+    <div class="aya-block"><span class="aya sem-aya">﴿أَفَلَا يَتَدَبَّرُونَ الْقُرْآنَ ۚ وَلَوْ كَانَ مِنْ عِندِ غَيْرِ اللَّهِ لَوَجَدُوا فِيهِ اخْتِلَافًا كَثِيرًا﴾</span><span class="ref">[النساء: 82]</span></div>
+    <div class="aya-block"><span class="aya sem-aya">﴿إِنَّا أَنزَلْنَاهُ قُرْآنًا عَرَبِيًّا﴾</span><span class="ref">[يوسف: 2]</span></div>
+    <div class="chain">
+      <div class="lnk"><span class="kh">الدعوى</span>القرآن لا يُتدبَّر إلا إذا فهم الإنسان اللغة العربية</div>
+      <div class="arw">←</div>
+      <div class="lnk"><span class="kh">السبب</span>لأن القرآن نزل بلغة العرب</div>
+      <div class="arw">←</div>
+      <div class="lnk"><span class="kh">النتيجة</span>ففهمُ النحو بابٌ لتدبّر كلام الله</div>
+    </div>
+    <p>ولذلك لا يريد الشيخ أن يكون همّ الطالب الحصول على شهادة جامعية أو غيرها؛ بل يريده أن <b>يفهم العلم</b>، ثم الشهادة بعد ذلك أمرها سهل إن شاء الله.</p>
+
+    <h3 id="s1-tahaddi">تحدّاهم بما برعوا فيه</h3>
+    <p>العرب كانوا فصحاء بلغاء شعراء أدباء، فتحدّاهم الله <b>من جنس ما برعوا فيه</b> فعجزوا:</p>
+    <div class="aya-block"><span class="aya sem-aya">﴿وَإِن كُنتُمْ فِي رَيْبٍ مِّمَّا نَزَّلْنَا عَلَىٰ عَبْدِنَا فَأْتُوا بِسُورَةٍ مِّن مِّثْلِهِ ... فَإِن لَّمْ تَفْعَلُوا وَلَن تَفْعَلُوا﴾</span><span class="ref">[البقرة: 23–24]</span></div>
+    <p>ومن رزقه الله فهم النحو انفتحت له عند قراءة القرآن أمورٌ عجيبة، فيقول: سبحان من هذا كلامُه!</p>
+    <div class="quiz-slot ilm-export-section nohl" data-q="q01,q02"></div>
+
+    <h3 id="s1-method">كيف نذاكر هذا الكتاب؟</h3>
+    <div class="num-list">
+      <div class="num-item"><div class="b"><span class="kh">الكتاب معك دائمًا.</span> يحرص كل طالب على أن يكون الكتاب معه في الدرس.</div></div>
+      <div class="num-item"><div class="b"><span class="kh">اقرأ الدرس قبل أن تأتي.</span> قراءةً عادية لا للحفظ، ولو لم تفهم؛ الغرض أن <b>تُهيّئ نفسك لسماع الدرس</b>.</div></div>
+      <div class="num-item"><div class="b"><span class="kh">شغّل عقلك وأنت تسمع.</span> لا تسمع الشيء فتحفظه وخلاص؛ ركّز وفكّر فيما يُقال.</div></div>
+      <div class="num-item"><div class="b"><span class="kh">اسأل «لماذا؟»</span> فما في النحو شيءٌ جاء اعتباطًا: لماذا جُعلت «كان» أمَّ أخواتها، و«إنّ» أمَّ أخواتها، و«ظنّ» أمَّ أخواتها؟ لماذا قدّموا الواو والفاء في حروف العطف، و«يا» في حروف النداء (يا، وأيا، وهيا)؟ ولماذا قالوا «كان فعلٌ ناقص»: ما الذي نقص منها؟</div></div>
+      <div class="num-item"><div class="b"><span class="kh">انسَ عادة الحفظ بلا فهم.</span> ما كنتم تحفظونه قديمًا من غير فهم انسوه الآن؛ نريد أن نفهم النحو كنحو.</div></div>
+      <div class="num-item"><div class="b"><span class="kh">اسأل عن كل ما لم تفهمه.</span> ومن طريقة الشيخ في التشجيع أن يعطي من يسأل «حلاوة»، وقال: كلما سأل الطالب كلما استفاد.</div></div>
+    </div>
+
+    <div class="box ponder" id="s1-ponder">
+      <span class="bl">أسئلة تدبّر طرحها الشيخ ليُعلّمنا التفكير (لم يُجب عنها في هذا المجلس)</span>
+      <span class="pq">في <span class="aya sem-aya">﴿إِن تَتُوبَا إِلَى اللَّهِ فَقَدْ صَغَتْ قُلُوبُكُمَا﴾</span> [التحريم: 4] الخطاب لاثنتين من أزواج <span class="sem-sahabi">النبي ﷺ</span>، و«قُلُوب» جمعُ تكسيرٍ لـ«قَلْب»؛ فكيف جُعل القلبان قلوبًا؟</span>
+      <span class="pq">في <span class="aya sem-aya">﴿إِنَّ هَٰذَانِ لَسَاحِرَانِ﴾</span> [طه: 63]: «إنّ» تنصب، فلماذا جاء بعدها اسمٌ مرفوع؟</span>
+      <span class="pq">في <span class="aya sem-aya">﴿هَٰذَانِ خَصْمَانِ اخْتَصَمُوا فِي رَبِّهِمْ﴾</span> [الحج: 19]: هما اثنان، فلماذا قال «اختصموا» بالجمع؟</span>
+    </div>
+    <div class="box edit"><span class="bl">إضافة تحريرية</span>آية طه نطقها الشيخ بتشديد «إنّ»، وهي قراءة نافع وجماعة من القرّاء. أمّا في رواية حفص عن عاصم فهي ﴿إِنْ هَٰذَانِ لَسَاحِرَانِ﴾ بتخفيف النون، ولا يرد عليها السؤال بهذه الصورة.</div>
+    <div class="quiz-slot ilm-export-section nohl" data-q="q03,q04"></div>
+
+    <h3 id="s1-story">قصة: كيف صار النحو سهلًا على البسطاء؟</h3>
+    <div class="box story">
+      <span class="bl">قصة يرويها الشيخ</span>
+      <p>منذ أكثر من عشرين عامًا طُلب من الشيخ أن يُدرّس النحو في مسجد، فاستغرب: كيف يدرّس النحو لناس بسطاء — هذا صنايعي، وهذا على المعاش، وهذا كبير وهذا صغير؟ فقالوا له: كلنا نحب أن نفهم النحو؛ لأننا نقرأ القرآن فتمرّ بنا آيات لا نعرف لماذا هذه الكلمة مرفوعة وتلك منصوبة.</p>
+      <p>فجلس يشرح لهم بالطريقة نفسها التي يشرح بها الآن، فلما أكرمهم الله وختموا الكتاب قالوا: أعرب لنا القرآن. فأعرب لهم الجزء الأول من سورة البقرة، <b>فصاروا هم يصحّحون له</b> من تمكّنهم.</p>
+      <p>وكانت معهم فتاة في الثانوية العامة (شعبة علمي)، أبوها طبيب وأمها طبيبة، سمعت منه النحو فعشقته، وحصلت على 96% التي تؤهلها لكلية الطب، فاختارت <b>دار العلوم</b>، وكانت كل سنة تحصل على امتياز، وهي الآن <b>دكتورة في النحو</b> — من قعدة المسجد!</p>
+      <p>وفي الأزهر يحضر معه أحيانًا فرّان وكهربائي، ويقرآن في أمهات الكتب. ومن الحاضرين في هذا المجلس نفسه أستاذ دكتور يحضر حبًّا للنحو.</p>
+    </div>
+    <div class="box key"><span class="bl">العبرة</span>من عنده رغبة في التعلّم — ولو لم يكن متعلّمًا — يصير بفضل الله جيدًا في النحو؛ فالموضوع سهل جدًّا متى وُجد الفهم والسؤال.</div>
+    <div class="quiz-slot ilm-export-section nohl" data-q="q05"></div>
+
+    <h3 id="s1-matn">صاحب المتن وصاحب الشرح</h3>
+    <p>المتن: «المقدمة الآجرومية» لـ<span class="sem-scholar">ابن آجُرُّوم</span>: أبي عبد الله محمد بن محمد بن داود الصِّنْهاجي، وهو من بلاد <span class="sem-name">المغرب</span> رحمه الله. والشرح الذي ندرسه: «التحفة السَّنِيَّة» للشيخ <span class="sem-scholar">محمد محيي الدين عبد الحميد</span> رحمه الله. والشيخ ملتزم بشرح ما في الكتاب المقرَّر <b>من باب الأمانة العلمية</b>، مع تبسيط المعلومة.</p>
+    <div class="box edit"><span class="bl">إضافة تحريرية</span>وُلد <span class="sem-scholar">ابن آجُرُّوم</span> بمدينة <span class="sem-name">فاس</span> سنة 672هـ وتوفي سنة 723هـ. وقد ورد اسم كتاب الشرح في التفريغ «التحفة الثانية» خطأً صوتيًّا، وصوابه «التحفة السَّنِيَّة».</div>
+
+    <div class="scorebar ilm-export-section nohl">نتيجتك في أسئلة القسم: <span class="score" data-sec="s1">—</span></div>
+    <div class="takeaway">
+      <span class="bl">خلاصة القسم</span>
+      <span class="tk">الغاية من دراسة النحو الفهم، لا الحفظ ولا الشهادة.</span>
+      <span class="tk">القرآن نزل بلغة العرب، فلا يُتدبَّر إلا بفهم العربية، والنحو مفتاحها.</span>
+      <span class="tk">منهج المذاكرة: اقرأ الدرس قبله، وشغّل عقلك، واسأل «لماذا؟» عن كل شيء.</span>
+      <span class="tk">ما في النحو شيءٌ جاء اعتباطًا؛ لكل ترتيب وتسمية سبب.</span>
+      <span class="tk">من كانت عنده رغبة صادقة تعلّم، ولو كان من البسطاء.</span>
+    </div>
+    <div class="next"><b>الخيط التالي:</b> نبدأ متن الكتاب بأول مسألة فيه: ما هو «الكلام» عند النحاة؟</div>
+  </section>
+
+  <!-- ================= القسم 2 ================= -->
+  <section class="sec" id="s2" style="--c:var(--c2)">
+    <div class="sec-h"><div class="sec-n">٢</div><h2>الكلام: تعريفه وشروطه الأربعة</h2></div>
+
+    <div class="box def" id="s2-def">
+      <span class="bl">التعريف — قال المصنّف</span>
+      <span class="dt nx">الكَلَامُ: هُوَ اللَّفْظُ المُرَكَّبُ المُفِيدُ بِالوَضْعِ.</span><br>
+      مثاله: <span class="nx">«زَيْدٌ عَالِمٌ»</span>.
+    </div>
+    <p>فالكلام عند النحاة عبارة عن <b>أربعة أشياء</b>، أي أربعة شروط: أن يكون <b>لفظًا</b>، <b>مركّبًا</b>، <b>مفيدًا</b>، <b>بالوضع</b>. وكل شرط منها يُخرج شيئًا:</p>
+
+    <div class="tbl" id="s2-shurut">
+      <div class="tr th"><div class="td n">الشرط</div><div class="td">معناه</div><div class="td">ما يُخرِجه</div></div>
+      <div class="tr"><div class="td n">١· اللفظ</div><div class="td">الصوت الخارج من الفم المشتمل على بعض الحروف الهجائية التي تبدأ بالهمزة (الألف) وتنتهي بالياء</div><div class="td">ما ليس بلفظ: <b>الإشارة</b> و<b>الكتابة (الخط)</b></div></div>
+      <div class="tr"><div class="td n">٢· المركّب</div><div class="td">المركّب من كلمتين أو أكثر</div><div class="td"><b>الكلمة المفردة</b>، مثل: <span class="nx">«زَيْدٌ»</span> وحدها</div></div>
+      <div class="tr"><div class="td n">٣· المفيد</div><div class="td">ما أفاد فائدةً يحسن السكوت عليها، فلا يبقى السامع منتظرًا أن يُكمل المتكلم</div><div class="td">المركّب الذي لا يفيد، مثل: <span class="nx">«إِنْ حَضَرَ زَيْدٌ»</span></div></div>
+      <div class="tr"><div class="td n">٤· بالوضع</div><div class="td">أن يكون موضوعًا في كلام العرب، قد تكلّمت به العرب</div><div class="td">ما ليس بلغة العرب، كالفرنسية والإنجليزية وغيرهما</div></div>
+    </div>
+    <div class="quiz-slot ilm-export-section nohl" data-q="q06,q07"></div>
+
+    <h3 id="s2-lafz">الشرط الأول: اللفظ — الكلام في اللغة غيرُ الكلام في النحو</h3>
+    <p>الإشارة تُسمّى في اللغة كلامًا، لكنها لا تُسمّى في النحو كلامًا. تقول بيدك لصاحبك: قُمْ، اجلسْ، تعالَ — فيفهمك؛ هذا كلامٌ لغةً لا نحوًا. ومن ذلك في القرآن:</p>
+    <div class="aya-block"><span class="aya sem-aya">﴿فَأَشَارَتْ إِلَيْهِ ۖ قَالُوا كَيْفَ نُكَلِّمُ مَن كَانَ فِي الْمَهْدِ صَبِيًّا﴾</span><span class="ref">[مريم: 29]</span></div>
+    <div class="aya-block"><span class="aya sem-aya">﴿قَالَ آيَتُكَ أَلَّا تُكَلِّمَ النَّاسَ ثَلَاثَةَ أَيَّامٍ إِلَّا رَمْزًا﴾</span><span class="ref">[آل عمران: 41]</span></div>
+    <p>ربُّنا يكلّم سيدنا <span class="sem-sahabi">زكريا</span>: علامةُ أن امرأتك حملت أن يُحبَس لسانك عن الكلام ثلاثة أيام <b>إلا رمزًا</b> أي إلا إشارة؛ فسمّى الإشارة كلامًا — وهذا في اللغة لا في النحو.</p>
+    <div class="cmp">
+      <div class="col"><div class="ch">الكلام في اللغة</div>يشمل كل ما يُفهِم: <b>الإشارة</b>، و<b>الكتابة</b>، و«لغة العيون»</div>
+      <div class="col"><div class="ch">الكلام في النحو</div>لا يكون إلا <b>لفظًا</b> مركّبًا مفيدًا بالوضع؛ فالإشارة والكتابة ليستا كلامًا عند النحاة</div>
+    </div>
+    <p>ولهذا قال <span class="sem-scholar">ابن مالك</span>: <span class="nx">«كَلَامُنَا لَفْظٌ مُفِيدٌ ...»</span> — «كلامُنا» أي نحن النحاة: غير اللفظ لا يُسمّى عندنا كلامًا؛ لأن <b>كل علمٍ له مصطلحاته</b>.</p>
+
+    <div class="poem" id="s2-poem">
+      <span class="bl">شاهد «لغة العيون»</span>
+      <div class="bayt"><span>أَشَارَتْ بِطَرْفِ العَيْنِ خِيفَةَ أَهْلِهَا</span><span>إِشَارَةَ مَحْزُونٍ وَلَمْ تَتَكَلَّمِ</span></div>
+      <div class="bayt"><span>فَأَيْقَنْتُ أَنَّ الطَّرْفَ قَدْ قَالَ مَرْحَبًا</span><span>وَأَهْلًا وَسَهْلًا بِالحَبِيبِ المُتَيَّمِ</span></div>
+      <div class="gloss"><b>القصة:</b> شاعرٌ أحبّ فتاة، فلما ذهب إلى أهلها خافت عليه، فأشارت إليه بطرف عينها كأنها تقول: لماذا جئت هنا؟ <b>الطَّرْف</b>: العين. <b>خِيفة أهلها</b>: خوفًا من أهلها. <b>المتيَّم</b>: الذي ذهب به الحب. فالعين «قالت»: مرحبًا وأهلًا وسهلًا — وهذا كلامٌ في اللغة لا في النحو.</div>
+    </div>
+    <div class="quiz-slot ilm-export-section nohl" data-q="q08"></div>
+
+    <h3 id="s2-murakkab">الشرط الثاني والثالث: المركّب المفيد</h3>
+    <p><b>المركّب</b> يُخرج الكلمة المفردة؛ فكلمة <span class="nx">«زَيْدٌ»</span> وحدها لا تصح أن تكون كلامًا، بل نريد كلامًا مركّبًا من كلمتين أو أكثر — <b>بشرط الإفادة</b>؛ لأنك قد تأتي بأكثر من كلمة ولا تفيد.</p>
+    <div class="exs">
+      <div class="ex"><span class="s nx">إِنْ حَضَرَ زَيْدٌ</span><span class="r">لفظ مركّب من ثلاث كلمات، لكنه غير مفيد ← ليس كلامًا</span></div>
+      <div class="ex"><span class="s nx">العِلْمُ نُورٌ — الجَهْلُ ظَلَامٌ — الدَّرْسُ مَفْهُومٌ</span><span class="r">مفيدٌ يحسن السكوت عليه ← كلام</span></div>
+      <div class="ex"><span class="s nx">اللهُ رَبُّنَا — مُحَمَّدٌ نَبِيُّنَا</span><span class="r">كلامٌ مفيد</span></div>
+    </div>
+    <p>«إنْ حضر زيدٌ» — فيحصل ماذا؟ السامع ما زال ينتظر؛ فهو لفظ ومركّب، لكنه لم يُفِد، فلا يُسمّى في النحو كلامًا.</p>
+    <p><b>بالوضع</b>: أي أن هذا الكلام موضوع في كلام العرب، تكلّمت به العرب؛ ليُخرج ما ليس بلغة العرب كالفرنسية والإنجليزية.</p>
+    <div class="quiz-slot ilm-export-section nohl" data-q="q09,q10"></div>
+
+    <h3 id="s2-nazm">المنثور والمنظوم: «من حفظ المتون حاز الفنون»</h3>
+    <p>هذا التعريف نفسه نظمه الناظم في بيتٍ واحد:</p>
+    <div class="poem">
+      <div class="bayt"><span>إِنَّ الكَلَامَ عِنْدَنَا فَلْتَسْتَمِعْ</span><span>لَفْظٌ مُرَكَّبٌ مُفِيدٌ قَدْ وُضِعْ</span></div>
+      <div class="gloss"><b>عِندنا</b>: أي عند النحاة. <b>فَلْتَسْتَمِعْ</b>: أمرٌ من الشيخ لطالب العلم، والمقصود به <b>النصيحة</b> لا الاستعلاء — كأنه يقول: استمع. ثم ذكر الشروط الأربعة: لفظ، مركّب، مفيد، قد وُضع.</div>
+    </div>
+    <div class="cmp">
+      <div class="col"><div class="ch">المنثور</div>كلام المتن كما كتبه المصنّف نثرًا؛ كحبّات سُبحةٍ تناثرت، يصعب عليك أن تجمعها كلها</div>
+      <div class="col"><div class="ch">المنظوم</div>الكلام نفسه منظومًا أبياتًا؛ كحبّات نُظمت في خيط، يسهل عليك الاحتفاظ بها — فالنظم <b>أيسر في الحفظ</b></div>
+    </div>
+    <p>ولهذا يقول العلماء: <span class="nx">«مَنْ حَفِظَ المُتُونَ حَازَ الفُنُونَ»</span>. فالعلماء — جزاهم الله خيرًا — نظموا لنا العلوم تسهيلًا لها: من أراد علم القراءات حفظ «الشاطبية»، ومن أراد النحو حفظ «الألفية». والأبيات حين نتغنّى بها تصير سهلة.</p>
+    <div class="quiz-slot ilm-export-section nohl" data-q="q11"></div>
+
+    <div class="scorebar ilm-export-section nohl">نتيجتك في أسئلة القسم: <span class="score" data-sec="s2">—</span></div>
+    <div class="takeaway">
+      <span class="bl">خلاصة القسم</span>
+      <span class="tk">الكلام عند النحاة: اللفظ المركّب المفيد بالوضع، مثل «زَيْدٌ عَالِمٌ».</span>
+      <span class="tk">«اللفظ» يُخرج الإشارة والكتابة؛ فهما كلامٌ في اللغة لا في النحو.</span>
+      <span class="tk">«المركّب» يُخرج الكلمة المفردة، و«المفيد» يُخرج مثل «إنْ حضر زيدٌ».</span>
+      <span class="tk">«بالوضع»: ما تكلّمت به العرب، فيخرج كلام غير العرب.</span>
+      <span class="tk">النظم أيسر في الحفظ من النثر، و«من حفظ المتون حاز الفنون».</span>
+    </div>
+    <div class="next"><b>الخيط التالي:</b> إذا عرفنا الكلام، فممّ يتركّب؟ من ثلاثة أقسام.</div>
+  </section>
+
+  <!-- ================= القسم 3 ================= -->
+  <section class="sec" id="s3" style="--c:var(--c3)">
+    <div class="sec-h"><div class="sec-n">٣</div><h2>أقسام الكلام: اسم وفعل وحرف</h2></div>
+    <div class="box def"><span class="bl">قال المصنّف</span><span class="nx">«وَأَقْسَامُهُ ثَلَاثَةٌ: اسْمٌ، وَفِعْلٌ، وَحَرْفٌ جَاءَ لِمَعْنًى».</span></div>
+    <div class="tree">
+      <span class="root">الكلمة — «أمٌّ» لها ثلاثة أولاد</span>
+      <div class="kids">
+        <div class="kid"><span class="kh">الابن الأكبر: الاسم</span>ويشمل المذكر والمؤنث؛ تقول: <span class="nx">مُحَمَّدٌ</span> (علمٌ لمذكر)، و<span class="nx">سُعَادُ، زَيْنَبُ، هِنْدٌ</span> (أعلام لمؤنث).</div>
+        <div class="kid"><span class="kh">الثاني: الفعل</span>وسيأتي الكلام عن علاماته في الدرس القادم.</div>
+        <div class="kid"><span class="kh">الثالث: الحرف «جاء لمعنى»</span>أي من حروف المعاني؛ فكل حرف له معنى، كـ<span class="nx">«إِنَّ»</span> للتوكيد، و<span class="nx">«كَأَنَّ»</span> للتشبيه، و<span class="nx">«لَيْتَ»</span> للتمنّي.</div>
+      </div>
+    </div>
+    <p>يتعامل الشيخ مع المسألة بحوار لطيف: نعتبر «الكلمة» تزوّجت ورُزقت ثلاثة أولاد، ثم نسألها: <b>ما العلامات التي تميّز ابنك الاسمَ عن أخويه الفعل والحرف؟</b> — وهذا موضوع بقية المجلس.</p>
+    <div class="box fix"><span class="bl">تصحيح أثناء القراءة</span>قرأ أحد الطلاب «اسمٌ ومالٌ وحرف» فصحّحها الشيخ: «اسمٌ وفعلٌ وحرف». وقرأ آخر «رَبّ» فصحّحها: <span class="nx">«رُبَّ»</span> بضم الراء وتشديد الباء.</div>
+    <div class="quiz-slot ilm-export-section nohl" data-q="q12,q13"></div>
+    <div class="scorebar ilm-export-section nohl">نتيجتك في أسئلة القسم: <span class="score" data-sec="s3">—</span></div>
+    <div class="takeaway">
+      <span class="bl">خلاصة القسم</span>
+      <span class="tk">أقسام الكلام ثلاثة: اسم، وفعل، وحرف جاء لمعنى.</span>
+      <span class="tk">الاسم يشمل المذكر والمؤنث: محمدٌ، سعادُ، زينبُ، هندٌ.</span>
+      <span class="tk">الحرف «جاء لمعنى»: لكل حرف معنى، كإنّ للتوكيد وكأنّ للتشبيه وليت للتمني.</span>
+    </div>
+    <div class="next"><b>الخيط التالي:</b> العلامة الأولى التي يُعرف بها الاسم: الخفض.</div>
+  </section>
+
+  <!-- ================= القسم 4 ================= -->
+  <section class="sec" id="s4" style="--c:var(--c4)">
+    <div class="sec-h"><div class="sec-n">٤</div><h2>العلامة الأولى للاسم: الخفض</h2></div>
+    <div class="box def"><span class="bl">قال المصنّف</span><span class="nx">«فَالِاسْمُ يُعْرَفُ بِالخَفْضِ، وَالتَّنْوِينِ، وَدُخُولِ الأَلِفِ وَاللَّامِ، وَحُرُوفِ الخَفْضِ...»</span></div>
+    <div class="box key"><span class="bl">الخلاصة أولًا</span>علامات الاسم في المتن أربع: <b>الخفض</b>، و<b>التنوين</b>، و<b>دخول «أل»</b>، و<b>دخول حروف الخفض</b>. والخفض معناه <b>الجرّ</b>.</div>
+
+    <h3 id="s4-term">لماذا قال «الخفض» ولم يقل «الجر»؟</h3>
+    <p>نشأ النحو في مدرستين مشهورتين في <span class="sem-name">العراق</span>: مدرسة <span class="sem-name">البصرة</span> ومدرسة <span class="sem-name">الكوفة</span>. اشتغل أهل البصرة بعلم النحو قبل أهل الكوفة بنحو <b>مئة عام</b>، ثم نافسهم أهل الكوفة، فاختلفوا في مسائل كثيرة <b>حتى في المصطلحات نفسها</b>.</p>
+    <div class="cmp">
+      <div class="col"><div class="ch">الكوفيون</div>يقولون: <b>الخفض</b>، و«حروف الخفض»</div>
+      <div class="col"><div class="ch">البصريون</div>يقولون: <b>الجر</b>، و«حروف الجر»</div>
+    </div>
+    <p>والمعنى واحد، كالكلمات المترادفة: تقول «يا فلان اجلس» و«يا فلان اقعد»، ويردّ واحدٌ «نعم» وآخر «أيوه». و<span class="sem-scholar">ابن آجُرُّوم</span> سار على <b>مصطلحات الكوفيين</b> فقال «الخفض»، ونحن على أيامنا نقول «الجر».</p>
+
+    <h3 id="s4-why">لماذا سُمّيت الحركات بهذه الأسماء؟ <span class="tag-ed">تعليل الشيخ</span></h3>
+    <p>نقول في «سلّمتُ على الأستاذِ» و«جلستُ في المسجدِ»: اسمٌ مخفوض أو مجرور، ونقول في «جاء الرجلُ»: مرفوع. فلماذا؟ يرى الشيخ أن الاسم جاء من <b>حركة اللسان والفم</b> عند النطق:</p>
+    <div class="tbl">
+      <div class="tr th"><div class="td n">الحركة</div><div class="td">الاسم</div><div class="td">علّته كما ذكرها الشيخ</div></div>
+      <div class="tr"><div class="td n">الضمة</div><div class="td">علامة <b>رفع</b></div><div class="td">تخرج من <b>الشفتين</b>، والشفتان أعلى المخارج؛ فهي «مرفوعة فوق». (المخارج تبدأ من الجوف، ثم الحلق، ثم اللسان، ثم الشفتين.)</div></div>
+      <div class="tr"><div class="td n">الفتحة</div><div class="td">علامة <b>نصب</b></div><div class="td">النصب بمعنى <b>الاستواء</b>؛ في «رأيتُ الرجلَ» تجد اللسان يرتفع ويستوي</div></div>
+      <div class="tr"><div class="td n">الكسرة</div><div class="td">علامة <b>خفض/جر</b></div><div class="td">تجد اللسان <b>ينزل من فوق لتحت</b> في «سلّمتُ على الرجلِ»</div></div>
+    </div>
+    <p>وحروف الحلق ستة: الهمزة والهاء والعين والحاء والغين والخاء، مجموعة في عبارة: <span class="nx">«إِنْ غَابَ عَنِّي حَبِيبِي هَمَّنِي خَبَرُهُ»</span>.</p>
+    <div class="quiz-slot ilm-export-section nohl" data-q="q14,q15"></div>
+
+    <h3 id="s4-rule">القاعدة: كل مجرور اسم، والفعل لا يُجرّ</h3>
+    <p>ساعة ما ترى كلمة مجرورة — ولو وأنت مغمض — قل: هذا <b>اسم</b>: <span class="nx">سَلَّمْتُ عَلَى الرَّجُلِ</span>، <span class="nx">جَلَسْتُ عَلَى الكُرْسِيِّ</span>. لأن <b>الفعل لا يُجَرّ</b>؛ لا يصح أن تقول: «سلّمتُ على كَتَبَ» ولا «سلّمتُ على جَلَسَ». الذي يُجرّ هو الاسم فقط.</p>
+
+    <h3 id="s4-types">أنواع الجر ثلاثة</h3>
+    <p>مثال الشيخ الجامع: <span class="nx">سَلَّمْتُ عَلَى <span class="tgt">أُسْتَاذِ</span> <span class="tgt">الفَصْلِ</span> <span class="tgt">الصَّالِحِ</span></span></p>
+    <div class="tree">
+      <span class="root">الجرّ</span>
+      <div class="kids">
+        <div class="kid"><span class="kh">١· الجرّ بالحرف</span><span class="nx">«أُسْتَاذِ»</span> — نسأله: مَن جرّك بالكسر؟ يقول: «على»، وهو حرف جر.</div>
+        <div class="kid"><span class="kh">٢· الجرّ بالإضافة</span><span class="nx">«الفَصْلِ»</span> — ليس قبله حرف جر؛ جرّه المضاف «أستاذِ». أصلها <span class="nx">«أُسْتَاذٌ»</span>، فلما حذفنا التنوين أُضيفت الكلمة إلى ما بعدها: <span class="nx">قَلَمٌ ← قَلَمُ الأُسْتَاذِ</span>، <span class="nx">بَابٌ ← بَابُ الفَصْلِ</span>، <span class="nx">مَسْجِدُ الصَّحَابَةِ</span>.</div>
+        <div class="kid"><span class="kh">٣· الجرّ بالتبعية</span><span class="nx">«الصَّالِحِ»</span> — صفةٌ للأستاذ، و<b>صفة المجرور مجرورة</b>؛ فالصفة تتبع الموصوف: <span class="nx">سَلَّمْتُ عَلَى رَجُلٍ صَالِحٍ</span>، <span class="nx">نَظَرْتُ إِلَى فَتَاةٍ جَمِيلَةٍ</span>.</div>
+      </div>
+    </div>
+    <div class="box fix"><span class="bl">تصحيح تصوّر</span>ظنّ أحد الطلاب أن «الصالح» صفة لـ«الفصل»، فبيّن الشيخ أنه صفة لـ«الأستاذ»؛ فالأستاذ هو الصالح، فهو مجرور تبعًا له.</div>
+    <p>والثلاثة مجتمعة في البسملة:</p>
+    <div class="aya-block"><span class="aya sem-aya">﴿بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ﴾</span></div>
+    <div class="exs">
+      <div class="ex"><span class="s nx">بِـ<span class="tgt">اسْمِ</span></span><span class="r">مجرور بالحرف (الباء)</span></div>
+      <div class="ex"><span class="s nx"><span class="tgt">اللهِ</span></span><span class="r">مجرور بالإضافة</span></div>
+      <div class="ex"><span class="s nx"><span class="tgt">الرَّحْمٰنِ الرَّحِيمِ</span></span><span class="r">صفتان للفظ الجلالة ← مجروران بالتبعية</span></div>
+    </div>
+    <div class="box key"><span class="bl">قاعدة مستفادة</span>التنوين والإضافة لا يجتمعان: إذا حذفتَ التنوين من الكلمة أُضيفت تلقائيًّا إلى ما بعدها، فـ«قلمٌ» تصير «قلمُ الأستاذِ».</div>
+    <div class="quiz-slot ilm-export-section nohl" data-q="q16,q17,q18"></div>
+    <div class="box edit"><span class="bl">تدريب من إعداد الذكاء الاصطناعي</span>الأسئلة التالية تطبيقٌ لأنواع الجر الثلاثة على جُمَلٍ جديدة، وليست من كلام الشيخ.</div>
+    <div class="quiz-slot ilm-export-section nohl" data-q="q19,q20"></div>
+
+    <div class="scorebar ilm-export-section nohl">نتيجتك في أسئلة القسم: <span class="score" data-sec="s4">—</span></div>
+    <div class="takeaway">
+      <span class="bl">خلاصة القسم</span>
+      <span class="tk">الخفض هو الجر: الأول مصطلح الكوفيين، والثاني مصطلح البصريين، وابن آجروم تبع الكوفيين.</span>
+      <span class="tk">كل كلمة مجرورة فهي اسم؛ لأن الفعل لا يُجَرّ.</span>
+      <span class="tk">أنواع الجر ثلاثة: بالحرف، وبالإضافة، وبالتبعية — وكلها في البسملة.</span>
+      <span class="tk">حذف التنوين يجعل الكلمة مضافة: قلمٌ ← قلمُ الأستاذِ.</span>
+      <span class="tk">تعليل الشيخ للأسماء: الضمة من الشفتين (رفع)، والفتحة استواء (نصب)، والكسرة نزول اللسان (خفض).</span>
+    </div>
+    <div class="next"><b>الخيط التالي:</b> العلامة الثانية: التنوين، وله أربعة أنواع.</div>
+  </section>
+
+  <!-- ================= القسم 5 ================= -->
+  <section class="sec" id="s5" style="--c:var(--c5)">
+    <div class="sec-h"><div class="sec-n">٥</div><h2>العلامة الثانية: التنوين وأنواعه الأربعة</h2></div>
+    <div class="box def" id="s5-def"><span class="bl">التعريف</span><span class="dt">التنوين: نونٌ ساكنةٌ تلحق آخر الاسم لفظًا وتفارقه خطًّا.</span></div>
+    <div class="aya-block"><span class="aya sem-aya">﴿مُّحَمَّدٌ رَّسُولُ اللَّهِ﴾</span><span class="ref">[الفتح: 29]</span></div>
+    <p>انظر <span class="nx">«مُحَمَّدٌ»</span>: تنطق في آخرها نونًا «مُحَمَّدُنْ»، لكنك لا تكتبها نونًا، بل تكتب <b>ضمتين</b> في حالة الرفع؛ تُنطَق ولا تُكتَب — هذا هو التنوين. فأيّ كلمة منوّنة اعرف على طول أنها <b>اسم</b>: <span class="nx">قَلَمٌ، أُسْتَاذٌ، فَصْلٌ، فَتَاةٌ</span>. أمّا الفعل فلا يُنوَّن؛ لا تقول: «جَلَسٌ» ولا «شَرِبٌ».</p>
+    <div class="aya-block"><span class="aya sem-aya">﴿سُبْحَانَ الَّذِي أَسْرَىٰ بِعَبْدِهِ لَيْلًا مِّنَ الْمَسْجِدِ الْحَرَامِ إِلَى الْمَسْجِدِ الْأَقْصَى﴾</span><span class="ref">[الإسراء: 1]</span></div>
+    <p><span class="nx">«لَيْلًا»</span> اسمٌ لأنه <b>منوَّن</b>، و<span class="nx">«المَسْجِدِ»</span> اسمٌ لأنه <b>مجرور</b>.</p>
+
+    <h3 id="s5-mithal">«المثال يغني عن المقال»</h3>
+    <p>العجيب أن الشارح لم يذكر أنواع التنوين بأسمائها، بل اكتفى بأمثلتها: <span class="nx">«مُحَمَّدٌ، وَكِتَابٌ، وَإِيهٍ، وَصَهٍ، وَمُسْلِمَاتٌ، وَفَاطِمَاتٌ، وَحِينَئِذٍ، وَسَاعَتَئِذٍ»</span> — وكما يقولون: «والحِدِق يفهم». وهذا مثل قول <span class="sem-scholar">الشاطبي</span> رحمه الله:</p>
+    <div class="poem"><div class="bayt"><span>وَبِاللَّفْظِ أَسْتَغْنِي عَنِ القَيْدِ إِنْ جَلَا</span></div>
+      <div class="gloss">أي: إذا كان اللفظ واضحًا (جلا) استغنيتُ به عن التقييد والشرح. فالمثال يغني عن المقال.</div></div>
+    <p>والشيخ يشرح أنواعه لأنه في كتاب مقرَّر يلتزم بشرح ما فيه، مع وعدٍ بالتبسيط.</p>
+
+    <div class="tbl" id="s5-anwa">
+      <div class="tr th"><div class="td n">النوع</div><div class="td">أين يكون؟</div><div class="td">أمثلته</div></div>
+      <div class="tr"><div class="td n">١· تنوين التمكين</div><div class="td">في الاسم المعرب المنوّن؛ سُمّي كذلك لأن الاسم <b>متمكّن في باب الاسمية</b></div><div class="td nx">مُحَمَّدٌ، كِتَابٌ، قَلَمٌ، أُسْتَاذٌ، خَالِدٌ، صَالِحٌ، مَسْجِدٌ</div></div>
+      <div class="tr"><div class="td n">٢· تنوين التنكير</div><div class="td">في <b>بعض</b> الأسماء المبنية (كلمات محفوظة)، للتفريق بين <b>المعرفة والنكرة</b></div><div class="td nx">سِيبَوَيْهٍ، صَهٍ، إِيهٍ، آهٍ، أُفٍّ</div></div>
+      <div class="tr"><div class="td n">٣· تنوين المقابلة</div><div class="td">في <b>جمع المؤنث السالم</b>؛ يقابل النون في جمع المذكر السالم</div><div class="td nx">مُسْلِمَاتٌ، فَاطِمَاتٌ، طَالِبَاتٌ، مُهَنْدِسَاتٌ</div></div>
+      <div class="tr"><div class="td n">٤· تنوين العوض</div><div class="td">يأتي <b>عوضًا عن جملة</b> محذوفة</div><div class="td nx">حِينَئِذٍ، سَاعَتَئِذٍ</div></div>
+    </div>
+    <div class="quiz-slot ilm-export-section nohl" data-q="q21"></div>
+
+    <h3 id="s5-tamkin">١· تنوين التمكين</h3>
+    <p>لما تقول <span class="nx">«مُحَمَّدٌ»</span> فهذا تنوين تمكين، أي أن الاسم متمكّن في باب الاسمية. وكل اسم منوّن من هذا النوع — <span class="nx">قَلَمٌ، أُسْتَاذٌ، مُحَمَّدٌ، خَالِدٌ، صَالِحٌ، سَقْفٌ، مِرْوَحَةٌ، مَسْجِدٌ</span> — تنوينه تنوين تمكين، <b>ما عدا</b> جمع المؤنث (مقابلة) والكلمات المحفوظة مثل «صهٍ» و«إيهٍ» و«آهٍ» (تنكير). وفي «سبحان الذي أسرى بعبده ليلًا»: «ليلًا» تنوينها تمكين.</p>
+    <div class="box key"><span class="bl">إشارة لما سيأتي</span>قال الشيخ: الاسم في الأصل غير الفعل وغير الحرف؛ فإذا <b>أشبه الحرفَ بُني</b>، وإذا <b>أشبه الفعلَ لم يُنوَّن</b> — مثل <span class="nx">إِبْرَاهِيمُ</span> و<span class="nx">فَاطِمَةُ</span> لا تقول فيهما «إبراهيمٌ» ولا «فاطمةٌ». وهذه قصة ستأتي إن شاء الله.</div>
+
+    <h3 id="s5-murab">قبل التنكير: ما المعرب وما المبني؟</h3>
+    <div class="cmp">
+      <div class="col"><div class="ch">المعرب</div>يتغيّر شكل آخره بتغيّر موقعه: <span class="nx">هٰذَا قَلَمٌ — اشْتَرَيْتُ قَلَمًا — كَتَبْتُ بِقَلَمٍ</span>. و<span class="nx">هٰذَا أُسْتَاذٌ — رَأَيْتُ أُسْتَاذًا — سَلَّمْتُ عَلَى أُسْتَاذٍ</span>.</div>
+      <div class="col"><div class="ch">المبني</div>يثبت آخره على حالة واحدة <b>كالحائط المبني</b> لا يتغيّر: <span class="nx">هٰؤُلَاءِ</span> مكسورة دائمًا، لا يصح «هؤلاءُ» ولا «هؤلاءَ». ومنه <span class="nx">سِيبَوَيْهِ</span> مبني على الكسر.</div>
+    </div>
+
+    <h3 id="s5-tankir">٢· تنوين التنكير</h3>
+    <p>هناك أسماء مبنية — <b>كلمات معدودة محفوظة</b> — إذا أردنا أن نفرّق فيها بين المعرفة والنكرة استعملنا التنوين: <b>بلا تنوين = معرفة</b> (شيء معيّن)، <b>بالتنوين = نكرة</b> (غير معيّن).</p>
+    <div class="box story">
+      <span class="bl">مثال الشيخ: سيبويه وسيبويهٍ</span>
+      <p>أحد الحضور — الدكتور فكري — أحبّ النحو، فرُزق بمولود فسمّاه <span class="nx">«سِيبَوَيْهِ»</span>، على اسم <span class="sem-scholar">سيبويه</span> عالِم النحو المشهور. سيبويه العالم <b>معروف</b> للدنيا كلها، وابن الدكتور لا يعرفه أحد في الشارع، فهو <b>نكرة</b>. فإذا جاءا معًا قلنا:</p>
+      <p class="nx" style="text-align:center">جَاءَ <span class="tgt">سِيبَوَيْهِ</span> وَمَعَهُ <span class="tgt">سِيبَوَيْهٍ</span></p>
+      <p>الأولى بالكسر بلا تنوين: العالِم المعروف، والثانية بالتنوين: الذي لا يعرفه أحد.</p>
+    </div>
+    <div class="box warn"><span class="bl">ضابط من جواب الشيخ عن سؤال</span>التنوين هنا للتفريق حين تجمع بين الاثنين؛ أمّا لو ذكرتَ واحدًا فقط فتقول «جاء سيبويهِ» مبنيًّا على الكسر. وأهلُ الولد يعرفونه طبعًا فيقولون له «يا سيبويهِ»، والمقصود بالمعرفة هنا الشهرة عند عامة الخلق.</div>
+    <div class="tbl">
+      <div class="tr th"><div class="td n">الكلمة</div><div class="td">بلا تنوين (معرفة)</div><div class="td">بالتنوين (نكرة)</div></div>
+      <div class="tr"><div class="td n nx">صَهْ / صَهٍ</div><div class="td">«اسكت» عن هذا الحديث بعينه: زميلك يوشوشك «الساعة سبعة فيه ماتش مهم» فتقول <span class="nx">صَهْ</span>: اسكت عن هذا الكلام وتكلّم في غيره</div><div class="td"><span class="nx">صَهٍ</span>: اسكت عن الكلام كله؛ لا تتكلم أبدًا</div></div>
+      <div class="tr"><div class="td n nx">إِيهِ / إِيهٍ</div><div class="td">زدني من هذا الحديث المعيّن</div><div class="td">زدني من أيّ حديث</div></div>
+      <div class="tr"><div class="td n nx">آهِ / آهٍ</div><div class="td">يتوجّع من شيء معيّن، كالصداع</div><div class="td">كل جسمه يوجعه، كما كان يغني القائل: «آهٍ من الأيام»</div></div>
+      <div class="tr"><div class="td n nx">أُفِّ / أُفٍّ</div><div class="td">يتضجّر من أمر معيّن؛ أمك تطلب منك أن تشتري لها حاجات من السوق فتقول: <span class="nx">أُفِّ</span></div><div class="td"><span class="nx">أُفٍّ</span>: متضايق من كل شيء يُقال له</div></div>
+    </div>
+    <div class="aya-block"><span class="aya sem-aya">﴿فَلَا تَقُل لَّهُمَا أُفٍّ﴾</span><span class="ref">[الإسراء: 23]</span></div>
+    <p>ذكر الشيخ أن الكلمة وردت في الآية بقراءتين: <span class="nx">«أُفِّ»</span> مبنية على الكسر، و<span class="nx">«أُفٍّ»</span> بالتنوين.</p>
+    <div class="box edit"><span class="bl">إضافة تحريرية</span>في الكلمة ثلاث قراءات متواترة: <span class="nx">«أُفٍّ»</span> بالكسر والتنوين (نافع وحفص وأبو جعفر)، و<span class="nx">«أُفَّ»</span> بالفتح بلا تنوين (ابن كثير وابن عامر ويعقوب)، و<span class="nx">«أُفِّ»</span> بالكسر بلا تنوين (باقي العشرة). وقد ورد مطلع الآية في التفريغ «ولا تقل لهما»، والصواب «فلا تقل لهما».</div>
+    <div class="box fix"><span class="bl">تصحيح تصوّر (من سؤال إحدى الحاضرات)</span>تنوين التنكير <b>لا يدخل الأسماء المعربة</b> أبدًا، ولا يدخل كل الأسماء المبنية؛ فـ«هؤلاء» و«نحن» لا يدخلهما. هو في <b>بعض</b> المبنيات المحفوظة فقط: سيبويه، إيه، صه، آه، أف.</div>
+    <div class="quiz-slot ilm-export-section nohl" data-q="q22,q23,q24"></div>
+
+    <h3 id="s5-muqabala">٣· تنوين المقابلة</h3>
+    <p>انظر <span class="aya sem-aya">﴿قَدْ أَفْلَحَ الْمُؤْمِنُونَ﴾</span> [المؤمنون: 1]: أصلها <span class="nx">«مُؤْمِنٌ»</span>، فلما جمعنا جمع مذكر سالمًا حذفنا التنوين وجئنا بالنون مكانه: <span class="nx">مُؤْمِنُونَ</span>؛ فـ<b>النون في جمع المذكر السالم عوضٌ عن التنوين في المفرد</b>: <span class="nx">مُدَرِّسٌ ← مُدَرِّسُونَ</span>، <span class="nx">مُهَنْدِسٌ ← مُهَنْدِسُونَ</span>، <span class="nx">صَالِحٌ ← صَالِحُونَ</span>.</p>
+    <div class="box story">
+      <span class="bl">تشبيه الشيخ</span>
+      <p>«البنات زعلوا» وقالوا: لماذا أعطيتم جمع المذكر نونًا ولم تعطونا شيئًا؟ أنتم تعدلون بين الأولاد! كما في الحديث: <span class="sem-hadith">«اتقوا الله واعدلوا بين أولادكم»</span>. فقلنا: خلاص، نعطيكم شيئًا يقابل النون في جمع المذكر؛ وهو التنوين في جمع المؤنث السالم: <span class="nx">طَالِبَاتٌ، مُسْلِمَاتٌ، مُدَرِّسَاتٌ، مُهَنْدِسَاتٌ، صَالِحَاتٌ</span>.</p>
+    </div>
+    <div class="aya-block"><span class="aya sem-aya">﴿عَسَىٰ رَبُّهُ إِن طَلَّقَكُنَّ أَن يُبْدِلَهُ أَزْوَاجًا خَيْرًا مِّنكُنَّ مُسْلِمَاتٍ﴾</span><span class="ref">[التحريم: 5]</span></div>
+    <div class="cmp">
+      <div class="col"><div class="ch">تنوين التمكين</div>في الاسم المفرد المعرب: <span class="nx">مُحَمَّدٌ، أُسْتَاذٌ</span></div>
+      <div class="col"><div class="ch">تنوين المقابلة</div>في جمع المؤنث السالم: <span class="nx">طَالِبَاتٌ، مُسْلِمَاتٌ، مُهَذَّبَاتٌ، صَالِحَاتٌ</span> — يقابل النون في جمع المذكر</div>
+    </div>
+    <h4>أسئلة الحاضرين وتصحيحاتها</h4>
+    <div class="tbl">
+      <div class="tr th"><div class="td n">التصوّر</div><div class="td">الصواب كما بيّنه الشيخ</div></div>
+      <div class="tr"><div class="td n">الواو والنون في «مؤمنون» عوض عن التنوين</div><div class="td"><b>النون وحدها</b> عوض عن التنوين؛ أمّا <b>الواو فعلامة رفع</b> نيابةً عن الضمة لأنه جمع مذكر سالم. فـ«المدرسون» مبتدأ مرفوع بالواو.</div></div>
+      <div class="tr"><div class="td n">التاء في «مؤمنات» هي المقابِلة للتنوين</div><div class="td"><b>الألف والتاء</b> زيدتا للتفريق بين المفرد والجمع: <span class="nx">هِنْدٌ ← هِنْدَاتٌ</span>؛ والجمع ما دلّ على أكثر من اثنتين. أمّا المقابِل للنون فهو <b>التنوين</b> في آخرها.</div></div>
+      <div class="tr"><div class="td n">النون في «يلعبون» مثل نون «مدرسون»</div><div class="td">نون الأفعال الخمسة <b>علامة رفع</b> نيابةً عن الضمة (ترفع بثبوت النون): أصل الفعل <span class="nx">يَلْعَبُ</span> مشيت الضمة وجت مكانها النون، وواو الجماعة فاعل؛ فليست عوضًا عن تنوين. ومثلها: <span class="nx">التِّلْمِيذَانِ يَلْعَبَانِ، وَالتَّلَامِيذُ يَلْعَبُونَ، وَأَنْتِ يَا فَاطِمَةُ تَلْعَبِينَ</span> — وسيأتي درسها.</div></div>
+    </div>
+    <div class="cmp">
+      <div class="col"><div class="ch">نون جمع المذكر السالم</div><span class="nx">مُدَرِّسُونَ</span>: النون <b>عوض عن التنوين</b> في المفرد «مُدَرِّسٌ»، والواو علامة الرفع</div>
+      <div class="col"><div class="ch">نون الأفعال الخمسة</div><span class="nx">يَلْعَبُونَ</span>: النون <b>علامة رفع</b> نيابةً عن الضمة في «يَلْعَبُ»، والواو فاعل</div>
+    </div>
+    <div class="quiz-slot ilm-export-section nohl" data-q="q25,q26,q27"></div>
+
+    <h3 id="s5-iwad">٤· تنوين العوض</h3>
+    <div class="aya-block"><span class="aya sem-aya">﴿فَلَوْلَا إِذَا بَلَغَتِ الْحُلْقُومَ ۝ وَأَنتُمْ حِينَئِذٍ تَنظُرُونَ﴾</span><span class="ref">[الواقعة: 83–84]</span></div>
+    <p><span class="nx">«حِينَئِذٍ»</span> = «حِينَ إِذْ بَلَغَتِ الرُّوحُ الحُلْقُومَ»؛ حُذفت الجملة كلها وجيء بالتنوين في «إذْ» مكانها، فهو <b>تنوين عوضٍ عن جملة</b>. والآية تصف الميت عند الاحتضار، وأهله جالسون حوله ينظرون إليه ولا يستطيعون أن ينفعوه بشيء.</p>
+    <div class="box fix"><span class="bl">تصحيح</span>نطق الشيخ مطلع الآية «كلا إذا بلغت الحلقوم»، والصواب في سورة الواقعة: <span class="aya sem-aya">﴿فَلَوْلَا إِذَا بَلَغَتِ الْحُلْقُومَ﴾</span>؛ أمّا <span class="aya sem-aya">﴿كَلَّا إِذَا بَلَغَتِ التَّرَاقِيَ﴾</span> فهي في سورة القيامة [26]. ولا يتغيّر الشاهد: «حينئذٍ» في آية الواقعة.</div>
+    <p>قال الشيخ: هذا الموضع (أنواع التنوين) ربما يكون <b>أصعب ما سيمرّ عليكم في النحو</b>، وكل ما بعده أسهل بكثير.</p>
+    <div class="quiz-slot ilm-export-section nohl" data-q="q28"></div>
+    <div class="box edit"><span class="bl">تدريب من إعداد الذكاء الاصطناعي</span>حدِّد نوع التنوين في كلمات جديدة.</div>
+    <div class="quiz-slot ilm-export-section nohl" data-q="q29,q30"></div>
+
+    <div class="scorebar ilm-export-section nohl">نتيجتك في أسئلة القسم: <span class="score" data-sec="s5">—</span></div>
+    <div class="takeaway">
+      <span class="bl">خلاصة القسم</span>
+      <span class="tk">التنوين نونٌ ساكنة تلحق آخر الاسم لفظًا وتفارقه خطًّا، والفعل لا يُنوَّن.</span>
+      <span class="tk">التمكين: في الاسم المعرب كـ«محمدٌ»، والتنكير: في بعض المبنيات للتفريق بين المعرفة والنكرة كـ«سيبويهٍ».</span>
+      <span class="tk">المقابلة: في جمع المؤنث السالم، يقابل النون في جمع المذكر السالم.</span>
+      <span class="tk">العوض: عوضٌ عن جملة كـ«حينئذٍ».</span>
+      <span class="tk">المعرب يتغيّر آخره، والمبني ثابت كالحائط.</span>
+      <span class="tk">نون جمع المذكر عوض عن التنوين، ونون الأفعال الخمسة علامة رفع.</span>
+    </div>
+    <div class="next"><b>الخيط التالي:</b> العلامة الثالثة: دخول «أل»، ومعها علامتان لم يذكرهما المصنّف.</div>
+  </section>
+
+  <!-- ================= القسم 6 ================= -->
+  <section class="sec" id="s6" style="--c:var(--c6)">
+    <div class="sec-h"><div class="sec-n">٦</div><h2>العلامة الثالثة «أل»، ومعها النداء والإسناد</h2></div>
+    <h3 id="s6-al">دخول الألف واللام</h3>
+    <p>هذه سهلة: أيّ كلمة دخلتها «أل» فهي اسم: <span class="nx">المَسْجِدُ الحَرَامُ، القَلَمُ، الأُسْتَاذُ، الفَتَاةُ، البِنْتُ، اللَّيْلُ، النَّهَارُ، الشَّمْسُ، القَمَرُ</span>. لأن <b>الفعل لا تدخله «أل»</b>؛ لا يصح أن تقول: «الجَلَسَ» ولا «الكَتَبَ».</p>
+    <div class="quiz-slot ilm-export-section nohl" data-q="q31"></div>
+
+    <h3 id="s6-isnad">علامات لم يذكرها المصنّف: الإسناد والنداء</h3>
+    <p>سأل أحد الحاضرين: <span class="nx">إِبْرَاهِيمُ، مُصْطَفَى</span> — لا تنوين فيهما ولا «أل»، فكيف نعرف أنهما اسمان؟ فقال الشيخ: سؤالك وجيه، ومن علامات الاسم <b>الإسناد</b>.</p>
+    <div class="box def"><span class="bl">الإسناد</span><span class="dt">أن تُخبِر عن الكلمة؛ أي تأتي لها بفعلٍ فتكون هي فاعله.</span><br>تقول: <span class="nx">جَاءَ سِيبَوَيْهِ</span> — لا تنوين فيها ولا «أل»، لكنها فاعل؛ ولا يصح أن تقول: «جَاءَ شَرِبَ» أو «جَاءَ جَلَسَ»؛ لأن الفعل لا يُسنَد إليه، بل يُسنَد هو إلى الفاعل. فالفعل لا بد بعده من فاعل، والفاعل اسم.</div>
+    <div class="box key"><span class="bl">أقوى علامات الاسم</span>الإسناد <b>علامة معنوية</b>، وهو أقوى علامات الاسم؛ لأن بعض الكلمات لا تقبل علامةً غيره. مثاله: التاء في <span class="nx">شَرِبْتُ</span> اسمٌ (ضمير)، ولا تقبل التنوين ولا «أل» ولا النداء — لا تقول «تٌ» ولا «التُّ» ولا «يا تُ» — ولا تقبل إلا الإسناد: بدل «شَرِبَ الأُسْتَاذُ» تقول «شَرِبْتُ»، أي أسندتَ الشرب إليها.</div>
+    <p>ومن علامات الاسم أيضًا <b>النداء</b>؛ فلا يدخل إلا على الأسماء: <span class="nx">يَا نُوحُ، يَا إِبْرَاهِيمُ، يَا إِسْمَاعِيلُ</span>، ولا يصح «يا كَتَبَ» ولا «يا شَرِبَ». وقد جمعها <span class="sem-scholar">ابن مالك</span> في الألفية:</p>
+    <div class="poem"><div class="bayt"><span>بِالجَرِّ وَالتَّنْوِينِ وَالنِّدَا وَأَلْ</span><span>وَمُسْنَدٍ لِلِاسْمِ تَمْيِيزٌ حَصَلْ</span></div>
+      <div class="gloss">أي: يتميّز الاسم عن الفعل والحرف بخمس علامات: الجر، والتنوين، والنداء، و«أل»، والإسناد إليه.</div></div>
+    <p>ولماذا لم يذكرها <span class="sem-scholar">ابن آجُرُّوم</span>؟ لأن كتابه <b>للمبتدئين</b>، فذكر بعض العلامات وترك بعضها <b>مراعاةً لحال المخاطَب</b> — كأنه يقول لك: أنت لسه في الروضة!</p>
+    <div class="box warn"><span class="bl">من الحوار</span>قالت إحدى الحاضرات: قد يأتي الاسم مجرورًا فنعرفه، مثل «مررتُ بسيبويهِ». فقال الشيخ: صحيح، لكن قد يأتي في جملة بلا جرٍّ أصلًا، فيكفي فيه الإسناد لتعرف أنه اسم.</div>
+    <div class="quiz-slot ilm-export-section nohl" data-q="q32,q33,q34"></div>
+
+    <div class="scorebar ilm-export-section nohl">نتيجتك في أسئلة القسم: <span class="score" data-sec="s6">—</span></div>
+    <div class="takeaway">
+      <span class="bl">خلاصة القسم</span>
+      <span class="tk">كل كلمة دخلتها «أل» فهي اسم، والفعل لا تدخله «أل».</span>
+      <span class="tk">الإسناد: أن تُخبر عن الكلمة (تجعلها فاعلًا)، وهو علامة معنوية وأقوى علامات الاسم.</span>
+      <span class="tk">تاء «شربتُ» اسمٌ لا يقبل إلا علامة الإسناد.</span>
+      <span class="tk">النداء لا يدخل إلا على الأسماء: يا نوحُ.</span>
+      <span class="tk">ترك ابن آجروم بعض العلامات مراعاةً لحال المبتدئ.</span>
+    </div>
+    <div class="next"><b>الخيط التالي:</b> العلامة الرابعة: حروف الخفض، ومعنى كل حرف.</div>
+  </section>
+
+  <!-- ================= القسم 7 ================= -->
+  <section class="sec" id="s7" style="--c:var(--c7)">
+    <div class="sec-h"><div class="sec-n">٧</div><h2>العلامة الرابعة: حروف الخفض ومعانيها</h2></div>
+    <div class="box def"><span class="bl">قال المصنّف</span><span class="nx">«وَحُرُوفُ الخَفْضِ وَهِيَ: مِنْ، وَإِلَى، وَعَنْ، وَعَلَى، وَفِي، وَرُبَّ، وَالبَاءُ، وَالكَافُ، وَاللَّامُ، وَحُرُوفُ القَسَمِ وَهِيَ: الوَاوُ، وَالبَاءُ، وَالتَّاءُ».</span></div>
+    <p>قد يعترض أحد: ألم نقل «الجر بالحرف» تحت العلامة الأولى؟ نعم، لكنه هنا <b>فصّل الحروف</b> نفسها. وكل هذه الحروف تدخل على الاسم فتجرّه. والشيخ يتكلم هنا عن <b>معانيها</b>، لأنها من «حروف المعاني» التي لكل حرف منها معنى.</p>
+
+    <div class="tbl" id="s7-maani">
+      <div class="tr th"><div class="td n">الحرف</div><div class="td">معناه</div><div class="td">أمثلة الشيخ</div></div>
+      <div class="tr"><div class="td n nx">مِنْ</div><div class="td">الابتداء</div><div class="td"><span class="nx">سَافَرْتُ مِنْ مِصْرَ إِلَى الإِسْكَنْدَرِيَّةِ</span> — بداية السفر من مصر</div></div>
+      <div class="tr"><div class="td n nx">إِلَى</div><div class="td">الانتهاء</div><div class="td">نهاية السفر الإسكندرية. وفي آية الإسراء: بداية الإسراء المسجد الحرام، ونهايته المسجد الأقصى</div></div>
+      <div class="tr"><div class="td n nx">عَنْ</div><div class="td">المجاوزة</div><div class="td"><span class="nx">رَمَيْتُ السَّهْمَ عَنِ القَوْسِ</span> — جاوز السهمُ القوسَ وابتعد عنه</div></div>
+      <div class="tr"><div class="td n nx">عَلَى</div><div class="td">الاستعلاء</div><div class="td"><span class="nx">جَلَسْتُ عَلَى الكُرْسِيِّ</span>، و<span class="aya sem-aya">﴿وَعَلَيْهَا وَعَلَى الْفُلْكِ تُحْمَلُونَ﴾</span> [المؤمنون: 22]</div></div>
+      <div class="tr"><div class="td n nx">فِي</div><div class="td">الظرفية</div><div class="td"><span class="nx">وَضَعْتُ القَلَمَ فِي جَيْبِي</span>، <span class="nx">جَلَسْنَا فِي الحُجْرَةِ</span></div></div>
+      <div class="tr"><div class="td n nx">رُبَّ</div><div class="td">التقليل، وقد تفيد التكثير</div><div class="td"><span class="nx">رُبَّ أَخٍ لَكَ لَمْ تَلِدْهُ أُمُّكَ</span> (قليل)، <span class="nx">رُبَّ صَائِمٍ ...</span> (كثير)</div></div>
+      <div class="tr"><div class="td n nx">البَاءُ</div><div class="td">الاستعانة</div><div class="td"><span class="nx">كَتَبْتُ بِالقَلَمِ</span> — مستعينًا بالقلم</div></div>
+      <div class="tr"><div class="td n nx">الكَافُ</div><div class="td">التشبيه</div><div class="td"><span class="nx">هِنْدٌ كَالقَمَرِ</span> — مشبَّه ومشبَّه به وأداة تشبيه</div></div>
+      <div class="tr"><div class="td n nx">اللَّامُ</div><div class="td">المِلك</div><div class="td"><span class="nx">القَلَمُ لِمُحَمَّدٍ</span> — مِلكٌ له</div></div>
+    </div>
+    <div class="quiz-slot ilm-export-section nohl" data-q="q35,q36"></div>
+
+    <h3 id="s7-fi">«في» و«على»: الظرفية والاستعلاء</h3>
+    <p><b>الظرفية</b>: الظرف شيء يحوي غيره؛ كما تكتب رسالة وتضعها في ظرف، فالظرف ظرف والرسالة مظروف. ونحن الآن جالسون في حجرة لها أركان تحوينا، فنقول: <span class="nx">جَلَسْنَا فِي الحُجْرَةِ</span>.</p>
+    <p>وفرعون لما هدّد السحرة قال:</p>
+    <div class="aya-block"><span class="aya sem-aya">﴿وَلَأُصَلِّبَنَّكُمْ فِي جُذُوعِ النَّخْلِ﴾</span><span class="ref">[طه: 71]</span></div>
+    <div class="chain">
+      <div class="lnk"><span class="kh">الأصل</span>الإنسان يُصلَب <b>على</b> الجذع لا <b>في</b> الجذع</div>
+      <div class="arw">←</div>
+      <div class="lnk"><span class="kh">القاعدة</span>حروف الجر ينوب بعضها عن بعض؛ فهنا «في» نابت عن «على»</div>
+      <div class="arw">←</div>
+      <div class="lnk"><span class="kh">الغرض البلاغي</span>يبيّن لهم أنه سيشدّ ربطهم في النخل كأنهم دخلوا فيها، فلا يقدر أحد أن يفكّهم</div>
+    </div>
+    <div class="box fix"><span class="bl">تصحيح تصوّر (من سؤال)</span>«في» <b>حرف جر</b>، أمّا «أمام» و«خلف» و«فوق» و«تحت» فهي <b>أسماء</b> وتُسمّى ظروف مكان. وظرف المكان شيء وظرف الزمان شيء آخر: الزمان وقت، تقول: <span class="nx">رَجَعْتُ البَيْتَ عِشَاءً</span>، <span class="nx">صَبَاحًا</span> — هذا ظرف زمان.</div>
+
+    <h3 id="s7-rubba">«رُبَّ» بين التقليل والتكثير</h3>
+    <div class="exs">
+      <div class="ex"><span class="s nx">رُبَّ أَخٍ لَكَ لَمْ تَلِدْهُ أُمُّكَ</span><span class="r">تقليل: شخصٌ غريب يحبك أكثر من أهلك — وهذا نادر</span></div>
+      <div class="ex"><span class="s nx">رُبَّ مَوْلُودٍ لَيْسَ لَهُ وَالِدٌ</span><span class="r">تقليل: كآدم وعيسى عليهما السلام</span></div>
+      <div class="ex"><span class="s"><span class="sem-hadith">«رُبَّ صَائِمٍ لَيْسَ لَهُ مِنْ صِيَامِهِ إِلَّا الجُوعُ وَالعَطَشُ»</span></span><span class="r">تكثير: صائمون كثيرون يرتكبون ما يُضيّع صيامهم</span></div>
+    </div>
+    <p>قال الشيخ في الحديث: لو أن الناس صائمون كثيرًا، وواحدٌ يرتشي أو يشهد زورًا أو يكذب أو لا يصلي — فهذا كثير؛ فهي هنا للتكثير. وتعرف المعنى من سياق المثال.</p>
+    <div class="quiz-slot ilm-export-section nohl" data-q="q37"></div>
+
+    <h3 id="s7-qasam">حروف القسم: الواو والباء والتاء</h3>
+    <p>تقول: <span class="nx">وَاللهِ، بِاللهِ، تَاللهِ</span>. و<b>الواو أمّ حروف القسم</b>؛ لأنها تدخل على <b>كل مقسَمٍ به</b>، وفي القرآن أمثلة كثيرة:</p>
+    <div class="aya-block"><span class="aya sem-aya">﴿وَالْفَجْرِ﴾ ﴿وَالتِّينِ﴾ ﴿وَاللَّيْلِ﴾ ﴿وَالشَّمْسِ﴾ ﴿وَالْعَصْرِ﴾ ﴿وَالسَّمَاءِ﴾ ﴿وَالضُّحَىٰ﴾</span></div>
+    <p>وحتى العامة في كلامهم يُدخلون الواو على كل ما يحلفون به. أمّا «التاء» فلا تدخل إلا على لفظ الجلالة: <span class="nx">تَاللهِ</span>. وهذا مثال آخر على أن ترتيبهم الحروفَ «ما جاش من فراغ»: قدّموا الواو لميزتها.</p>
+    <div class="box edit"><span class="bl">إضافة تحريرية</span>التفصيل في «التحفة السنية»: الواو تدخل على كل اسمٍ ظاهر، والباء تدخل على الظاهر والضمير (كقولك: بك لأفعلنّ)، والتاء لا تدخل إلا على لفظ الجلالة. وكلام الشيخ عن «الباء» في التفريغ غير واضح، فاعتمدنا هنا نص الشرح.</div>
+    <div class="quiz-slot ilm-export-section nohl" data-q="q38"></div>
+
+    <h3 id="s7-nazm-extra">ما زاده النظم: مُذْ، ومُنْذُ، ولعلّ، وحتى</h3>
+    <div class="tbl">
+      <div class="tr th"><div class="td n">الحرف</div><div class="td">ضابطه عند الشيخ</div><div class="td">مثاله</div></div>
+      <div class="tr"><div class="td n nx">مُذْ / مُنْذُ</div><div class="td">معناهما واحد، و«مُذْ» على حرفين و«مُنْذُ» على ثلاثة. <b>لا يجرّان إلا ظرف الزمان</b>؛ فلا يقال «مُذْ مُحَمَّدٍ» ولا «مُذْ أَحْمَدَ»</div><div class="td"><span class="nx">لَمْ أَرَهُ مُذْ يَوْمِ الجُمُعَةِ</span> = <span class="nx">مُنْذُ يَوْمِ الجُمُعَةِ</span>: أي من يوم الجمعة ما شفته</div></div>
+      <div class="tr"><div class="td n nx">لَعَلَّ</div><div class="td">حرف جر <b>في لغة عُقَيل</b> (قبيلة من العرب) يقولون: <span class="nx">لَعَلَّ اللهِ</span>. أمّا عامة العرب فجعلوها حرفًا ناصبًا من أخوات «إنّ»</div><div class="td"><span class="aya sem-aya">﴿لَا تَدْرِي لَعَلَّ اللَّهَ يُحْدِثُ بَعْدَ ذَٰلِكَ أَمْرًا﴾</span> [الطلاق: 1]</div></div>
+      <div class="tr"><div class="td n nx">حَتَّى</div><div class="td">تجرّ <b>آخر الشيء</b> الذي تتكلم عنه</div><div class="td"><span class="aya sem-aya">﴿سَلَامٌ هِيَ حَتَّىٰ مَطْلَعِ الْفَجْرِ﴾</span> [القدر: 5]، <span class="nx">أَكَلْتُ السَّمَكَةَ حَتَّى رَأْسِهَا</span>؛ ولا تقول: «سهرتُ الليلةَ حتى نصفِها»</div></div>
+    </div>
+    <div class="quiz-slot ilm-export-section nohl" data-q="q39,q40"></div>
+    <div class="box edit"><span class="bl">تدريب من إعداد الذكاء الاصطناعي</span>طبّق معاني الحروف على جمل جديدة.</div>
+    <div class="quiz-slot ilm-export-section nohl" data-q="q41,q42"></div>
+
+    <div class="scorebar ilm-export-section nohl">نتيجتك في أسئلة القسم: <span class="score" data-sec="s7">—</span></div>
+    <div class="takeaway">
+      <span class="bl">خلاصة القسم</span>
+      <span class="tk">من للابتداء، وإلى للانتهاء، وعن للمجاوزة، وعلى للاستعلاء، وفي للظرفية.</span>
+      <span class="tk">رُبّ للتقليل وقد تأتي للتكثير، والباء للاستعانة، والكاف للتشبيه، واللام للملك.</span>
+      <span class="tk">حروف الجر ينوب بعضها عن بعض لغرض بلاغي: «في جذوع النخل».</span>
+      <span class="tk">الواو أمّ حروف القسم تدخل على كل مقسم به، والتاء خاصة بلفظ الجلالة.</span>
+      <span class="tk">مذ ومنذ لا تجرّان إلا الزمان، ولعلّ جارّة في لغة عُقيل، وحتى تجرّ آخر الشيء.</span>
+    </div>
+    <div class="next"><b>الخيط التالي:</b> نختم بقراءة ما شرحناه منظومًا، مع فائدة بلاغية في أول النظم: القصر.</div>
+  </section>
+
+  <!-- ================= القسم 8 ================= -->
+  <section class="sec" id="s8" style="--c:var(--c8)">
+    <div class="sec-h"><div class="sec-n">٨</div><h2>مسك الختام: شرح أبيات النظم وفائدة «القصر»</h2></div>
+    <p>ما شرحناه نثرًا نقرؤه الآن نظمًا، و«لما نكرّره ستحسّ أنه سهل»؛ فالحفظ مطلوب في العلم بحسب القدرة والاستطاعة. والنظم من نظم <span class="sem-scholar">عبيد ربه الشنقيطي</span> — والشيخ صوّره من الإنترنت — وكل الكتاب في ورقتين.</p>
+    <div class="box edit"><span class="bl">إضافة تحريرية</span>نسبة هذا النظم مختلَفٌ فيها: فريق ينسبه إلى الشيخ <span class="sem-scholar">عبيد ربه الشنقيطي</span> الموريتاني (وهي نسبة الشيخ هنا)، وفريق إلى <span class="sem-scholar">محمد بن أُبَّ المزمّري التواتي</span> الجزائري (ت 1160هـ).</div>
+
+    <div class="poem" id="s8-abyat">
+      <span class="bl">الأبيات مع شرح الشيخ</span>
+      <div class="bayt"><span>قَالَ عُبَيْدُ رَبِّهِ مُحَمَّدُ</span><span>اللهَ فِي كُلِّ الأُمُورِ أَحْمَدُ</span><span class="num">١</span></div>
+      <div class="gloss"><b>عُبَيد</b>: تصغير «عبد» من باب التواضع لله؛ كأنه يقول: لستُ مستحقًّا أن أكون «عبدًا»، أنا «عُبيد». <b>محمد</b>: اسمه. <b>اللهَ ... أحمدُ</b>: الأصل «أحمدُ اللهَ»، فقدّم المفعول ليفيد <b>القصر</b> (يأتي بيانه).</div>
+      <div class="bayt"><span>مُصَلِّيًا عَلَى الرَّسُولِ المُنْتَقَى</span><span>وَآلِهِ وَصَحْبِهِ ذَوِي التُّقَى</span><span class="num">٢</span></div>
+      <div class="gloss"><b>المنتقى</b>: المختار، الذي اختاره الله واصطفاه من جميع الخلق. <b>آله</b>: آل بيته. <b>صحبه</b>: أصحابه. <b>ذوي التقى</b>: أصحاب التقوى.</div>
+      <div class="bayt"><span>وَبَعْدُ فَالقَصْدُ بِذَا المَنْظُومِ</span><span>تَسْهِيلُ مَنْثُورِ ابْنِ آجُرُّومِ</span><span class="num">٣</span></div>
+      <div class="bayt"><span>لِمَنْ أَرَادَ حِفْظَهُ وَعَسُرَا</span><span>عَلَيْهِ أَنْ يَحْفَظَ مَا قَدْ نُثِرَا</span><span class="num">٤</span></div>
+      <div class="gloss">لماذا عمل هذا النظم؟ <b>تسهيلُ</b> الكلام الذي كتبه ابن آجروم ونثره في كتابه، لمن أراد حفظه و<b>صعُب عليه</b> أن يحفظ المنثور.</div>
+      <div class="bayt"><span>وَاللهَ أَسْتَعِينُ فِي كُلِّ عَمَلْ</span><span>إِلَيْهِ قَصْدِي وَعَلَيْهِ المُتَّكَلْ</span><span class="num">٥</span></div>
+      <div class="gloss"><b>واللهَ أستعينُ</b>: قدّم لفظ الجلالة فأفاد القصر: لا يستعين إلا بالله. <b>إليه قصدي</b>: الأصل «قصدي إليه»؛ والجارّ والمجرور حقّه التأخير، فقدّمه للقصر. وكذلك <b>عليه المتّكل</b>: لا يتوكّل إلا عليه.</div>
+      <div class="bayt"><span>إِنَّ الكَلَامَ عِنْدَنَا فَلْتَسْتَمِعْ</span><span>لَفْظٌ مُرَكَّبٌ مُفِيدٌ قَدْ وُضِعْ</span><span class="num">٦</span></div>
+      <div class="bayt"><span>أَقْسَامُهُ الَّتِي عَلَيْهَا يُبْنَى</span><span>اسْمٌ وَفِعْلٌ ثُمَّ حَرْفُ مَعْنَى</span><span class="num">٧</span></div>
+      <div class="gloss"><b>يُبنى</b>: يُؤسَّس؛ أي أقسام الكلام التي يقوم عليها: اسم وفعل وحرف معنى.</div>
+      <div class="bayt"><span>فَالاِسْمُ بِالخَفْضِ وَبِالتَّنْوِينِ أَوْ</span><span>دُخُولِ أَلْ يُعْرَفُ فَاقْفُ مَا قَفَوْا</span><span class="num">٨</span></div>
+      <div class="gloss">الخفض: الجرّ بالحرف أو بالإضافة أو بالتبعية؛ والتنوين مثل «محمدٌ رسول الله»؛ ودخول «أل» مثل «المسجد». <b>فاقْفُ ما قَفَوْا</b>: سِرْ على طريقتهم واتبعهم؛ والقافية معناها التتابع.</div>
+      <div class="bayt"><span>وَبِحُرُوفِ الخَفْضِ وَهْيَ مِنْ إِلَى</span><span>وَعَنْ وَفِي وَرُبَّ وَالبَا وَعَلَى</span><span class="num">٩</span></div>
+      <div class="bayt"><span>وَالكَافُ وَاللَّامُ وَوَاوٌ وَالتَّا</span><span>وَمُذْ وَمُنْذُ وَلَعَلَّ حَتَّى</span><span class="num">١٠</span></div>
+      <div class="gloss">زاد النظم على المتن: <b>مُذْ ومُنْذُ ولعلّ وحتى</b> — وقد سبق ضابطها في القسم السابع.</div>
+    </div>
+    <div class="quiz-slot ilm-export-section nohl" data-q="q43,q44"></div>
+
+    <h3 id="s8-qasr">فائدة بلاغية: القصر بتقديم ما حقُّه التأخير</h3>
+    <div class="box def"><span class="bl">التعريف</span><span class="dt">القصر: إثباتُ الحكم لشيءٍ ونفيُه عمّا عداه.</span> وليس المقصود «قصر الأمراء»!</div>
+    <div class="chain">
+      <div class="lnk"><span class="kh">الأصل</span>الترتيب: فعل ← فاعل ← مفعول؛ فالمفعول حقُّه <b>التأخير</b>: <span class="nx">كَتَبَ الأُسْتَاذُ الدَّرْسَ</span></div>
+      <div class="arw">←</div>
+      <div class="lnk"><span class="kh">الشرط</span>إذا <b>قُدِّم</b> ما حقُّه التأخير (المفعول أو الجار والمجرور)</div>
+      <div class="arw">←</div>
+      <div class="lnk"><span class="kh">النتيجة</span>أفاد <b>القصر</b>: ثبوت الحكم له وحده</div>
+    </div>
+    <div class="box story">
+      <span class="bl">مثال الشيخ العملي: «أحبُّكِ» و«إيّاكِ أُحِبُّ»</span>
+      <p>زوجٌ رجع إلى بيته ومعه هدية حلوة، وقال لزوجته: <span class="nx">أُحِبُّكِ</span>. وإعرابها: «أحبُّ» فعل مضارع، والفاعل ضمير مستتر تقديره «أنا»، والكاف ضمير متصل مبني في محل نصب مفعول به — فعلٌ وفاعلٌ ومفعول، والمفعول في مكانه: التأخير.</p>
+      <p>لكن من حظّه أن زوجته تعرف اللغة العربية، فما فرحت! قال: أنا بقول لك كلام حلو، فيه حد النهارده يقول «أحبك»؟ قالت: أنت لما قلت «أحبك» فمعناها أنك ممكن تحب غيري؛ أنا عايزاك تقصر المحبة عليّ ولا تحب غيري. قال: أقول إيه؟ قالت: قل <span class="nx">إِيَّاكِ أُحِبُّ</span>. فلما قالها — أي قصر المحبة عليها فلا يحب سواها — «زغردت».</p>
+    </div>
+    <div class="aya-block"><span class="aya sem-aya">﴿إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ﴾</span><span class="ref">[الفاتحة: 5]</span></div>
+    <div class="cmp">
+      <div class="col"><div class="ch">«نعبدك»</div>لا تمنع أن نعبد غيره معه</div>
+      <div class="col"><div class="ch">«إيّاك نعبد»</div>قصرنا العبادة على الله: لا نعبد سواك</div>
+    </div>
+    <p>وتقديم الجار والمجرور مثله، كقوله تعالى: <span class="aya sem-aya">﴿إِلَيْهِ مَرْجِعُكُمْ﴾</span> [يونس: 4]، و<span class="aya sem-aya">﴿وَعَلَى اللَّهِ فَلْيَتَوَكَّلِ الْمُؤْمِنُونَ﴾</span> [آل عمران: 122] — للقصر.</p>
+    <div class="exs">
+      <div class="ex"><span class="s nx">الهَدِيَّةُ لَكَ</span><span class="r">ممكن تكون لغيرك أيضًا</span></div>
+      <div class="ex"><span class="s nx">لَكَ الهَدِيَّةُ</span><span class="r">ليست لغيرك (قصر)</span></div>
+    </div>
+    <div class="quiz-slot ilm-export-section nohl" data-q="q45,q46"></div>
+    <div class="box edit"><span class="bl">تدريب من إعداد الذكاء الاصطناعي</span>طبّق قاعدة القصر.</div>
+    <div class="quiz-slot ilm-export-section nohl" data-q="q47"></div>
+
+    <p>وختم الشيخ المجلس بالدعاء: «اللهم ارزقنا علمًا نافعًا، وقلبًا خاشعًا، ولسانًا ذاكرًا، ودعاءً مستجابًا»، وأعطى الحلاوة لكل من سأل، وقال: «دي طريقتي من باب التشجيع».</p>
+
+    <div class="scorebar ilm-export-section nohl">نتيجتك في أسئلة القسم: <span class="score" data-sec="s8">—</span></div>
+    <div class="takeaway">
+      <span class="bl">خلاصة القسم</span>
+      <span class="tk">«عُبيد ربه»: تصغير «عبد» تواضعًا لله.</span>
+      <span class="tk">غرض النظم: تسهيل منثور ابن آجروم على من صعُب عليه حفظه.</span>
+      <span class="tk">القصر: إثبات الحكم لشيء ونفيه عمّا عداه، ويحصل بتقديم ما حقه التأخير.</span>
+      <span class="tk">«إيّاك نعبد» = لا نعبد سواك، و«إيّاكِ أُحبّ» = لا أحب سواكِ.</span>
+      <span class="tk">«فاقْفُ ما قفَوْا»: اتّبع طريقة أهل العلم.</span>
+    </div>
+    <div class="next"><b>الخيط التالي (المحاضرة 02):</b> العلامات التي تميّز الفعل عن الاسم: قد، والسين، وسوف، وتاء التأنيث الساكنة، ثم علامة الحرف، ثم باب الإعراب.</div>
+  </section>
+
+</main>
+
+  <!-- ================= بطاقات المراجعة (خارج منطقة الهايلايت) ================= -->
+  <section class="deck ilm-export-section nohl" id="deck">
+    <h2>بطاقات المراجعة (Anki)</h2>
+    <p class="note">اضغط على البطاقة لقلبها. والتحميل يُصدِّر ملف TSV جاهزًا للاستيراد في Anki: كل بطاقة تنزل في رزمة أولويتها، ومعها وسم المحاضرة تلقائيًّا. في شاشة الاستيراد اختر نوع الملاحظة «أساسي»، واترك خانة «وسم كل الملحوظات» فارغة.</p>
+    <div class="dk-filters" id="dk-filters"></div>
+    <div class="dk-stage" id="dk-stage" tabindex="0" role="button" aria-label="اقلب البطاقة"></div>
+    <div class="dk-ctrl">
+      <button type="button" id="dk-prev">→ السابقة</button>
+      <span class="pos" id="dk-pos"></span>
+      <button type="button" id="dk-next">التالية ←</button>
+    </div>
+    <button type="button" class="dk-dl" id="dk-dl">⬇ تحميل بطاقات المحاضرة لـ Anki</button>
+    <div class="dk-err" id="dk-err"></div>
+  </section>
+
+  <div class="foot">مواد شرعية · شرح الآجرومية · المحاضرة 01 — أُعدّ بمساعدة الذكاء الاصطناعي، ويُرجى مراجعته</div>
+</div>
+
+<!-- 1) المزامنة ثم تتبّع الإنجاز -->
+<script type="module" src="../../firebase-sync-manhaj.js"></script>
+<script src="../../ilm-track.js"></script>
+<script>
+(function () {
+  var cb = document.querySelector('#ilm-completion-box input');
+  var lid = cb.getAttribute('data-lecture-id');
+  function render(v) { cb.checked = !!v; }
+  window.addEventListener('DOMContentLoaded', function () {
+    if (window.IlmTrack) render(window.IlmTrack.isDone(lid));
+    if (window.ManhajCloud) window.ManhajCloud.ready.then(function () {
+      if (window.IlmTrack) render(window.IlmTrack.isDone(lid));
+    });
+  });
+  window.addEventListener('ilm-track-synced', function () { render(window.IlmTrack.isDone(lid)); });
+  cb.addEventListener('change', function () { if (window.IlmTrack) window.IlmTrack.setDone(lid, cb.checked); });
+})();
+</script>
+
+<!-- 2) أداة البطاقات المشتركة (9-ص): الوسم والرزمة وGUID تُبنى آليًا من data.js -->
+<script src="../../data.js"></script>
+<script src="../../ilm-anki.js" data-lecture="01"></script>
+
+<!-- 3) بيانات الصفحة وطبقة التفاعل -->
+<script>
+/* ================= الأسئلة التفاعلية (7-ب) ================= */
+var QUIZ_DATA = [
+  // ---- القسم 1
+  { id: "q01", sectionId: "s1", question: "لماذا ربط الشيخ بين فهم النحو وتدبّر القرآن؟", options: ["لأن القرآن نزل بلغة العرب فلا يُتدبَّر إلا بفهم العربية", "لأن النحو يُغني عن كتب التفسير", "لأن تدبّر القرآن شرطٌ لدراسة النحو", "لأن أكثر شواهد النحو من القرآن فقط"], correctIndex: 0, explanation: "استدل بـ﴿أَفَلَا يَتَدَبَّرُونَ الْقُرْآنَ﴾ و﴿إِنَّا أَنزَلْنَاهُ قُرْآنًا عَرَبِيًّا﴾: القرآن نزل بلغة العرب، فلا يُتدبَّر إلا بفهمها." },
+  { id: "q02", sectionId: "s1", question: "تحدّى الله العربَ بالقرآن «من جنس ما برعوا فيه». ما المقصود؟", options: ["تحدّاهم بالقوة والقتال", "تحدّاهم في الفصاحة والبلاغة وهم أهلها فعجزوا", "تحدّاهم في الحساب والفلك", "تحدّاهم في التجارة والرحلات"], correctIndex: 1, explanation: "كانوا فصحاء بلغاء شعراء، فتحدّاهم أن يأتوا بسورة من مثله فعجزوا: ﴿فَإِن لَّمْ تَفْعَلُوا وَلَن تَفْعَلُوا﴾." },
+  { id: "q03", sectionId: "s1", question: "طالبٌ يقول: «أنا بقرأ الدرس قبل ما آجي ومش بفهم، يبقى مالوش لازمة». بماذا يجيبه الشيخ؟", options: ["صحيح، لا تقرأ إلا بعد الشرح", "اقرأه لتحفظه قبل الدرس", "اقرأه قراءة عادية ولو لم تفهم؛ الغرض أن تُهيّئ نفسك لسماع الدرس", "اقرأ الشرح من كتاب آخر بدلًا منه"], correctIndex: 2, explanation: "قال: لا أريدك أن تقرأ لتحفظ، بل قراءة عادية حتى يُهيّئ نفسه لسماع الدرس." },
+  { id: "q04", sectionId: "s1", question: "ما الهدف من أسئلة الشيخ مثل: لماذا جُعلت «كان» أمَّ أخواتها؟ ولماذا قيل «فعلٌ ناقص»؟", options: ["الإكثار من الحفظ", "أن يشغّل الطالب عقله ويسأل «لماذا؟» لأنه لا شيء في النحو جاء اعتباطًا", "إثبات أن النحو صعب", "تعجيز الطلاب"], correctIndex: 1, explanation: "أراد أن ينشغل عقل الطالب ولا يحفظ بلا فهم؛ فلكل ترتيب وتسمية في النحو سبب." },
+  { id: "q05", sectionId: "s1", question: "ما العبرة من قصة الفتاة التي سمعت النحو في المسجد ثم صارت دكتورة فيه؟", options: ["أن الطب أصعب من النحو", "أن الرغبة الصادقة مع الفهم تجعل النحو سهلًا ولو بدأ المرء من بساطة", "أن دار العلوم أفضل الكليات", "أن الحفظ وحده يكفي"], correctIndex: 1, explanation: "قال الشيخ: أي واحد عنده رغبة — حتى لو مش متعلم — بفضل الله هيبقى كويس." },
+  // ---- القسم 2
+  { id: "q06", sectionId: "s2", question: "«إنْ حضر زيدٌ» — لماذا ليس كلامًا عند النحاة مع أنه لفظ مركّب من ثلاث كلمات؟", options: ["لأنه ليس لفظًا", "لأنه غير مفيد؛ السامع ما زال منتظرًا", "لأنه ليس من لغة العرب", "لأنه كلمة واحدة"], correctIndex: 1, explanation: "هو لفظ ومركّب، لكنه لم يُفد فائدة يحسن السكوت عليها." },
+  { id: "q07", sectionId: "s2", question: "أيّ شروط الكلام يُخرِج الكلام بالفرنسية والإنجليزية؟", options: ["اللفظ", "التركيب", "الإفادة", "الوضع"], correctIndex: 3, explanation: "«بالوضع»: أن يكون موضوعًا في كلام العرب، فيخرج ما ليس بلغتهم." },
+  { id: "q08", sectionId: "s2", question: "شخص أشار لصاحبه بيده: «تعالَ»، ففهمه. ما الحكم؟", options: ["كلام في اللغة والنحو معًا", "كلام في اللغة لا في النحو؛ لأنه ليس لفظًا", "كلام في النحو لا في اللغة", "ليس كلامًا في اللغة ولا في النحو"], correctIndex: 1, explanation: "الإشارة تُسمّى كلامًا لغةً (﴿إِلَّا رَمْزًا﴾)، لكن الكلام عند النحاة لا يكون إلا لفظًا." },
+  { id: "q09", sectionId: "s2", question: "كلمة «زيدٌ» وحدها، أيّ شرط ينقصها لتكون كلامًا؟", options: ["اللفظ", "التركيب (ثم الإفادة)", "الوضع", "لا ينقصها شيء"], correctIndex: 1, explanation: "الكلمة المفردة يخرجها شرط «المركّب»؛ فلا بد من كلمتين أو أكثر مع الإفادة." },
+  { id: "q10", sectionId: "s2", question: "رسالة مكتوبة بخط اليد فيها: «العلمُ نورٌ». هل هي كلامٌ عند النحاة من حيث هي كتابة؟", options: ["نعم، لأنها مفيدة", "لا؛ الكتابة تُسمّى كلامًا في اللغة، والنحاة يشترطون اللفظ", "نعم، لأنها بلغة العرب", "لا، لأنها غير مركّبة"], correctIndex: 1, explanation: "ذكر الشيخ أن الكتابة كالإشارة: تُسمّى كلامًا في اللغة لا في النحو، لأن النحاة يشترطون اللفظ." },
+  { id: "q11", sectionId: "s2", question: "لماذا نظم العلماء المتون شعرًا؟", options: ["للتسلية فقط", "لأن النظم أيسر في الحفظ كحبّات السُّبحة المنظومة في خيط", "لأن النثر لا يصح في العلم", "لإخفاء المعنى عن العامة"], correctIndex: 1, explanation: "المنثور كحبّات سُبحة تناثرت يصعب جمعها، والمنظوم كحبات في خيط يسهل حفظها؛ و«من حفظ المتون حاز الفنون»." },
+  // ---- القسم 3
+  { id: "q12", sectionId: "s3", question: "ما أقسام الكلام كما في المتن؟", options: ["اسم وفعل وحرف جاء لمعنى", "اسم وفعل ومصدر", "فعل ماضٍ ومضارع وأمر", "مرفوع ومنصوب ومجرور"], correctIndex: 0, explanation: "«وأقسامه ثلاثة: اسمٌ، وفعلٌ، وحرفٌ جاء لمعنى»." },
+  { id: "q13", sectionId: "s3", question: "معنى «حرف جاء لمعنى»؟", options: ["حرف من حروف الهجاء", "حرف من حروف المعاني له معنى، كإنّ للتوكيد وليت للتمني", "حرف زائد لا معنى له", "حرف في أول الكلمة"], correctIndex: 1, explanation: "حروف المعاني: لكل حرف معنى، كإنّ للتوكيد وكأنّ للتشبيه وليت للتمني." },
+  // ---- القسم 4
+  { id: "q14", sectionId: "s4", question: "لماذا قال ابن آجروم «يُعرف بالخفض» ولم يقل «بالجر»؟", options: ["لأن الخفض غير الجر", "لأنه سار على مصطلحات الكوفيين، والمعنى واحد", "لأن الجر خاص بالأفعال", "لأنه خطأ في النسخ"], correctIndex: 1, explanation: "الكوفيون يقولون «الخفض» والبصريون «الجر»، وابن آجروم تبع الكوفيين في المصطلح." },
+  { id: "q15", sectionId: "s4", question: "على تعليل الشيخ: لماذا سُمّيت الضمة علامة «رفع»؟", options: ["لأنها تُكتب فوق الحرف", "لأنها تخرج من الشفتين، والشفتان أعلى المخارج", "لأنها أثقل الحركات", "لأن الفاعل مرفوع القدر"], correctIndex: 1, explanation: "هكذا علّلها الشيخ: الضمة من الشفتين وهما أعلى المخارج، والفتحة استواء، والكسرة نزول اللسان." },
+  { id: "q16", sectionId: "s4", question: "في «سلّمتُ على أستاذِ الفصلِ الصالحِ»: بمَ جُرّت كلمة «الفصلِ»؟", options: ["بحرف الجر «على»", "بالإضافة", "بالتبعية", "ليست مجرورة"], correctIndex: 1, explanation: "ليس قبلها حرف جر؛ جرّها المضاف «أستاذِ» الذي حُذف تنوينه فأضيف." },
+  { id: "q17", sectionId: "s4", question: "في المثال نفسه: «الصالحِ» صفةٌ لأيّ كلمة؟", options: ["للفصل", "للأستاذ، فهو مجرور بالتبعية", "لحرف الجر", "لا موصوف لها"], correctIndex: 1, explanation: "صحّح الشيخ لمن قال «صفة للفصل»: الأستاذ هو الصالح، وصفة المجرور مجرورة." },
+  { id: "q18", sectionId: "s4", question: "في ﴿بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ﴾: ما نوع جر «اللهِ»؟", options: ["بالحرف", "بالإضافة", "بالتبعية", "ليس مجرورًا"], correctIndex: 1, explanation: "«اسمِ» مجرور بالباء، و«اللهِ» مضاف إليه مجرور بالإضافة، و«الرحمنِ الرحيمِ» بالتبعية." },
+  { id: "q19", sectionId: "s4", ai: true, question: "«قرأتُ في كتابِ العلمِ النافعِ» — ما نوع جر «النافعِ»؟", options: ["بالحرف", "بالإضافة", "بالتبعية (صفة)", "ليست مجرورة"], correctIndex: 2, explanation: "«النافعِ» صفة لـ«العلمِ» المجرور، وصفة المجرور مجرورة." },
+  { id: "q20", sectionId: "s4", ai: true, question: "أيّ هذه الكلمات لا يمكن أن تكون مجرورة؟", options: ["البيتِ", "مدرسةٍ", "ذَهَبَ", "رجلٍ"], correctIndex: 2, explanation: "«ذهب» فعل، والفعل لا يُجَرّ؛ أما الباقي فأسماء." },
+  // ---- القسم 5
+  { id: "q21", sectionId: "s5", question: "التنوين في تعريف الشيخ:", options: ["نون متحركة في أول الاسم", "نون ساكنة تلحق آخر الاسم لفظًا وتفارقه خطًّا", "نون تُكتب ولا تُنطق", "حركة تُكتب فوق الفعل"], correctIndex: 1, explanation: "تُنطق نونًا في آخر الاسم ولا تُكتب نونًا، بل ضمتين أو فتحتين أو كسرتين." },
+  { id: "q22", sectionId: "s5", question: "«جاء سيبويهِ ومعه سيبويهٍ» — لماذا نُوّنت الثانية؟", options: ["لأنها معربة", "تنوين تنكير: الثاني نكرة لا يعرفه أحد، والأول العالم المعروف", "تنوين مقابلة", "تنوين عوض عن جملة"], correctIndex: 1, explanation: "سيبويه مبني على الكسر، وتنوين التنكير يفرّق بين المعرفة (العالم المشهور) والنكرة (ابن الدكتور)." },
+  { id: "q23", sectionId: "s5", question: "قلتَ لزميلك وهو يتكلم عن المباراة: «صَهْ». ما المعنى؟", options: ["اسكت عن الكلام كله", "اسكت عن هذا الحديث بعينه وتكلم في غيره", "زدني من الحديث", "أنا متضايق من كل شيء"], correctIndex: 1, explanation: "بلا تنوين = معرفة: اسكت عن هذا الحديث المعيّن. أما «صَهٍ» بالتنوين: اسكت عن كل كلام." },
+  { id: "q24", sectionId: "s5", question: "طالبة قالت: «تنوين التنكير يدخل الأسماء المعربة». ما الصواب؟", options: ["صحيح", "لا يدخل المعربات أبدًا، وإنما بعض المبنيات المحفوظة", "يدخل كل الأسماء المبنية كهؤلاء ونحن", "يدخل الأفعال"], correctIndex: 1, explanation: "قال الشيخ: بعض الأسماء المبنية لا كلها — كسيبويه وصه وإيه وآه وأف — ولا يدخل المعربات." },
+  { id: "q25", sectionId: "s5", question: "في «المؤمنون»: ما الذي هو عوضٌ عن التنوين في المفرد «مؤمنٌ»؟", options: ["الواو", "النون وحدها", "الواو والنون معًا", "الميم"], correctIndex: 1, explanation: "النون عوض عن التنوين، أما الواو فعلامة رفع نيابة عن الضمة لأنه جمع مذكر سالم." },
+  { id: "q26", sectionId: "s5", question: "التنوين في «مسلماتٌ» نوعه:", options: ["تمكين", "تنكير", "مقابلة: يقابل النون في جمع المذكر السالم", "عوض"], correctIndex: 2, explanation: "جمع المؤنث السالم يُعطى تنوينًا يقابل النون في جمع المذكر — «اعدلوا بين أولادكم»." },
+  { id: "q27", sectionId: "s5", question: "النون في «التلاميذُ يلعبون» ما هي؟", options: ["عوض عن التنوين", "تنوين مقابلة", "علامة رفع الفعل المضارع (الأفعال الخمسة) نيابةً عن الضمة", "نون التوكيد"], correctIndex: 2, explanation: "الأفعال الخمسة تُرفع بثبوت النون؛ فهي علامة رفع لا عوض، وواو الجماعة فاعل." },
+  { id: "q28", sectionId: "s5", question: "﴿وَأَنتُمْ حِينَئِذٍ تَنظُرُونَ﴾ — التنوين في «إذٍ» عوضٌ عن ماذا؟", options: ["عن حرف", "عن كلمة واحدة", "عن جملة: حين إذ بلغت الروح الحلقوم", "ليس عوضًا"], correctIndex: 2, explanation: "حُذفت جملة «بلغت الروح الحلقوم» وجيء بالتنوين مكانها: تنوين عوض عن جملة." },
+  { id: "q29", sectionId: "s5", ai: true, question: "التنوين في «جاءت معلّماتٌ» نوعه:", options: ["تمكين", "تنكير", "مقابلة", "عوض"], correctIndex: 2, explanation: "«معلّمات» جمع مؤنث سالم، فتنوينه تنوين مقابلة." },
+  { id: "q30", sectionId: "s5", ai: true, question: "التنوين في «اشتريتُ كتابًا» نوعه:", options: ["تمكين", "تنكير", "مقابلة", "عوض"], correctIndex: 0, explanation: "«كتابًا» اسم معرب مفرد، فتنوينه تنوين تمكين." },
+  // ---- القسم 6
+  { id: "q31", sectionId: "s6", question: "لماذا لا يصح «الجَلَسَ»؟", options: ["لأن «أل» لا تدخل على الفعل", "لأن «جلس» حرف", "لأنها تحتاج تنوينًا", "يصح ذلك"], correctIndex: 0, explanation: "دخول «أل» من علامات الاسم، والفعل لا تدخله «أل»." },
+  { id: "q32", sectionId: "s6", question: "كلمة بلا تنوين ولا «أل» ولا جر، مثل «سيبويه» في «جاء سيبويهِ» — بأيّ علامة عرفنا أنها اسم؟", options: ["النداء", "الإسناد: جعلناها فاعلًا لـ«جاء»", "دخول «قد»", "تاء التأنيث"], correctIndex: 1, explanation: "الفعل «جاء» لا بد له من فاعل، والفاعل اسم؛ فهذا إسناد." },
+  { id: "q33", sectionId: "s6", question: "لماذا عُدّ الإسناد أقوى علامات الاسم؟", options: ["لأنه أسهلها", "لأن بعض الأسماء كتاء «شربتُ» لا تقبل علامةً غيره", "لأن ابن آجروم ذكره أولًا", "لأنه علامة لفظية"], correctIndex: 1, explanation: "التاء لا تقبل تنوينًا ولا «أل» ولا نداء، ولا تُعرف إلا بالإسناد إليها." },
+  { id: "q34", sectionId: "s6", question: "لماذا لم يذكر ابن آجروم النداءَ والإسنادَ بين علامات الاسم؟", options: ["لأنهما ليسا علامتين", "لأن كتابه للمبتدئين، فذكر بعض العلامات مراعاةً لحال المخاطَب", "لأنه لم يعرفهما", "لأنهما خاصان بالأفعال"], correctIndex: 1, explanation: "قال الشيخ: ذكر بعضًا وترك بعضًا مراعاةً لحال المبتدئ." },
+  // ---- القسم 7
+  { id: "q35", sectionId: "s7", question: "«رميتُ السهمَ عن القوسِ» — معنى «عن»:", options: ["الابتداء", "المجاوزة", "الاستعلاء", "الظرفية"], correctIndex: 1, explanation: "السهم جاوز القوس وابتعد عنه: «عن» للمجاوزة." },
+  { id: "q36", sectionId: "s7", question: "«القلمُ لمحمدٍ» — معنى اللام:", options: ["التشبيه", "الملك", "الاستعانة", "الانتهاء"], correctIndex: 1, explanation: "اللام للملك: القلم ملكٌ لمحمد." },
+  { id: "q37", sectionId: "s7", question: "﴿وَلَأُصَلِّبَنَّكُمْ فِي جُذُوعِ النَّخْلِ﴾ — ما وجه استعمال «في» والمصلوب يكون «على» الجذع؟", options: ["خطأ في الرواية", "حروف الجر ينوب بعضها عن بعض، والغرض بيان شدة الربط كأنهم دخلوا في الجذوع", "«في» هنا للاستعانة", "«في» هنا للمجاوزة"], correctIndex: 1, explanation: "نابت «في» عن «على» لغرض بلاغي: شدة الربط حتى لا يقدر أحد أن يفكّهم." },
+  { id: "q38", sectionId: "s7", question: "لماذا كانت الواو «أمّ» حروف القسم؟", options: ["لأنها أقدمها", "لأنها تدخل على كل مقسَمٍ به", "لأنها لا تدخل إلا على لفظ الجلالة", "لأنها حرف واحد"], correctIndex: 1, explanation: "الواو تدخل على كل مقسم به: ﴿وَالْفَجْرِ﴾ ﴿وَالتِّينِ﴾ ﴿وَالْعَصْرِ﴾، بخلاف التاء الخاصة بلفظ الجلالة." },
+  { id: "q39", sectionId: "s7", question: "أيّ هذه الجمل صحيحة؟", options: ["لم أره مُذْ محمدٍ", "لم أره مُذْ يومِ الجمعة", "لم أره منذُ أحمدَ", "كلها صحيحة"], correctIndex: 1, explanation: "مذ ومنذ لا يجرّان إلا ظرف الزمان." },
+  { id: "q40", sectionId: "s7", question: "«لعلَّ اللهِ» بجرّ لفظ الجلالة — ما حكمها عند الشيخ؟", options: ["خطأ في كل لغات العرب", "لغة قبيلة عُقيل التي تجعل «لعلّ» حرف جر", "لغة قريش", "قراءة قرآنية"], correctIndex: 1, explanation: "«لعلّ» جارّة في لغة عقيل، وعامة العرب تجعلها ناصبة من أخوات إنّ: ﴿لَعَلَّ اللَّهَ يُحْدِثُ﴾." },
+  { id: "q41", sectionId: "s7", ai: true, question: "«خرجتُ من البيتِ إلى المسجدِ» — «إلى» تفيد:", options: ["الابتداء", "الانتهاء", "الملك", "التشبيه"], correctIndex: 1, explanation: "«من» لبداية الخروج، و«إلى» لنهايته." },
+  { id: "q42", sectionId: "s7", ai: true, question: "«العالمُ كالمصباحِ» — الكاف تفيد:", options: ["الاستعلاء", "الظرفية", "التشبيه", "المجاوزة"], correctIndex: 2, explanation: "الكاف للتشبيه: العالم مشبّه، والمصباح مشبّه به، والكاف أداة التشبيه." },
+  // ---- القسم 8
+  { id: "q43", sectionId: "s8", question: "لماذا قال الناظم «عُبيد ربه» ولم يقل «عبد ربه»؟", options: ["لضرورة الوزن فقط", "تصغير تواضعًا لله: كأنه لا يرى نفسه مستحقًّا أن يكون عبدًا", "لأنه اسم أبيه", "تحقيرًا للعلم"], correctIndex: 1, explanation: "هكذا شرحه الشيخ: «عُبيد» من باب التواضع لله." },
+  { id: "q44", sectionId: "s8", question: "«فاقْفُ ما قَفَوْا» في النظم معناها:", options: ["قِفْ حيث وقفوا", "سِرْ على طريقتهم واتّبعهم", "اكتب القافية", "اترك ما فعلوا"], correctIndex: 1, explanation: "أي سِر على طريقة أهل العلم؛ والقافية معناها التتابع." },
+  { id: "q45", sectionId: "s8", question: "القصر في اصطلاح البلاغيين كما عرّفه الشيخ:", options: ["تقصير الكلام", "إثبات الحكم لشيء ونفيه عمّا عداه", "حذف المفعول", "قصر الأمراء"], correctIndex: 1, explanation: "القصر: إثبات الحكم لشيء ونفيه عما عداه، ويحصل بتقديم ما حقه التأخير." },
+  { id: "q46", sectionId: "s8", question: "لماذا لم تفرح الزوجة بقول زوجها «أحبّكِ» وفرحت بـ«إيّاكِ أحبّ»؟", options: ["لأن الثانية أطول", "لأن الأولى لا تمنع أن يحب غيرها، والثانية قصرت المحبة عليها", "لأن الأولى بالعامية", "لأن الثانية فيها نداء"], correctIndex: 1, explanation: "تقديم المفعول «إياكِ» أفاد القصر، كما في ﴿إِيَّاكَ نَعْبُدُ﴾: لا نعبد سواك." },
+  { id: "q47", sectionId: "s8", ai: true, question: "أيّ الجملتين تفيد القصر: (أ) «نتوكّلُ على الله» (ب) «على اللهِ نتوكّلُ»؟", options: ["(أ)", "(ب)، لتقديم الجار والمجرور", "كلتاهما", "لا شيء منهما"], correctIndex: 1, explanation: "قُدِّم الجار والمجرور «على الله» وحقّه التأخير، فأفاد: لا نتوكل إلا على الله." }
+];
+
+/* ================= بطاقات Anki (9-ط) — تُولَّد وتُصدَّر بـ ilm-anki.js ================= */
+var ANKI_NAMES = {
+  sahabi: ["النبي ﷺ", "زكريا", "آدم", "عيسى"],
+  scholar: ["ابن آجروم", "ابن مالك", "الشاطبي", "محمد محيي الدين عبد الحميد", "عبيد ربه الشنقيطي", "محمد بن أبّ المزمري"],
+  name: ["البصرة", "الكوفة", "عقيل", "موريتانيا", "المغرب"]
+};
+var CARDS_DATA = [
+  /* ---------- القسم 1: لماذا النحو؟ ---------- */
+  { id: "c01", sectionId: "s1", level: 1, pattern: "calm", anchor: "غاية دراسة النحو",
+    q: "علم النحو — ما الغاية التي قرّرها شارح الآجرومية لدراسته، وما الذي يترتب على تحقيقها؟",
+    a: "الفهم، لا الحفظ ولا الشهادة. فمن فهم النحو عرف كيف يُعرب ويستخرج القاعدة ويتدبّر القرآن.",
+    blocks: [{ type: "ans", s: "الفهم،", e: "الشهادة.", core: true }, { type: "ans", s: "فمن", e: "القرآن.", nolabel: true }],
+    marks: [{ t: "focus", w: "الغاية" }], src: "لان الغايه الفهم كثير من طلبه العلم" },
+  { id: "c02", sectionId: "s1", level: 2, pattern: "calm", anchor: "سبب استصعاب النحو",
+    q: "لماذا يستصعب كثير من طلبة العلم النحو بل يكرهونه، في تشخيص شارح الآجرومية؟",
+    a: "لأنهم لم يفهموه. فإذا فُهم بصورة سلسة بسيطة صار سهلًا.",
+    blocks: [{ type: "ans", s: "لأنهم", e: "يفهموه.", core: true }, { type: "ans", s: "فإذا", e: "سهلًا.", nolabel: true }],
+    marks: [{ t: "focus", w: "لماذا" }], src: "يستصعبون النحو بسبب ان هو مش فاهم" },
+  { id: "c03", sectionId: "s1", level: 3, pattern: "quran", anchor: "آية التدبر",
+    q: "﴿أَفَلَا يَتَدَبَّرُونَ الْقُرْآنَ ۚ وَلَوْ كَانَ مِنْ عِندِ غَيْرِ اللَّهِ لَوَجَدُوا فِيهِ اخْتِلَافًا كَثِيرًا﴾\nكيف استُدلّ بها على أهمية دراسة النحو؟",
+    a: "النحو طريقٌ إلى التدبّر الذي تحثّ عليه الآية. لأن القرآن لا يُتدبَّر إلا إذا فهم الإنسان اللغة العربية.",
+    blocks: [{ type: "ans", s: "النحو", e: "الآية.", core: true }, { type: "wajh", s: "لأن", e: "العربية." }],
+    marks: [{ t: "focus", w: "كيف استُدلّ" }], src: "افلا يتدبرون القران ولو كان من عند" },
+  { id: "c04", sectionId: "s1", level: 3, pattern: "quran", anchor: "قرآنا عربيا",
+    q: "﴿إِنَّا أَنزَلْنَاهُ قُرْآنًا عَرَبِيًّا﴾\nما وجه الاستدلال بها على أن تدبّر القرآن يتوقف على فهم العربية؟",
+    a: "القرآن نزل بلغة العرب. فلا يُتدبَّر إلا بفهم لغتهم.",
+    blocks: [{ type: "ans", s: "القرآن", e: "العرب.", core: true }, { type: "wajh", s: "فلا", e: "لغتهم." }],
+    marks: [{ t: "focus", w: "وجه الاستدلال" }], src: "انا انزلناه قرانا عربيا فانا مش عايز" },
+  { id: "c05", sectionId: "s1", level: 3, pattern: "quran", anchor: "آية التحدي",
+    q: "﴿فَأْتُوا بِسُورَةٍ مِّن مِّثْلِهِ ... فَإِن لَّمْ تَفْعَلُوا وَلَن تَفْعَلُوا﴾\nما وجه هذا التحدي للعرب كما بيّنه شارح الآجرومية؟",
+    a: "تحدّاهم من جنس ما برعوا فيه فعجزوا. فقد كانوا فصحاء بلغاء شعراء أدباء.",
+    blocks: [{ type: "ans", s: "تحدّاهم", e: "فعجزوا.", core: true }, { type: "wajh", s: "فقد", e: "أدباء." }],
+    marks: [{ t: "focus", w: "وجه هذا التحدي" }], src: "لكن تحداهم من جنس ما برع فيه فعجزوا" },
+  { id: "c06", sectionId: "s1", level: 2, pattern: "method", anchor: "منهج المذاكرة",
+    q: "منهج مذاكرة شرح الآجرومية — ما الوصايا التي أوصى بها الشارح الطالب؟",
+    a: "أن يكون الكتاب معه. وأن يقرأ الدرس قبل حضوره. وأن يركّز ويشغّل عقله أثناء الشرح. وأن يسأل «لماذا؟» ويسأل عن كل ما لم يفهمه.",
+    blocks: [{ type: "steps", seq: false, items: [{ s: "أن يكون", e: "معه." }, { s: "وأن يقرأ", e: "حضوره." }, { s: "وأن يركّز", e: "الشرح." }, { s: "وأن يسأل", e: "يفهمه." }] }],
+    marks: [{ t: "focus", w: "الوصايا" }], src: "لازم كل واحد يحرص على ان يكون الكتاب معه" },
+  { id: "c07", sectionId: "s1", level: 2, pattern: "calm", anchor: "القراءة قبل الدرس",
+    q: "لماذا يقرأ الطالب درس النحو قبل حضوره ولو لم يفهمه؟",
+    a: "ليهيّئ نفسه لسماع الدرس، لا ليحفظه.",
+    blocks: [{ type: "ans", all: true, core: true }],
+    marks: [{ t: "focus", w: "لماذا" }], src: "عشان الواحد يهيا نفسه لسماع الدرس" },
+  { id: "c08", sectionId: "s1", level: 2, pattern: "method", anchor: "لا شيء اعتباطًا",
+    q: "قاعدة «ما في النحو شيءٌ جاء اعتباطًا» — ما أمثلة أسئلة «لماذا؟» التي ضربها الشارح؟",
+    a: "لماذا جُعلت «كان» و«إنّ» و«ظنّ» أمهات أخواتها. ولماذا قُدّمت الواو والفاء في العطف و«يا» في النداء. ولماذا قيل في «كان»: فعل ناقص، وما الذي نقص منها.",
+    blocks: [{ type: "steps", seq: false, items: [{ s: "لماذا جُعلت", e: "أخواتها." }, { s: "ولماذا قُدّمت", e: "النداء." }, { s: "ولماذا قيل", e: "منها." }] }],
+    marks: [{ t: "focus", w: "أمثلة" }], src: "ما فيش حاجه جت اعتباطا كده خالص" },
+  { id: "c09", sectionId: "s1", level: 4, pattern: "quran", anchor: "قلوبكما",
+    q: "﴿إِن تَتُوبَا إِلَى اللَّهِ فَقَدْ صَغَتْ قُلُوبُكُمَا﴾\nما السؤال النحوي الذي طرحه شارح الآجرومية فيها للتدبّر؟",
+    a: "الخطاب لاثنتين، و«قلوب» جمع تكسير لـ«قلب». فكيف جُعل القلبان قلوبًا؟",
+    blocks: [{ type: "ans", s: "الخطاب", e: "لـ«قلب».", core: true }, { type: "ans", s: "فكيف", e: "قلوبًا؟", nolabel: true }],
+    marks: [{ t: "focus", w: "السؤال النحوي" }], src: "تتوبا الى الله فقد صغت قلوبهما" },
+  { id: "c10", sectionId: "s1", level: 4, pattern: "quran", anchor: "إن هذان",
+    q: "﴿إِنَّ هَٰذَانِ لَسَاحِرَانِ﴾ بتشديد «إنّ»\nما السؤال النحوي الذي طرحه شارح الآجرومية فيها؟",
+    a: "«إنّ» تنصب، فلماذا جاء بعدها اسمٌ مرفوع؟ وهذا على قراءة التشديد، وفي رواية حفص ﴿إِنْ هَٰذَانِ﴾ بالتخفيف.",
+    blocks: [{ type: "ans", s: "«إنّ»", e: "مرفوع؟", core: true }, { type: "edit", s: "وهذا", e: "بالتخفيف." }],
+    marks: [{ t: "focus", w: "السؤال النحوي" }], src: "ان هذان لساحران رغم انها بتنصب" },
+  { id: "c11", sectionId: "s1", level: 4, pattern: "quran", anchor: "اختصموا",
+    q: "﴿هَٰذَانِ خَصْمَانِ اخْتَصَمُوا فِي رَبِّهِمْ﴾\nما السؤال النحوي الذي طرحه شارح الآجرومية فيها؟",
+    a: "هما اثنان، فلماذا قال «اختصموا» بالجمع؟",
+    blocks: [{ type: "ans", all: true, core: true }],
+    marks: [{ t: "focus", w: "السؤال النحوي" }], src: "هذان خصمان اختصموا يا ما هم اثنين" },
+  { id: "c12", sectionId: "s1", level: 5, pattern: "calm", anchor: "قصة درس المسجد",
+    q: "قصة شارح الآجرومية مع البسطاء الذين درسوا عليه النحو في مسجد — بمَ انتهت، وما عبرتها؟",
+    a: "بعد ختم الكتاب أعرب لهم الجزء الأول من سورة البقرة فصاروا هم يصحّحون له. والعبرة أن من عنده رغبة يتعلّم النحو ولو كان من البسطاء.",
+    blocks: [{ type: "ans", s: "بعد", e: "له.", lead: "بعد ختم الكتاب أعرب لهم الجزء الأول من سورة البقرة" }, { type: "wajh", s: "والعبرة", e: "البسطاء." }],
+    marks: [{ t: "focus", w: "بمَ انتهت" }, { t: "focus", w: "عبرتها" }], src: "قديما منذ اكثر من 20 عاما" },
+  { id: "c13", sectionId: "s1", level: 5, pattern: "calm", anchor: "فتاة دار العلوم",
+    q: "الفتاة ابنة الطبيبين التي سمعت النحو في المسجد فأحبّته — ماذا اختارت بعد الثانوية، وإلامَ انتهت؟",
+    a: "حصلت على 96% فاختارت دار العلوم بدل الطب. وكانت تحصل على امتياز كل سنة حتى صارت دكتورة في النحو.",
+    blocks: [{ type: "ans", s: "حصلت", e: "الطب.", core: true }, { type: "ans", s: "وكانت", e: "النحو.", nolabel: true }],
+    marks: [{ t: "focus", w: "ماذا اختارت" }], src: "جابت 96 عشان تدخل كليه الطب" },
+  { id: "c14", sectionId: "s1", level: 6, pattern: "calm", anchor: "صاحب المتن",
+    q: "مَن صاحب متن «المقدمة الآجرومية» في النحو، ومن أيّ بلاد هو؟",
+    a: "ابن آجروم: أبو عبد الله محمد بن محمد بن داود الصنهاجي، من بلاد المغرب.",
+    blocks: [{ type: "ans", all: true, core: true }],
+    marks: [{ t: "focus", w: "مَن" }], src: "ابو عبد الله ابن محمد بن داوود السنهاجي" },
+  { id: "c15", sectionId: "s1", level: 6, pattern: "calm", anchor: "الشرح المقرر",
+    q: "شرح «المقدمة الآجرومية» المقرَّر في سلسلة الأستاذ الدكتور محمد حسن عثمان — ما اسمه، ومن مؤلفه؟",
+    a: "«التحفة السنية بشرح المقدمة الآجرومية» للشيخ محمد محيي الدين عبد الحميد.",
+    blocks: [{ type: "ans", all: true, core: true }],
+    marks: [{ t: "focus", w: "ما اسمه" }], src: "لشرح كتاب التحفه الثانيه في شرح المقدمه" },
+
+  /* ---------- القسم 2: الكلام ---------- */
+  { id: "c16", sectionId: "s2", level: 2, pattern: "calm", anchor: "تعريف الكلام",
+    q: "الكلام في اصطلاح النحاة — ما تعريفه في الآجرومية، وما مثاله؟",
+    a: "اللفظ المركّب المفيد بالوضع. ومثاله: «زَيْدٌ عَالِمٌ».",
+    blocks: [{ type: "def", s: "اللفظ", e: "بالوضع.", core: true }, { type: "ans", s: "ومثاله:", e: "عَالِمٌ»." }],
+    marks: [{ t: "focus", w: "تعريفه" }], src: "الكلام هو اللفظ المركب المفيد بالوضع" },
+  { id: "c17", sectionId: "s2", level: 2, pattern: "calm", anchor: "عكسية: الكلام",
+    q: "«اللفظ المركّب المفيد بالوضع» — ما المصطلح النحوي الذي هذا حدّه؟",
+    a: "الكلام.",
+    blocks: [{ type: "ans", all: true, core: true }],
+    marks: [{ t: "focus", w: "ما المصطلح" }], src: "الكلام هو اللفظ المركب المفيد بالوضع" },
+  { id: "c18", sectionId: "s2", level: 2, pattern: "method", anchor: "شروط الكلام",
+    q: "شروط الكلام الأربعة عند النحاة — ما هي، وما الذي يُخرِجه كل شرط؟",
+    a: "اللفظ: يُخرج الإشارة والكتابة. والمركّب: يُخرج الكلمة المفردة. والمفيد: يُخرج المركّب الذي لا يفيد كـ«إِنْ حَضَرَ زَيْدٌ». وبالوضع: يُخرج كلام غير العرب.",
+    blocks: [{ type: "steps", seq: false, items: [{ s: "اللفظ:", e: "اللفظ:", ds: "يُخرج الإشارة", de: "والكتابة." }, { s: "والمركّب:", e: "والمركّب:", ds: "يُخرج الكلمة", de: "المفردة." }, { s: "والمفيد:", e: "والمفيد:", ds: "يُخرج المركّب", de: "زَيْدٌ»." }, { s: "وبالوضع:", e: "وبالوضع:", ds: "يُخرج كلام", de: "العرب." }] }],
+    marks: [{ t: "focus", w: "الأربعة" }, { t: "focus", w: "يُخرِجه" }], src: "عباره عن اربعه اشياء اللفظ وبعد كده مركب" },
+  { id: "c19", sectionId: "s2", level: 2, pattern: "calm", anchor: "شرط اللفظ",
+    q: "«اللفظ» في تعريف الكلام عند النحاة — ما المقصود به، وما الذي يخرج به؟",
+    a: "الصوت الخارج من الفم المشتمل على بعض الحروف الهجائية. فيخرج به ما ليس بلفظ كالإشارة والكتابة.",
+    blocks: [{ type: "def", s: "الصوت", e: "الهجائية.", core: true }, { type: "excl", s: "فيخرج", e: "والكتابة." }],
+    marks: [{ t: "focus", w: "المقصود" }], src: "اللفظ المقصود به الصوت الخارج من الفم" },
+  { id: "c20", sectionId: "s2", level: 2, pattern: "calm", anchor: "شرط التركيب",
+    q: "«المركّب» في تعريف الكلام عند النحاة — ما معناه، وما الذي يخرج به؟",
+    a: "المركّب من كلمتين أو أكثر. فتخرج به الكلمة المفردة مثل «زَيْدٌ».",
+    blocks: [{ type: "def", s: "المركّب", e: "أكثر.", core: true }, { type: "excl", s: "فتخرج", e: "«زَيْدٌ»." }],
+    marks: [{ t: "focus", w: "ما معناه" }], src: "المركب عشان يخرج الكلمه المفرده" },
+  { id: "c21", sectionId: "s2", level: 2, pattern: "calm", anchor: "شرط الإفادة",
+    q: "«المفيد» في تعريف الكلام عند النحاة — ما ضابطه؟",
+    a: "أن يفيد فائدة يحسن السكوت عليها. فلا يبقى السامع منتظرًا أن يُكمل المتكلم.",
+    blocks: [{ type: "def", s: "أن", e: "عليها.", core: true }, { type: "ans", s: "فلا", e: "المتكلم.", nolabel: true }],
+    marks: [{ t: "focus", w: "ضابطه" }], src: "فائده يحسن السكوت عليه" },
+  { id: "c22", sectionId: "s2", level: 2, pattern: "method", anchor: "إن حضر زيد",
+    q: "تطبيق: «إِنْ حَضَرَ زَيْدٌ» — هل هو كلامٌ عند النحاة؟ ولماذا؟",
+    a: "ليس كلامًا. لأنه لفظ مركّب من ثلاث كلمات لكنه لم يُفد.",
+    blocks: [{ type: "ruling", s: "ليس", e: "كلامًا.", core: true }, { type: "rule", s: "لأنه", e: "يُفد." }],
+    marks: [{ t: "focus", w: "هل هو كلامٌ" }], src: "فان قلت مثلا ان حضر زيد" },
+  { id: "c23", sectionId: "s2", level: 2, pattern: "calm", anchor: "شرط الوضع",
+    q: "«بالوضع» في تعريف الكلام عند النحاة — ما معناه، وما الذي يخرج به؟",
+    a: "أن يكون موضوعًا في كلام العرب قد تكلّمت به العرب. فيخرج ما ليس بلغة العرب كالفرنسية والإنجليزية.",
+    blocks: [{ type: "def", s: "أن", e: "العرب.", core: true }, { type: "excl", s: "فيخرج", e: "والإنجليزية." }],
+    marks: [{ t: "focus", w: "ما معناه" }], src: "بالوضع يعني هذا الكلام موضوع في كلام العرب" },
+  { id: "c24", sectionId: "s2", level: 4, pattern: "compare", anchor: "الكلام لغة ونحوًا",
+    q: "الإشارة والكتابة — ما الفرق بين حكمهما في اللغة وحكمهما في النحو؟",
+    a: "في اللغة تُسمّيان كلامًا. أما في النحو فلا تُسمّيان كلامًا، لأن الكلام عند النحاة لا يكون إلا لفظًا.",
+    blocks: [{ type: "cols", parts: [{ s: "في اللغة", e: "كلامًا." }, { s: "أما", e: "لفظًا." }] }],
+    marks: [{ t: "focus", w: "الفرق" }], src: "الكتابه تسمى في اللغه كلام لكن لا تسمى" },
+  { id: "c25", sectionId: "s2", level: 3, pattern: "quran", anchor: "فأشارت إليه",
+    q: "﴿فَأَشَارَتْ إِلَيْهِ ۖ قَالُوا كَيْفَ نُكَلِّمُ مَن كَانَ فِي الْمَهْدِ صَبِيًّا﴾\nعلى أيّ شيء استُشهد بها في باب الكلام؟",
+    a: "على أن الإشارة تُسمّى كلامًا في اللغة. لكنها لا تُسمّى كلامًا في النحو.",
+    blocks: [{ type: "ans", s: "على", e: "اللغة.", core: true }, { type: "alert", s: "لكنها", e: "النحو." }],
+    marks: [{ t: "focus", w: "على أيّ شيء" }], src: "فاشارت اليه قالوا كيف نكلم من كان" },
+  { id: "c26", sectionId: "s2", level: 3, pattern: "quran", anchor: "إلا رمزا",
+    q: "﴿قَالَ آيَتُكَ أَلَّا تُكَلِّمَ النَّاسَ ثَلَاثَةَ أَيَّامٍ إِلَّا رَمْزًا﴾\nما وجه الاستشهاد بها على أن الإشارة كلامٌ في اللغة؟",
+    a: "استثنى الرمز — أي الإشارة — من الكلام فسمّاها كلامًا. والمعنى: علامة حمل امرأة زكريا أن يُحبس لسانه عن الكلام إلا إشارة.",
+    blocks: [{ type: "ans", s: "استثنى", e: "كلامًا.", core: true }, { type: "wajh", s: "والمعنى:", e: "إشارة." }],
+    marks: [{ t: "focus", w: "وجه الاستشهاد" }], src: "ايتك الا تكلم الناس ثلاثه ايام" },
+  { id: "c27", sectionId: "s2", level: 3, pattern: "calm", anchor: "شاهد لغة العيون",
+    q: "«أَشَارَتْ بِطَرْفِ العَيْنِ خِيفَةَ أَهْلِهَا ... فَأَيْقَنْتُ أَنَّ الطَّرْفَ قَدْ قَالَ مَرْحَبًا»\nعلى أيّ شيء استُشهد بالبيتين في باب الكلام؟",
+    a: "على أن إشارة العين («لغة العيون») تُسمّى كلامًا في اللغة لا في النحو.",
+    blocks: [{ type: "ans", all: true, core: true }],
+    marks: [{ t: "focus", w: "على أيّ شيء" }], src: "اشارت بطرف العين خيفه اهلها اشاره محزون" },
+  { id: "c28", sectionId: "s2", level: 2, pattern: "calm", anchor: "معاني كلمات البيت",
+    q: "«أَشَارَتْ بِطَرْفِ العَيْنِ خِيفَةَ أَهْلِهَا» — ما معنى «الطَّرْف» و«خِيفَةَ أهلها»؟",
+    a: "الطَّرْف: العين. وخِيفة أهلها: خوفًا من أهلها.",
+    blocks: [{ type: "ans", all: true, core: true }],
+    marks: [{ t: "focus", w: "ما معنى" }], src: "ان الطرف يعني العين يعني قد قال" },
+  { id: "c29", sectionId: "s2", level: 3, pattern: "calm", anchor: "كلامنا لفظ مفيد",
+    q: "«كَلَامُنَا لَفْظٌ مُفِيدٌ» من ألفية ابن مالك — ما المستفاد منها في تعريف الكلام؟",
+    a: "أن الكلام عند النحاة لا يكون إلا لفظًا، فغير اللفظ لا يُسمّى عندهم كلامًا. لأن كل علم له مصطلحاته.",
+    blocks: [{ type: "ans", s: "أن", e: "كلامًا.", lead: "أن الكلام عند النحاة لا يكون إلا لفظًا" }, { type: "rule", s: "لأن", e: "مصطلحاته." }],
+    marks: [{ t: "focus", w: "المستفاد" }], src: "لان ابن مالك يقول كلامنا اللي هو النحاه" },
+  { id: "c30", sectionId: "s2", level: 2, pattern: "calm", anchor: "فلتستمع",
+    q: "«إِنَّ الكَلَامَ عِنْدَنَا فَلْتَسْتَمِعْ * لَفْظٌ مُرَكَّبٌ مُفِيدٌ قَدْ وُضِعْ» — ما المراد بـ«عندنا»، وبالأمر «فلتستمع»؟",
+    a: "«عندنا» أي عند النحاة. و«فلتستمع» أمرٌ يُقصد به النصيحة لطالب العلم.",
+    blocks: [{ type: "ans", s: "«عندنا»", e: "النحاة.", core: true }, { type: "ans", s: "و«فلتستمع»", e: "العلم.", nolabel: true }],
+    marks: [{ t: "focus", w: "المراد" }], src: "ان الكلام عندنا يعني عند النحاه فلتستمع" },
+  { id: "c31", sectionId: "s2", level: 4, pattern: "compare", anchor: "المنثور والمنظوم",
+    q: "المنثور والمنظوم في المتون العلمية — ما الفرق بينهما، وأيهما أيسر في الحفظ؟",
+    a: "المنثور كحبّات سُبحة تناثرت يصعب جمعها. والمنظوم كحبّات نُظمت في خيط يسهل الاحتفاظ بها، فهو أيسر في الحفظ.",
+    blocks: [{ type: "cols", parts: [{ s: "المنثور", e: "جمعها." }, { s: "والمنظوم", e: "الحفظ." }] }],
+    marks: [{ t: "focus", w: "الفرق" }], src: "النظم بيبقى ايسر في الحفظ فاهمين" },
+  { id: "c32", sectionId: "s2", level: 3, pattern: "calm", anchor: "من حفظ المتون",
+    q: "«مَنْ حَفِظَ المُتُونَ حَازَ الفُنُونَ» — ما الذي يقرره القول، وما مثاله في القراءات والنحو؟",
+    a: "أن حفظ المتون المنظومة طريقُ تحصيل العلوم. فمن أراد القراءات حفظ «الشاطبية»، ومن أراد النحو حفظ «الألفية».",
+    blocks: [{ type: "ans", s: "أن", e: "العلوم.", core: true }, { type: "ans", s: "فمن", e: "«الألفية».", nolabel: true }],
+    marks: [{ t: "focus", w: "يقرره" }], src: "العلماء يقولون من حفظ المتون حاز الفنون" },
+
+  /* ---------- القسم 3: أقسام الكلام ---------- */
+  { id: "c33", sectionId: "s3", level: 1, pattern: "calm", anchor: "أقسام الكلام",
+    q: "أقسام الكلام في متن الآجرومية — ما هي؟",
+    a: "اسمٌ، وفعلٌ، وحرفٌ جاء لمعنى.",
+    blocks: [{ type: "ans", all: true, core: true }],
+    marks: [{ t: "focus", w: "أقسام الكلام" }], src: "اسم وفعل وحرف جاء لمعنى صلوا على" },
+  { id: "c34", sectionId: "s3", level: 2, pattern: "calm", anchor: "حرف جاء لمعنى",
+    q: "«حرفٌ جاء لمعنى» في تقسيم الكلام — ما المقصود به، وما أمثلته؟",
+    a: "حروف المعاني التي لكل حرف منها معنى. كـ«إنّ» للتوكيد، و«كأنّ» للتشبيه، و«ليت» للتمني.",
+    blocks: [{ type: "def", s: "حروف", e: "معنى.", core: true }, { type: "ans", s: "كـ«إنّ»", e: "للتمني.", nolabel: true }],
+    marks: [{ t: "focus", w: "المقصود" }], src: "حروف المعاني يعني ان تفيد التوكيد" },
+  { id: "c35", sectionId: "s3", level: 2, pattern: "calm", anchor: "الاسم يشمل المذكر والمؤنث",
+    q: "الاسم في تقسيم الكلام — هل يختص بالمذكر؟",
+    a: "لا، يشمل المذكر والمؤنث. مثل: محمد علمٌ لمذكر، وسعاد وزينب وهند أعلامٌ لمؤنث.",
+    blocks: [{ type: "ans", s: "لا،", e: "والمؤنث.", core: true }, { type: "ans", s: "مثل:", e: "لمؤنث.", nolabel: true }],
+    marks: [{ t: "focus", w: "هل يختص" }], src: "الاسم ده يعني يشمل الذكر والانثى" },
+  { id: "c36", sectionId: "s3", level: 1, pattern: "calm", anchor: "علامات الاسم في المتن",
+    q: "علامات الاسم التي ذكرها متن الآجرومية — ما هي؟",
+    a: "الخفض، والتنوين، ودخول الألف واللام، وحروف الخفض.",
+    blocks: [{ type: "ans", all: true, core: true }],
+    marks: [{ t: "focus", w: "علامات الاسم" }], src: "فالاسم يعرف بالخض" },
+
+  /* ---------- القسم 4: الخفض ---------- */
+  { id: "c37", sectionId: "s4", level: 2, pattern: "calm", anchor: "معنى الخفض",
+    q: "«فالاسم يُعرَف بالخفض» في الآجرومية — ما معنى «الخفض»؟",
+    a: "الجرّ.",
+    blocks: [{ type: "ans", all: true, core: true }],
+    marks: [{ t: "focus", w: "ما معنى" }], src: "الخفض ده معناه الج يقول الله" },
+  { id: "c38", sectionId: "s4", level: 4, pattern: "compare", anchor: "الخفض والجر",
+    q: "مصطلحا «الخفض» و«الجر» — ما الفرق بينهما، ولماذا عبّر ابن آجروم بالخفض؟",
+    a: "«الخفض» مصطلح الكوفيين. و«الجر» مصطلح البصريين والمعنى واحد. وابن آجروم سار على مصطلحات الكوفيين.",
+    blocks: [{ type: "cols", parts: [{ s: "«الخفض»", e: "الكوفيين." }, { s: "و«الجر»", e: "واحد." }] }, { type: "ans", s: "وابن", e: "الكوفيين.", nolabel: true }],
+    marks: [{ t: "focus", w: "الفرق" }, { t: "focus", w: "لماذا" }], src: "فالشيخ اتبع مذهب الكوفه فسار في مصطلحاتهم" },
+  { id: "c39", sectionId: "s4", level: 6, pattern: "calm", anchor: "مدرستا النحو",
+    q: "مدرستا النحو المشهورتان في العراق — ما هما، وأيّهما أسبق، وما أثر اختلافهما؟",
+    a: "البصرة والكوفة، واشتغلت البصرة بالنحو قبل الكوفة بنحو مئة عام. ثم نافسهم أهل الكوفة فاختلفوا في مسائل كثيرة حتى في المصطلحات.",
+    blocks: [{ type: "ans", s: "البصرة", e: "عام.", lead: "البصرة والكوفة" }, { type: "ans", s: "ثم", e: "المصطلحات.", nolabel: true }],
+    marks: [{ t: "focus", w: "أيّهما أسبق" }], src: "مدرسه البصره مدرسه الكوفه البصره اشتغلوا" },
+  { id: "c40", sectionId: "s4", level: 2, pattern: "method", anchor: "تعليل أسماء الحركات",
+    q: "لماذا سُمّيت الضمة علامة رفع، والفتحة علامة نصب، والكسرة علامة خفض — في تعليل شارح الآجرومية؟",
+    a: "الضمة رفع: لأنها تخرج من الشفتين وهما أعلى المخارج. والفتحة نصب: لأن النصب استواء واللسان يستوي بها. والكسرة خفض: لأن اللسان ينزل بها إلى أسفل.",
+    blocks: [{ type: "steps", seq: false, items: [{ s: "الضمة رفع:", e: "رفع:", ds: "لأنها تخرج", de: "المخارج." }, { s: "والفتحة نصب:", e: "نصب:", ds: "لأن النصب", de: "بها." }, { s: "والكسرة خفض:", e: "خفض:", ds: "لأن اللسان", de: "أسفل." }] }],
+    marks: [{ t: "focus", w: "لماذا" }], src: "ليه الضمه دي علامه رفع لانها" },
+  { id: "c41", sectionId: "s4", level: 2, pattern: "calm", anchor: "حروف الحلق",
+    q: "حروف الحلق الستة — ما هي، وما العبارة الجامعة لها؟",
+    a: "الهمزة والهاء والعين والحاء والغين والخاء. مجموعة في «إِنْ غَابَ عَنِّي حَبِيبِي هَمَّنِي خَبَرُهُ».",
+    blocks: [{ type: "ans", s: "الهمزة", e: "والخاء.", core: true }, { type: "ans", s: "مجموعة", e: "خَبَرُهُ».", nolabel: true }],
+    marks: [{ t: "focus", w: "العبارة الجامعة" }], src: "مجموعه في عباره ان غاب عني حبيبي همني خبره" },
+  { id: "c42", sectionId: "s4", level: 2, pattern: "calm", anchor: "المجرور اسم",
+    q: "كلمة مجرورة في جملة — هل يمكن أن تكون فعلًا؟ ولماذا؟",
+    a: "لا، بل هي اسم. لأن الفعل لا يُجَرّ؛ فلا يقال: «سلّمتُ على كَتَبَ».",
+    blocks: [{ type: "ruling", s: "لا،", e: "اسم.", core: true }, { type: "rule", s: "لأن", e: "كَتَبَ»." }],
+    marks: [{ t: "focus", w: "هل يمكن" }], src: "لان الفعل لا يجر ما ينفعش اقول" },
+  { id: "c43", sectionId: "s4", level: 2, pattern: "method", anchor: "أنواع الجر",
+    q: "أنواع الجر الثلاثة — ما هي، مع بيانها في «سَلَّمْتُ عَلَى أُسْتَاذِ الفَصْلِ الصَّالِحِ»؟",
+    a: "الجر بالحرف: «أُسْتَاذِ» جرّه حرف الجر «على». والجر بالإضافة: «الفَصْلِ» جرّه المضاف «أستاذِ». والجر بالتبعية: «الصَّالِحِ» صفةٌ للمجرور فهي مجرورة.",
+    blocks: [{ type: "steps", seq: false, items: [{ s: "الجر بالحرف:", e: "بالحرف:", ds: "«أُسْتَاذِ»", de: "«على»." }, { s: "والجر بالإضافة:", e: "بالإضافة:", ds: "«الفَصْلِ»", de: "«أستاذِ»." }, { s: "والجر بالتبعية:", e: "بالتبعية:", ds: "«الصَّالِحِ»", de: "مجرورة." }] }],
+    marks: [{ t: "focus", w: "أنواع الجر الثلاثة" }], src: "في خفض بالحرف يعني في جر بالحرف" },
+  { id: "c44", sectionId: "s4", level: 2, pattern: "calm", anchor: "الجر بالإضافة",
+    q: "الجر بالإضافة — كيف يحدث، وما أمثلته؟",
+    a: "إذا حُذف التنوين من الاسم أُضيف إلى ما بعده فجرّه. مثل: قَلَمٌ ← قَلَمُ الأُسْتَاذِ، وبَابٌ ← بَابُ الفَصْلِ، ومَسْجِدُ الصَّحَابَةِ.",
+    blocks: [{ type: "ans", s: "إذا", e: "فجرّه.", core: true }, { type: "ans", s: "مثل:", e: "الصَّحَابَةِ.", nolabel: true }],
+    marks: [{ t: "focus", w: "كيف يحدث" }], src: "لما حذفت التنوين الكلمه اضيفت لما بعدها" },
+  { id: "c45", sectionId: "s4", level: 2, pattern: "calm", anchor: "الجر بالتبعية",
+    q: "الجر بالتبعية — ما ضابطه، وما مثاله؟",
+    a: "صفة المجرور مجرورة لأن الصفة تتبع الموصوف. مثل: سَلَّمْتُ عَلَى رَجُلٍ صَالِحٍ، ونَظَرْتُ إِلَى فَتَاةٍ جَمِيلَةٍ.",
+    blocks: [{ type: "rule", s: "صفة", e: "الموصوف.", core: true }, { type: "ans", s: "مثل:", e: "جَمِيلَةٍ.", nolabel: true }],
+    marks: [{ t: "focus", w: "ضابطه" }], src: "وصفه المجرور مجرور فالصفه تابعه للموصوف" },
+  { id: "c46", sectionId: "s4", level: 4, pattern: "calm", anchor: "الصالح صفة لمن",
+    q: "«سَلَّمْتُ عَلَى أُسْتَاذِ الفَصْلِ الصَّالِحِ» — «الصالحِ» صفةٌ لأيّ الكلمتين؟",
+    a: "للأستاذ لا للفصل. فالأستاذ هو الصالح، فهو مجرور تبعًا له.",
+    blocks: [{ type: "ans", s: "للأستاذ", e: "للفصل.", core: true }, { type: "ans", s: "فالأستاذ", e: "له.", nolabel: true }],
+    marks: [{ t: "focus", w: "لأيّ الكلمتين" }], src: "لا صفه للاستاذ هو الفصل صالح" },
+  { id: "c47", sectionId: "s4", level: 3, pattern: "quran", anchor: "أنواع الجر في البسملة",
+    q: "﴿بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ﴾\nكيف اجتمعت فيها أنواع الجر الثلاثة؟",
+    a: "«اسمِ» مجرور بالحرف (الباء). و«اللهِ» مجرور بالإضافة. و«الرحمنِ الرحيمِ» صفتان مجرورتان بالتبعية.",
+    blocks: [{ type: "steps", seq: false, items: [{ s: "«اسمِ»", e: "(الباء)." }, { s: "و«اللهِ»", e: "بالإضافة." }, { s: "و«الرحمنِ", e: "بالتبعية." }] }],
+    marks: [{ t: "focus", w: "كيف اجتمعت" }], src: "والثلاثه موجودين في البسمله بسم الله الرحمن" },
+  { id: "c48", sectionId: "s4", level: 2, pattern: "calm", anchor: "التنوين والإضافة",
+    q: "التنوين والإضافة — هل يجتمعان في كلمة واحدة؟",
+    a: "لا يجتمعان. فإذا حُذف التنوين من الكلمة أُضيفت تلقائيًّا إلى ما بعدها.",
+    blocks: [{ type: "ruling", s: "لا", e: "يجتمعان.", core: true }, { type: "ans", s: "فإذا", e: "بعدها.", nolabel: true }],
+    marks: [{ t: "focus", w: "هل يجتمعان" }], src: "يعني لما احذف التنوين الكلمه اوتوماتيك تضاف" },
+
+  /* ---------- القسم 5: التنوين ---------- */
+  { id: "c49", sectionId: "s5", level: 2, pattern: "calm", anchor: "تعريف التنوين",
+    q: "التنوين — ما تعريفه؟",
+    a: "نونٌ ساكنة تلحق آخر الاسم لفظًا وتفارقه خطًّا.",
+    blocks: [{ type: "def", all: true, core: true }],
+    marks: [{ t: "focus", w: "تعريفه" }], src: "التنوين عباره عن نون ساكنه تلحق اخر" },
+  { id: "c50", sectionId: "s5", level: 2, pattern: "calm", anchor: "عكسية: التنوين",
+    q: "«نونٌ ساكنة تلحق آخر الاسم لفظًا وتفارقه خطًّا» — ما المصطلح الذي هذا حدّه؟",
+    a: "التنوين.",
+    blocks: [{ type: "ans", all: true, core: true }],
+    marks: [{ t: "focus", w: "ما المصطلح" }], src: "التنوين عباره عن نون ساكنه تلحق اخر" },
+  { id: "c51", sectionId: "s5", level: 3, pattern: "quran", anchor: "محمد رسول الله",
+    q: "﴿مُّحَمَّدٌ رَّسُولُ اللَّهِ﴾\nكيف يظهر في «محمدٌ» معنى: يلحق آخر الاسم لفظًا ويفارقه خطًّا؟",
+    a: "تُنطق في آخرها نون ولا تُكتب نونًا. بل تُكتب ضمتين في حالة الرفع.",
+    blocks: [{ type: "ans", s: "تُنطق", e: "نونًا.", core: true }, { type: "wajh", s: "بل", e: "الرفع." }],
+    marks: [{ t: "focus", w: "كيف يظهر" }], src: "شوف محمد ا ده اسمه عندنا تنوين يتكتب" },
+  { id: "c52", sectionId: "s5", level: 2, pattern: "calm", anchor: "الفعل لا ينون",
+    q: "لماذا لا يصح أن تقول «جَلَسٌ» أو «شَرِبٌ»؟",
+    a: "لأن الفعل لا يُنوَّن. والتنوين من علامات الاسم.",
+    blocks: [{ type: "ans", s: "لأن", e: "يُنوَّن.", core: true }, { type: "rule", s: "والتنوين", e: "الاسم." }],
+    marks: [{ t: "focus", w: "لماذا" }], src: "فالفعل لا ينون من هو الذي نون" },
+  { id: "c53", sectionId: "s5", level: 3, pattern: "quran", anchor: "ليلا من المسجد",
+    q: "﴿سُبْحَانَ الَّذِي أَسْرَىٰ بِعَبْدِهِ لَيْلًا مِّنَ الْمَسْجِدِ الْحَرَامِ﴾\nبأيّ علامة عرفنا أن «ليلًا» اسم، وأن «المسجدِ» اسم؟",
+    a: "«ليلًا» اسم لأنه منوَّن. و«المسجدِ» اسم لأنه مجرور.",
+    blocks: [{ type: "ans", s: "«ليلًا»", e: "منوَّن.", core: true }, { type: "ans", s: "و«المسجدِ»", e: "مجرور.", nolabel: true }],
+    marks: [{ t: "focus", w: "بأيّ علامة" }], src: "سبحان الذي اسرى بعبده" },
+  { id: "c54", sectionId: "s5", level: 3, pattern: "calm", anchor: "وباللفظ أستغني",
+    q: "«وَبِاللَّفْظِ أَسْتَغْنِي عَنِ القَيْدِ إِنْ جَلَا» للشاطبي — لماذا استُشهد به في باب التنوين من شرح الآجرومية؟",
+    a: "لأن الشارح اكتفى بذكر أمثلة التنوين دون تسمية أنواعه. فالمثال الواضح يُغني عن المقال.",
+    blocks: [{ type: "ans", s: "لأن", e: "أنواعه.", core: true }, { type: "rule", s: "فالمثال", e: "المقال." }],
+    marks: [{ t: "focus", w: "لماذا استُشهد" }], src: "وباللفظ استغني عن القيد ان جلى" },
+  { id: "c55", sectionId: "s5", level: 2, pattern: "method", anchor: "أنواع التنوين",
+    q: "أنواع التنوين الأربعة — ما هي، وأين يكون كلٌّ منها؟",
+    a: "تنوين التمكين: في الاسم المعرب كـ«مُحَمَّدٌ». وتنوين التنكير: في بعض الأسماء المبنية كـ«سِيبَوَيْهٍ». وتنوين المقابلة: في جمع المؤنث السالم كـ«مُسْلِمَاتٌ». وتنوين العوض: عوضًا عن جملة كـ«حِينَئِذٍ».",
+    blocks: [{ type: "steps", seq: false, items: [{ s: "تنوين التمكين:", e: "التمكين:", ds: "في الاسم", de: "«مُحَمَّدٌ»." }, { s: "وتنوين التنكير:", e: "التنكير:", ds: "في بعض", de: "«سِيبَوَيْهٍ»." }, { s: "وتنوين المقابلة:", e: "المقابلة:", ds: "في جمع", de: "«مُسْلِمَاتٌ»." }, { s: "وتنوين العوض:", e: "العوض:", ds: "عوضًا", de: "«حِينَئِذٍ»." }] }],
+    marks: [{ t: "focus", w: "الأربعة" }], src: "في تنوين اسمه تنوين تمكين وفي تنكير" },
+  { id: "c56", sectionId: "s5", level: 2, pattern: "calm", anchor: "تنوين التمكين",
+    q: "تنوين التمكين — لماذا سُمّي بذلك، وما أمثلته؟",
+    a: "لأن الاسم متمكّن في باب الاسمية. مثل: مُحَمَّدٌ، قَلَمٌ، أُسْتَاذٌ، خَالِدٌ، صَالِحٌ.",
+    blocks: [{ type: "ans", s: "لأن", e: "الاسمية.", core: true }, { type: "ans", s: "مثل:", e: "صَالِحٌ.", nolabel: true }],
+    marks: [{ t: "focus", w: "لماذا سُمّي" }], src: "ده اسمه تمكين يعني متمكن في باب الاسميه" },
+  { id: "c57", sectionId: "s5", level: 2, pattern: "calm", anchor: "تنوين التنكير",
+    q: "تنوين التنكير — أين يدخل، وما فائدته؟",
+    a: "يدخل بعض الأسماء المبنية المحفوظة. ليفرّق بين المعرفة والنكرة.",
+    blocks: [{ type: "ans", s: "يدخل", e: "المحفوظة.", core: true }, { type: "ans", s: "ليفرّق", e: "والنكرة.", nolabel: true }],
+    marks: [{ t: "focus", w: "أين يدخل" }], src: "الاسم المبني ده كيف افرق بين النكره والمعرفه" },
+  { id: "c58", sectionId: "s5", level: 4, pattern: "compare", anchor: "سيبويه وسيبويهٍ",
+    q: "«جَاءَ سِيبَوَيْهِ وَمَعَهُ سِيبَوَيْهٍ» — ما الفرق بين الكلمتين؟",
+    a: "الأولى بلا تنوين معرفة: العالِم المشهور الذي تعرفه الدنيا. والثانية بالتنوين نكرة: رجلٌ اسمه سيبويه لا يعرفه أحد.",
+    blocks: [{ type: "cols", parts: [{ s: "الأولى", e: "الدنيا." }, { s: "والثانية", e: "أحد." }] }],
+    marks: [{ t: "focus", w: "الفرق" }], src: "اقول جاء سيبويه ومعه سيبويهن" },
+  { id: "c59", sectionId: "s5", level: 4, pattern: "compare", anchor: "صه وصهٍ",
+    q: "«صَهْ» و«صَهٍ» — ما الفرق في المعنى؟",
+    a: "«صَهْ» بلا تنوين: اسكت عن هذا الحديث بعينه. و«صَهٍ» بالتنوين: اسكت عن الكلام كله.",
+    blocks: [{ type: "cols", parts: [{ s: "«صَهْ»", e: "بعينه." }, { s: "و«صَهٍ»", e: "كله." }] }],
+    marks: [{ t: "focus", w: "الفرق" }], src: "ده اسمه معرفه اسكت عن الكلام ده" },
+  { id: "c60", sectionId: "s5", level: 4, pattern: "compare", anchor: "آه وآهٍ",
+    q: "«آهِ» و«آهٍ» — ما الفرق في المعنى؟",
+    a: "«آهِ» بلا تنوين: يتوجّع من شيء معيّن كالصداع. و«آهٍ» بالتنوين: كل جسمه يوجعه.",
+    blocks: [{ type: "cols", parts: [{ s: "«آهِ»", e: "كالصداع." }, { s: "و«آهٍ»", e: "يوجعه." }] }],
+    marks: [{ t: "focus", w: "الفرق" }], src: "اهي يعني بيتوجع من حاجه معينه" },
+  { id: "c61", sectionId: "s5", level: 3, pattern: "compare", anchor: "أف وأفٍّ",
+    q: "﴿فَلَا تَقُل لَّهُمَا أُفٍّ﴾\nما الفرق بين «أُفِّ» و«أُفٍّ» كما شرحه شارح الآجرومية؟",
+    a: "«أُفِّ» بلا تنوين: تضجّرٌ من أمر معيّن. و«أُفٍّ» بالتنوين: تضجّرٌ من كل شيء يُقال. وفي رواية حفص ﴿أُفٍّ﴾ بالتنوين.",
+    blocks: [{ type: "cols", parts: [{ s: "«أُفِّ»", e: "معيّن." }, { s: "و«أُفٍّ»", e: "يُقال." }] }, { type: "edit", s: "وفي", e: "بالتنوين." }],
+    marks: [{ t: "focus", w: "الفرق" }], src: "ولا تقل لهما افي وفي قراءه" },
+  { id: "c62", sectionId: "s5", level: 2, pattern: "calm", anchor: "إيه",
+    q: "الكلمة المبنية «إِيهِ» — ما معناها؟",
+    a: "زدني من الحديث.",
+    blocks: [{ type: "ans", all: true, core: true }],
+    marks: [{ t: "focus", w: "ما معناها" }], src: "كلمه ايهي يعني زدني من الحديث" },
+  { id: "c63", sectionId: "s5", level: 4, pattern: "method", anchor: "حدود تنوين التنكير",
+    q: "هل يدخل تنوين التنكير الأسماء المعربة، أو كل الأسماء المبنية؟",
+    a: "لا هذا ولا ذاك. وإنما يدخل بعض المبنيات المحفوظة كسيبويه وإيه وصه وآه وأف، فلا يدخل «هؤلاء» ولا «نحن».",
+    blocks: [{ type: "ruling", s: "لا", e: "ذاك.", core: true }, { type: "rule", s: "وإنما", e: "«نحن»." }],
+    marks: [{ t: "focus", w: "هل يدخل" }], src: "بعض الاسماء المبنيه ليس كل الاسماء المبنيه" },
+  { id: "c64", sectionId: "s5", level: 2, pattern: "compare", anchor: "المعرب والمبني",
+    q: "المعرب والمبني — ما الفرق بينهما؟",
+    a: "المعرب يتغيّر شكل آخره: هذا قلمٌ، اشتريتُ قلمًا، كتبتُ بقلمٍ. والمبني يثبت آخره على حالة واحدة كالحائط المبني: هؤلاءِ.",
+    blocks: [{ type: "cols", parts: [{ s: "المعرب", e: "بقلمٍ." }, { s: "والمبني", e: "هؤلاءِ." }] }],
+    marks: [{ t: "focus", w: "الفرق" }], src: "الكلمه اللي شكل اخرها يتغير اسمه ايه" },
+  { id: "c65", sectionId: "s5", level: 2, pattern: "calm", anchor: "تنوين المقابلة",
+    q: "تنوين المقابلة — أين يكون، ولماذا سُمّي بذلك؟",
+    a: "في جمع المؤنث السالم. لأنه يقابل النون في جمع المذكر السالم.",
+    blocks: [{ type: "ans", s: "في", e: "السالم.", core: true }, { type: "ans", s: "لأنه", e: "السالم.", nolabel: true }],
+    marks: [{ t: "focus", w: "أين يكون" }], src: "اي تنوين في جمع المؤنث يقابل انه في جمع المذكر" },
+  { id: "c66", sectionId: "s5", level: 3, pattern: "quran", anchor: "مسلمات",
+    q: "﴿عَسَىٰ رَبُّهُ إِن طَلَّقَكُنَّ أَن يُبْدِلَهُ أَزْوَاجًا خَيْرًا مِّنكُنَّ مُسْلِمَاتٍ﴾\nما نوع التنوين في «مسلماتٍ»؟",
+    a: "تنوين مقابلة. لأنها جمع مؤنث سالم.",
+    blocks: [{ type: "ans", s: "تنوين", e: "مقابلة.", core: true }, { type: "wajh", s: "لأنها", e: "سالم." }],
+    marks: [{ t: "focus", w: "نوع التنوين" }], src: "عسى ربوهن طلاقكنقكن ان يبدله ازواجا" },
+  { id: "c67", sectionId: "s5", level: 3, pattern: "quran", anchor: "اعدلوا بين أولادكم",
+    q: "حديث «اتقوا الله واعدلوا بين أولادكم» — كيف استعمله شارح الآجرومية لتقريب تنوين المقابلة؟",
+    a: "كأن جمع المؤنث قال: أعطيتم جمع المذكر نونًا فاعدلوا بيننا. فأُعطي تنوينًا يقابل تلك النون.",
+    blocks: [{ type: "ans", s: "كأن", e: "بيننا.", core: true }, { type: "wajh", s: "فأُعطي", e: "النون." }],
+    marks: [{ t: "hadith", w: "«اتقوا الله واعدلوا بين أولادكم»" }, { t: "focus", w: "كيف استعمله" }], src: "اتقوا الله واعدلوا بين اولادكم" },
+  { id: "c68", sectionId: "s5", level: 3, pattern: "quran", anchor: "المؤمنون",
+    q: "﴿قَدْ أَفْلَحَ الْمُؤْمِنُونَ﴾\nالنون في «المؤمنون» عوضٌ عن ماذا؟",
+    a: "عن التنوين في المفرد «مُؤْمِنٌ».",
+    blocks: [{ type: "ans", all: true, core: true }],
+    marks: [{ t: "focus", w: "عوضٌ عن ماذا" }], src: "قد افلح ها المؤمنون مؤمنون اصلها مؤمن" },
+  { id: "c69", sectionId: "s5", level: 4, pattern: "method", anchor: "واو الجمع ليست عوضا",
+    q: "«المؤمنون»: هل الواو والنون معًا عوضٌ عن التنوين؟",
+    a: "لا؛ النون وحدها عوض عن التنوين. والواو علامة رفع نيابةً عن الضمة لأنه جمع مذكر سالم.",
+    blocks: [{ type: "ruling", s: "لا؛", e: "التنوين.", core: true }, { type: "rule", s: "والواو", e: "سالم." }],
+    marks: [{ t: "focus", w: "معًا" }], src: "لا الواو علامه رفع النون بس" },
+  { id: "c70", sectionId: "s5", level: 4, pattern: "method", anchor: "الألف والتاء",
+    q: "الألف والتاء في «مسلمات» — هل هما المقابِل للنون في جمع المذكر؟",
+    a: "لا؛ الألف والتاء زيدتا للتفريق بين المفرد والجمع: هِنْدٌ ← هِنْدَاتٌ. والمقابِل للنون هو التنوين في آخرها.",
+    blocks: [{ type: "ruling", s: "لا؛", e: "هِنْدَاتٌ.", lead: "لا؛ الألف والتاء زيدتا للتفريق بين المفرد والجمع" }, { type: "rule", s: "والمقابِل", e: "آخرها." }],
+    marks: [{ t: "focus", w: "هل هما" }], src: "هو زدنا الف وتاء عشان ابين لك الفرق" },
+  { id: "c71", sectionId: "s5", level: 4, pattern: "compare", anchor: "نون الجمع ونون الأفعال الخمسة",
+    q: "نون «مُدَرِّسُونَ» ونون «يَلْعَبُونَ» — ما الفرق بينهما؟",
+    a: "نون جمع المذكر في «مُدَرِّسُونَ» عوضٌ عن التنوين في المفرد «مُدَرِّسٌ». ونون الأفعال الخمسة في «يَلْعَبُونَ» علامة رفع نيابةً عن الضمة في «يَلْعَبُ».",
+    blocks: [{ type: "cols", parts: [{ s: "نون جمع", e: "«مُدَرِّسٌ»." }, { s: "ونون الأفعال", e: "«يَلْعَبُ»." }] }],
+    marks: [{ t: "focus", w: "الفرق" }], src: "النون اللي في الافعال الخامسه تختلف عن النون" },
+  { id: "c72", sectionId: "s5", level: 2, pattern: "calm", anchor: "رفع الأفعال الخمسة",
+    q: "بمَ تُرفع الأفعال الخمسة، وما إعراب واو الجماعة في «التَّلَامِيذُ يَلْعَبُونَ»؟",
+    a: "تُرفع بثبوت النون نيابةً عن الضمة. وواو الجماعة فاعل.",
+    blocks: [{ type: "ans", s: "تُرفع", e: "الضمة.", core: true }, { type: "ans", s: "وواو", e: "فاعل.", nolabel: true }],
+    marks: [{ t: "focus", w: "بمَ تُرفع" }], src: "فالافعال الخمسه برفعها بثبوت النون" },
+  { id: "c73", sectionId: "s5", level: 2, pattern: "calm", anchor: "تنوين العوض",
+    q: "تنوين العوض كما شرحه شارح الآجرومية — عوضٌ عن ماذا، وما مثاله؟",
+    a: "عوضٌ عن جملة محذوفة. مثل «حِينَئِذٍ» و«سَاعَتَئِذٍ».",
+    blocks: [{ type: "ans", s: "عوضٌ", e: "محذوفة.", core: true }, { type: "ans", s: "مثل", e: "«سَاعَتَئِذٍ».", nolabel: true }],
+    marks: [{ t: "focus", w: "عوضٌ عن ماذا" }], src: "اذ دي عوض عن جمله" },
+  { id: "c74", sectionId: "s5", level: 3, pattern: "quran", anchor: "حينئذ تنظرون",
+    q: "﴿وَأَنتُمْ حِينَئِذٍ تَنظُرُونَ﴾ [الواقعة: 84]\nما الجملة المحذوفة التي عُوّض عنها بالتنوين، وما الذي تصفه الآية؟",
+    a: "«حِينَ إِذْ بَلَغَتِ الرُّوحُ الحُلْقُومَ». والآية تصف الميت عند الاحتضار وأهله حوله ينظرون ولا يستطيعون أن ينفعوه بشيء.",
+    blocks: [{ type: "ans", s: "«حِينَ", e: "الحُلْقُومَ».", core: true }, { type: "wajh", s: "والآية", e: "بشيء." }],
+    marks: [{ t: "focus", w: "الجملة المحذوفة" }], src: "وانتم حينئذ حين حين اذ بلغت الروح" },
+  { id: "c75", sectionId: "s5", level: 4, pattern: "quran", anchor: "تصحيح مطلع آية الواقعة",
+    q: "مطلع الآية التي فيها ﴿وَأَنتُمْ حِينَئِذٍ تَنظُرُونَ﴾ — هل هو «كلا إذا بلغت الحلقوم»؟",
+    a: "لا؛ الصواب ﴿فَلَوْلَا إِذَا بَلَغَتِ الْحُلْقُومَ﴾ [الواقعة: 83]. أما ﴿كَلَّا إِذَا بَلَغَتِ التَّرَاقِيَ﴾ ففي سورة القيامة [26].",
+    blocks: [{ type: "edit", all: true }],
+    marks: [{ t: "focus", w: "هل هو" }], src: "كلا اذا بلغت الحلقوم يعني الروح" },
+  { id: "c76", sectionId: "s5", level: 2, pattern: "calm", anchor: "شبه الاسم بالحرف والفعل",
+    q: "متى يُبنى الاسم، ومتى لا يُنوَّن — في الإشارة التي سبق بها شارح الآجرومية؟",
+    a: "إذا أشبه الاسمُ الحرفَ بُني. وإذا أشبه الفعلَ لم يُنوَّن كإبراهيم وفاطمة.",
+    blocks: [{ type: "ans", s: "إذا", e: "بُني.", core: true }, { type: "ans", s: "وإذا", e: "وفاطمة.", nolabel: true }],
+    marks: [{ t: "focus", w: "متى يُبنى" }], src: "الاسم لو اشبه الحرف هيبنى ولو اشبه الفعل" },
+
+  /* ---------- القسم 6: أل والنداء والإسناد ---------- */
+  { id: "c77", sectionId: "s6", level: 2, pattern: "calm", anchor: "أل علامة الاسم",
+    q: "لماذا تُعدّ «أل» علامةً على الاسم؟",
+    a: "لأنها لا تدخل على الفعل. فلا يقال «الجَلَسَ» ولا «الكَتَبَ».",
+    blocks: [{ type: "ans", s: "لأنها", e: "الفعل.", core: true }, { type: "ans", s: "فلا", e: "«الكَتَبَ».", nolabel: true }],
+    marks: [{ t: "focus", w: "لماذا" }], src: "لان الفعل لا تدخله ال ما يصحش تقول" },
+  { id: "c78", sectionId: "s6", level: 2, pattern: "calm", anchor: "الإسناد",
+    q: "الإسناد علامةً على الاسم — ما معناه، وما مثاله؟",
+    a: "أن تُخبر عن الكلمة، أي تأتي لها بفعل فتكون فاعله. مثل «جَاءَ سِيبَوَيْهِ»، ولا يصح «جَاءَ شَرِبَ».",
+    blocks: [{ type: "def", s: "أن", e: "فاعله.", core: true }, { type: "ans", s: "مثل", e: "شَرِبَ».", nolabel: true }],
+    marks: [{ t: "focus", w: "ما معناه" }], src: "من علامات الاسم الاسناد يعني ايه الاسناد" },
+  { id: "c79", sectionId: "s6", level: 2, pattern: "calm", anchor: "الإسناد أقوى العلامات",
+    q: "لماذا عُدّ الإسناد أقوى علامات الاسم، وما مثاله؟",
+    a: "لأن بعض الأسماء لا تقبل علامةً غيره، وهو علامة معنوية. كتاء «شَرِبْتُ»: لا تقبل تنوينًا ولا «أل» ولا نداءً، وتقبل الإسناد.",
+    blocks: [{ type: "ans", s: "لأن", e: "معنوية.", lead: "لأن بعض الأسماء لا تقبل علامةً غيره" }, { type: "ans", s: "كتاء", e: "الإسناد.", nolabel: true }],
+    marks: [{ t: "focus", w: "أقوى" }], src: "ودي علامه معنويه اقوى علامات الاسم هي الاسناد" },
+  { id: "c80", sectionId: "s6", level: 2, pattern: "calm", anchor: "النداء",
+    q: "النداء علامةً على الاسم — ما مثاله، ولماذا لا يدخل الفعل؟",
+    a: "«يَا نُوحُ، يَا إِبْرَاهِيمُ، يَا إِسْمَاعِيلُ». ولا يقال «يا كَتَبَ» لأن النداء لا يدخل إلا على الأسماء.",
+    blocks: [{ type: "ans", s: "«يَا", e: "إِسْمَاعِيلُ».", core: true }, { type: "rule", s: "ولا", e: "الأسماء." }],
+    marks: [{ t: "focus", w: "لماذا" }], src: "النداء برض لا دخل الا على الاسماء" },
+  { id: "c81", sectionId: "s6", level: 3, pattern: "calm", anchor: "بيت الألفية في علامات الاسم",
+    q: "«بِالجَرِّ وَالتَّنْوِينِ وَالنِّدَا وَأَلْ * وَمُسْنَدٍ لِلِاسْمِ تَمْيِيزٌ حَصَلْ» — ما علامات الاسم في هذا البيت؟",
+    a: "الجر، والتنوين، والنداء، و«أل»، والإسناد إليه.",
+    blocks: [{ type: "ans", all: true, core: true }],
+    marks: [{ t: "focus", w: "علامات الاسم" }], src: "بالجر والتنوين والندا وال" },
+  { id: "c82", sectionId: "s6", level: 2, pattern: "calm", anchor: "لماذا لم يستوعب ابن آجروم",
+    q: "لماذا لم يذكر ابن آجروم كل علامات الاسم كالنداء والإسناد؟",
+    a: "لأن كتابه للمبتدئين. فذكر بعض العلامات وترك بعضها مراعاةً لحال المخاطَب.",
+    blocks: [{ type: "ans", s: "لأن", e: "للمبتدئين.", core: true }, { type: "ans", s: "فذكر", e: "المخاطَب.", nolabel: true }],
+    marks: [{ t: "focus", w: "لماذا" }], src: "عشان ده للمبتدئين فبذكر بعض العلامات" },
+
+  /* ---------- القسم 7: حروف الخفض ---------- */
+  { id: "c83", sectionId: "s7", level: 1, pattern: "calm", anchor: "حروف الخفض في المتن",
+    q: "حروف الخفض في متن الآجرومية — ما هي؟",
+    a: "مِن، وإلى، وعن، وعلى، وفي، ورُبَّ، والباء، والكاف، واللام، وحروف القسم: الواو والباء والتاء.",
+    blocks: [{ type: "ans", all: true, core: true }],
+    marks: [{ t: "focus", w: "حروف الخفض" }], src: "وحروف الخفض ها وهي" },
+  { id: "c84", sectionId: "s7", level: 2, pattern: "calm", anchor: "من",
+    q: "حرف الجر «مِنْ» — ما معناه، وما مثاله؟",
+    a: "الابتداء. مثل: سَافَرْتُ مِنْ مِصْرَ إِلَى الإِسْكَنْدَرِيَّةِ؛ فبداية السفر من مصر.",
+    blocks: [{ type: "ans", s: "الابتداء.", e: "الابتداء.", core: true }, { type: "ans", s: "مثل:", e: "مصر.", nolabel: true }],
+    marks: [{ t: "focus", w: "ما معناه" }], src: "اولا من دي يا اد تفيد الابتداء" },
+  { id: "c85", sectionId: "s7", level: 3, pattern: "quran", anchor: "من وإلى في آية الإسراء",
+    q: "﴿مِّنَ الْمَسْجِدِ الْحَرَامِ إِلَى الْمَسْجِدِ الْأَقْصَى﴾\nما معنى «مِن» و«إلى» فيها؟",
+    a: "«مِن» للابتداء و«إلى» للانتهاء. فبداية الإسراء المسجد الحرام ونهايته المسجد الأقصى.",
+    blocks: [{ type: "ans", s: "«مِن»", e: "للانتهاء.", core: true }, { type: "wajh", s: "فبداية", e: "الأقصى." }],
+    marks: [{ t: "focus", w: "ما معنى" }], src: "المسجد يبقى بدايه الاسراء المسجد الحرام ونهايته" },
+  { id: "c86", sectionId: "s7", level: 2, pattern: "calm", anchor: "عن",
+    q: "حرف الجر «عَنْ» — ما معناه، وما مثاله؟",
+    a: "المجاوزة. مثل: رَمَيْتُ السَّهْمَ عَنِ القَوْسِ؛ أي جاوز السهمُ القوسَ وابتعد عنه.",
+    blocks: [{ type: "ans", s: "المجاوزة.", e: "المجاوزة.", core: true }, { type: "ans", s: "مثل:", e: "عنه.", nolabel: true }],
+    marks: [{ t: "focus", w: "ما معناه" }], src: "عن تفيد المجاوزه رميت السهم عن القوس" },
+  { id: "c87", sectionId: "s7", level: 2, pattern: "calm", anchor: "على",
+    q: "حرف الجر «عَلَى» — ما معناه، وما مثاله؟",
+    a: "الاستعلاء. مثل: جَلَسْتُ عَلَى الكُرْسِيِّ، و﴿وَعَلَيْهَا وَعَلَى الْفُلْكِ تُحْمَلُونَ﴾.",
+    blocks: [{ type: "ans", s: "الاستعلاء.", e: "الاستعلاء.", core: true }, { type: "ans", s: "مثل:", e: "تُحْمَلُونَ﴾.", nolabel: true }],
+    marks: [{ t: "focus", w: "ما معناه" }], src: "واما على تفيد الاستعلاء" },
+  { id: "c88", sectionId: "s7", level: 2, pattern: "calm", anchor: "في",
+    q: "حرف الجر «فِي» — ما معناه، وما مثاله؟",
+    a: "الظرفية؛ والظرف ما يحوي غيره. مثل: وَضَعْتُ القَلَمَ فِي جَيْبِي، وجَلَسْنَا فِي الحُجْرَةِ.",
+    blocks: [{ type: "ans", s: "الظرفية؛", e: "غيره.", core: true }, { type: "ans", s: "مثل:", e: "الحُجْرَةِ.", nolabel: true }],
+    marks: [{ t: "focus", w: "ما معناه" }], src: "اما فيدفيد الظرفيه" },
+  { id: "c89", sectionId: "s7", level: 2, pattern: "calm", anchor: "رب",
+    q: "حرف الجر «رُبَّ» — ما معناه؟",
+    a: "التقليل، وقد يفيد التكثير. ويُعرف المراد من سياق المثال.",
+    blocks: [{ type: "ans", s: "التقليل،", e: "التكثير.", core: true }, { type: "ans", s: "ويُعرف", e: "المثال.", nolabel: true }],
+    marks: [{ t: "focus", w: "ما معناه" }], src: "رب تفيد التقليل" },
+  { id: "c90", sectionId: "s7", level: 3, pattern: "quran", anchor: "رب صائم",
+    q: "حديث «رُبَّ صائمٍ ليس له من صيامه إلا الجوعُ والعطشُ» — ما معنى «رُبَّ» فيه، ولماذا؟",
+    a: "التكثير. لأن الصائمين الذين يُضيّعون صيامهم بالكذب أو شهادة الزور أو ترك الصلاة كثير.",
+    blocks: [{ type: "ans", s: "التكثير.", e: "التكثير.", core: true }, { type: "wajh", s: "لأن", e: "كثير." }],
+    marks: [{ t: "hadith", w: "«رُبَّ صائمٍ ليس له من صيامه إلا الجوعُ والعطشُ»" }, { t: "focus", w: "ما معنى" }], src: "رب صائم ليس له منص الجوع والعطش" },
+  { id: "c91", sectionId: "s7", level: 2, pattern: "method", anchor: "رب للتقليل",
+    q: "تطبيق: «رُبَّ أَخٍ لَكَ لَمْ تَلِدْهُ أُمُّكَ» و«رُبَّ مَوْلُودٍ لَيْسَ لَهُ وَالِدٌ» — ما معنى «رُبَّ» فيهما؟",
+    a: "التقليل. فالغريب الذي يحبك أكثر من أهلك نادر، والمولود بلا والد قليل كآدم وعيسى عليهما السلام.",
+    blocks: [{ type: "rule", s: "التقليل.", e: "التقليل.", core: true }, { type: "ans", s: "فالغريب", e: "السلام.", nolabel: true }],
+    marks: [{ t: "focus", w: "ما معنى" }], src: "رب اخي لك لم تلد امك" },
+  { id: "c92", sectionId: "s7", level: 2, pattern: "calm", anchor: "الباء",
+    q: "حرف الجر «الباء» — ما معناه، وما مثاله؟",
+    a: "الاستعانة. مثل: كَتَبْتُ بِالقَلَمِ؛ أي مستعينًا بالقلم.",
+    blocks: [{ type: "ans", s: "الاستعانة.", e: "الاستعانة.", core: true }, { type: "ans", s: "مثل:", e: "بالقلم.", nolabel: true }],
+    marks: [{ t: "focus", w: "ما معناه" }], src: "واما الباء لما اقول كتبت بالقلم" },
+  { id: "c93", sectionId: "s7", level: 2, pattern: "calm", anchor: "الكاف",
+    q: "حرف الجر «الكاف» — ما معناه، وما مثاله؟",
+    a: "التشبيه. مثل: هِنْدٌ كَالقَمَرِ؛ فيها مشبَّه ومشبَّه به والكاف أداة التشبيه.",
+    blocks: [{ type: "ans", s: "التشبيه.", e: "التشبيه.", core: true }, { type: "ans", s: "مثل:", e: "التشبيه.", nolabel: true }],
+    marks: [{ t: "focus", w: "ما معناه" }], src: "الكاف تفيد التشبيه هند كالقمر" },
+  { id: "c94", sectionId: "s7", level: 2, pattern: "calm", anchor: "اللام",
+    q: "حرف الجر «اللام» — ما معناه، وما مثاله؟",
+    a: "المِلك. مثل: القَلَمُ لِمُحَمَّدٍ؛ أي مِلكٌ له.",
+    blocks: [{ type: "ans", s: "المِلك.", e: "المِلك.", core: true }, { type: "ans", s: "مثل:", e: "له.", nolabel: true }],
+    marks: [{ t: "focus", w: "ما معناه" }], src: "اللام في الملك القلم لمحمد" },
+  { id: "c95", sectionId: "s7", level: 3, pattern: "quran", anchor: "في جذوع النخل",
+    q: "﴿وَلَأُصَلِّبَنَّكُمْ فِي جُذُوعِ النَّخْلِ﴾\nلماذا قال «في» والمصلوب يكون «على» الجذع؟",
+    a: "نابت «في» عن «على»؛ فحروف الجر ينوب بعضها عن بعض. والغرض بلاغي: أنه سيشدّ ربطهم في النخل كأنهم دخلوا فيها فلا يقدر أحد أن يفكّهم.",
+    blocks: [{ type: "ans", s: "نابت", e: "بعض.", lead: "نابت «في» عن «على»" }, { type: "wajh", s: "والغرض", e: "يفكّهم." }],
+    marks: [{ t: "focus", w: "لماذا" }], src: "ولا يصلبنكم في جذوع النخل" },
+  { id: "c96", sectionId: "s7", level: 4, pattern: "compare", anchor: "في والظروف",
+    q: "«في» و«أمام، خلف، فوق، تحت» — ما الفرق بينهما في نوع الكلمة؟",
+    a: "«في» حرف جر. و«أمام» و«خلف» و«فوق» و«تحت» أسماء تُسمّى ظروف مكان. وظرف الزمان وقتٌ، كـ«رَجَعْتُ البَيْتَ عِشَاءً».",
+    blocks: [{ type: "cols", parts: [{ s: "«في»", e: "جر." }, { s: "و«أمام»", e: "مكان." }] }, { type: "alert", s: "وظرف", e: "عِشَاءً»." }],
+    marks: [{ t: "focus", w: "الفرق" }], src: "يا ابني ده حرف جر لكن لا لكن نقول امام" },
+  { id: "c97", sectionId: "s7", level: 2, pattern: "calm", anchor: "حروف القسم",
+    q: "حروف القسم — ما هي، وأيّها «أمّ» حروف القسم ولماذا؟",
+    a: "الواو والباء والتاء: وَاللهِ، بِاللهِ، تَاللهِ. والواو أمّها لأنها تدخل على كل مقسَمٍ به.",
+    blocks: [{ type: "ans", s: "الواو", e: "تَاللهِ.", core: true }, { type: "ans", s: "والواو", e: "به.", nolabel: true }],
+    marks: [{ t: "focus", w: "أمّ" }], src: "حروف القسم والله بالله ت الله" },
+  { id: "c98", sectionId: "s7", level: 3, pattern: "quran", anchor: "أقسام القرآن بالواو",
+    q: "﴿وَالْفَجْرِ﴾ ﴿وَالتِّينِ﴾ ﴿وَاللَّيْلِ﴾ ﴿وَالْعَصْرِ﴾ ﴿وَالضُّحَىٰ﴾\nعلى أيّ شيء تدل كثرة الواو في أقسام القرآن؟",
+    a: "على أن الواو تدخل على كل مقسَمٍ به، ولذلك كانت أمّ حروف القسم.",
+    blocks: [{ type: "ans", all: true, core: true }],
+    marks: [{ t: "focus", w: "على أيّ شيء" }], src: "والسماء والتين والفجر والليل والضحى" },
+  { id: "c99", sectionId: "s7", level: 2, pattern: "calm", anchor: "تاء القسم",
+    q: "التاء من حروف القسم — على ماذا تدخل؟",
+    a: "على لفظ الجلالة فقط: «تَاللهِ». وفي «التحفة السنية» أن الباء تدخل على الظاهر والضمير.",
+    blocks: [{ type: "ans", s: "على", e: "«تَاللهِ».", core: true }, { type: "edit", s: "وفي", e: "والضمير." }],
+    marks: [{ t: "focus", w: "على ماذا" }], src: "لفظ الجلالة بس اقول ت الله او بالله" },
+  { id: "c100", sectionId: "s7", level: 2, pattern: "calm", anchor: "مذ ومنذ",
+    q: "«مُذْ» و«مُنْذُ» — ما الفرق بينهما، وما الذي تجرّانه؟",
+    a: "معناهما واحد، و«مُذْ» على حرفين و«مُنْذُ» على ثلاثة. ولا تجرّان إلا ظرف الزمان: لَمْ أَرَهُ مُذْ يَوْمِ الجُمُعَةِ.",
+    blocks: [{ type: "ans", s: "معناهما", e: "ثلاثة.", lead: "معناهما واحد" }, { type: "rule", s: "ولا", e: "الجُمُعَةِ." }],
+    marks: [{ t: "focus", w: "الفرق" }], src: "مذ هي منذ بس مذ جت على حرفين" },
+  { id: "c101", sectionId: "s7", level: 2, pattern: "method", anchor: "مذ محمد",
+    q: "تطبيق: «لم أره مُذْ مُحَمَّدٍ» — هل يصح؟ ولماذا؟",
+    a: "لا يصح. لأن «مذ» و«منذ» لا تجرّان إلا ظرف الزمان.",
+    blocks: [{ type: "ruling", s: "لا", e: "يصح.", core: true }, { type: "rule", s: "لأن", e: "الزمان." }],
+    marks: [{ t: "focus", w: "هل يصح" }], src: "ما ينفعش اقول ايه مثلا يعني مثلا مز محمد" },
+  { id: "c102", sectionId: "s7", level: 2, pattern: "calm", anchor: "لعل الجارة",
+    q: "«لَعَلَّ» — متى تكون حرف جر؟",
+    a: "في لغة عقيل: «لَعَلَّ اللهِ». وعامة العرب جعلوها حرفًا ناصبًا من أخوات «إنّ».",
+    blocks: [{ type: "ans", s: "في", e: "اللهِ».", core: true }, { type: "ans", s: "وعامة", e: "«إنّ».", nolabel: true }],
+    marks: [{ t: "focus", w: "متى" }], src: "واما لعل ده حرف جر في لغه عقيل" },
+  { id: "c103", sectionId: "s7", level: 3, pattern: "quran", anchor: "لعل الله يحدث",
+    q: "﴿لَا تَدْرِي لَعَلَّ اللَّهَ يُحْدِثُ بَعْدَ ذَٰلِكَ أَمْرًا﴾\nما عمل «لعلّ» فيها؟",
+    a: "ناصبة من أخوات «إنّ» على لغة عامة العرب، فنُصب لفظ الجلالة بعدها.",
+    blocks: [{ type: "ans", all: true, core: true }],
+    marks: [{ t: "focus", w: "ما عمل" }], src: "لا تدري لعل الله يحدث بعد ذلك امرا" },
+  { id: "c104", sectionId: "s7", level: 2, pattern: "calm", anchor: "حتى الجارة",
+    q: "«حَتَّى» حرف جر — ما ضابط مجرورها؟",
+    a: "تجرّ آخر الشيء الذي تتكلم عنه. مثل: أَكَلْتُ السَّمَكَةَ حَتَّى رَأْسِهَا، ولا يقال في الليلة: حتى نصفِها.",
+    blocks: [{ type: "rule", s: "تجرّ", e: "عنه.", core: true }, { type: "ans", s: "مثل:", e: "نصفِها.", nolabel: true }],
+    marks: [{ t: "focus", w: "ضابط" }], src: "عشان تجر لازم تجر اخر حاجه" },
+  { id: "c105", sectionId: "s7", level: 3, pattern: "quran", anchor: "حتى مطلع الفجر",
+    q: "﴿سَلَامٌ هِيَ حَتَّىٰ مَطْلَعِ الْفَجْرِ﴾\nما عمل «حتى» فيها، ولماذا جاء مجرورها «مطلع الفجر»؟",
+    a: "حرف جر جرّ «مَطْلَعِ». لأن «حتى» تجرّ آخر الشيء، ومطلع الفجر آخر الليلة.",
+    blocks: [{ type: "ans", s: "حرف", e: "«مَطْلَعِ».", core: true }, { type: "wajh", s: "لأن", e: "الليلة." }],
+    marks: [{ t: "focus", w: "ما عمل" }], src: "وحتى تجر سلام هي حتى مطلع الفجر" },
+  { id: "c106", sectionId: "s7", level: 2, pattern: "calm", anchor: "زيادات النظم",
+    q: "ما الحروف التي زادها نظم الآجرومية على المتن في حروف الخفض؟",
+    a: "مُذْ، ومُنْذُ، ولَعَلَّ، وحَتَّى.",
+    blocks: [{ type: "ans", all: true, core: true }],
+    marks: [{ t: "focus", w: "زادها" }], src: "ومنذ ده اللي احنا ما قلناهاش" },
+
+  /* ---------- القسم 8: النظم والقصر ---------- */
+  { id: "c107", sectionId: "s8", level: 2, pattern: "calm", anchor: "عبيد ربه",
+    q: "«قَالَ عُبَيْدُ رَبِّهِ مُحَمَّدُ» في نظم الآجرومية — لماذا قال «عُبيد» بالتصغير؟",
+    a: "تواضعًا لله. كأنه يقول: لستُ مستحقًّا أن أكون عبدًا.",
+    blocks: [{ type: "ans", s: "تواضعًا", e: "لله.", core: true }, { type: "ans", s: "كأنه", e: "عبدًا.", nolabel: true }],
+    marks: [{ t: "focus", w: "لماذا" }], src: "عبيده الصغير عبد ده من باب التواضع" },
+  { id: "c108", sectionId: "s8", level: 6, pattern: "calm", anchor: "ناظم الآجرومية",
+    q: "نظم الآجرومية الذي مطلعه «قال عُبيد ربه محمد» — لمن نسبه الشارح؟",
+    a: "إلى عبيد ربه الشنقيطي من موريتانيا. ومن الباحثين من ينسبه إلى محمد بن أبّ المزمري التواتي الجزائري.",
+    blocks: [{ type: "ans", s: "إلى", e: "موريتانيا.", core: true }, { type: "edit", s: "ومن", e: "الجزائري." }],
+    marks: [{ t: "focus", w: "لمن نسبه" }], src: "الشنقيط يعني من موريتانيا" },
+  { id: "c109", sectionId: "s8", level: 2, pattern: "calm", anchor: "الله أحمد",
+    q: "«اللهَ فِي كُلِّ الأُمُورِ أَحْمَدُ» — ما أصل الترتيب، ولماذا قُدّم لفظ الجلالة؟",
+    a: "الأصل «أَحْمَدُ اللهَ». فقُدّم المفعول ليفيد القصر.",
+    blocks: [{ type: "ans", s: "الأصل", e: "اللهَ».", core: true }, { type: "rule", s: "فقُدّم", e: "القصر." }],
+    marks: [{ t: "focus", w: "لماذا" }], src: "اصل الكلام احمد الله اصلها كده" },
+  { id: "c110", sectionId: "s8", level: 2, pattern: "calm", anchor: "المنتقى وذوي التقى",
+    q: "«مُصَلِّيًا عَلَى الرَّسُولِ المُنْتَقَى * وَآلِهِ وَصَحْبِهِ ذَوِي التُّقَى» — ما معنى «المُنتقى» و«ذوي التُّقى»؟",
+    a: "المنتقى: المختار الذي اختاره الله واصطفاه من جميع الخلق. وذوو التقى: أصحاب التقوى.",
+    blocks: [{ type: "ans", s: "المنتقى:", e: "الخلق.", lead: "المنتقى: المختار" }, { type: "ans", s: "وذوو", e: "التقوى.", nolabel: true }],
+    marks: [{ t: "focus", w: "ما معنى" }], src: "المنتقى يعني المختار اللي ربنا اختاره" },
+  { id: "c111", sectionId: "s8", level: 2, pattern: "calm", anchor: "غرض النظم",
+    q: "«وَبَعْدُ فَالقَصْدُ بِذَا المَنْظُومِ * تَسْهِيلُ مَنْثُورِ ابْنِ آجُرُّومِ» — ما غرض الناظم؟",
+    a: "تسهيل ما نثره ابن آجروم في كتابه. لمن أراد حفظه وصعُب عليه حفظ المنثور.",
+    blocks: [{ type: "ans", s: "تسهيل", e: "كتابه.", core: true }, { type: "ans", s: "لمن", e: "المنثور.", nolabel: true }],
+    marks: [{ t: "focus", w: "غرض" }], src: "تسهيل منثور ابن اج الروم الكلام اللي كتبه" },
+  { id: "c112", sectionId: "s8", level: 2, pattern: "calm", anchor: "إليه قصدي",
+    q: "«وَاللهَ أَسْتَعِينُ فِي كُلِّ عَمَلْ * إِلَيْهِ قَصْدِي وَعَلَيْهِ المُتَّكَلْ» — ما الفائدة البلاغية المتكررة في البيت؟",
+    a: "القصر بتقديم ما حقه التأخير. فلا يستعين إلا بالله، ولا يقصد إلا إليه، ولا يتوكل إلا عليه.",
+    blocks: [{ type: "ans", s: "القصر", e: "التأخير.", core: true }, { type: "wajh", s: "فلا", e: "عليه." }],
+    marks: [{ t: "focus", w: "الفائدة البلاغية" }], src: "اليه قصدي المفروض قصدي اليه" },
+  { id: "c113", sectionId: "s8", level: 2, pattern: "calm", anchor: "يبنى",
+    q: "«أَقْسَامُهُ الَّتِي عَلَيْهَا يُبْنَى» — ما معنى «يُبنى»؟",
+    a: "يُؤسَّس.",
+    blocks: [{ type: "ans", all: true, core: true }],
+    marks: [{ t: "focus", w: "ما معنى" }], src: "التي عليها يبنى يعني يؤسس" },
+  { id: "c114", sectionId: "s8", level: 2, pattern: "calm", anchor: "فاقف ما قفوا",
+    q: "«فَاقْفُ مَا قَفَوْا» في نظم الآجرومية — ما معناها؟",
+    a: "سِرْ على طريقتهم واتّبعهم. والقافية معناها التتابع.",
+    blocks: [{ type: "ans", s: "سِرْ", e: "واتّبعهم.", core: true }, { type: "ans", s: "والقافية", e: "التتابع.", nolabel: true }],
+    marks: [{ t: "focus", w: "ما معناها" }], src: "فقف ما قفوا يعني سر على طريقتهم" },
+  { id: "c115", sectionId: "s8", level: 2, pattern: "calm", anchor: "تعريف القصر",
+    q: "القصر في البلاغة — ما تعريفه، وبمَ يحصل؟",
+    a: "إثبات الحكم لشيء ونفيه عمّا عداه. ويحصل بتقديم ما حقه التأخير كالمفعول والجار والمجرور.",
+    blocks: [{ type: "def", s: "إثبات", e: "عداه.", core: true }, { type: "ans", s: "ويحصل", e: "والمجرور.", nolabel: true }],
+    marks: [{ t: "focus", w: "تعريفه" }], src: "القصر اثبات الحكم لشيء نفي عن ما عداه" },
+  { id: "c116", sectionId: "s8", level: 2, pattern: "calm", anchor: "عكسية: القصر",
+    q: "«إثبات الحكم لشيء ونفيه عمّا عداه» — ما المصطلح البلاغي الذي هذا حدّه؟",
+    a: "القصر.",
+    blocks: [{ type: "ans", all: true, core: true }],
+    marks: [{ t: "focus", w: "ما المصطلح" }], src: "القصر اثبات الحكم لشيء نفي عن ما عداه" },
+  { id: "c117", sectionId: "s8", level: 2, pattern: "calm", anchor: "ترتيب الجملة الفعلية",
+    q: "«كَتَبَ الأُسْتَاذُ الدَّرْسَ» — ما الترتيب الأصلي للجملة الفعلية، وما حقّ المفعول فيه؟",
+    a: "فعلٌ ثم فاعلٌ ثم مفعول. والمفعول حقّه التأخير.",
+    blocks: [{ type: "ans", s: "فعلٌ", e: "مفعول.", core: true }, { type: "rule", s: "والمفعول", e: "التأخير." }],
+    marks: [{ t: "focus", w: "حقّ المفعول" }], src: "لما مثلا كتب الاستاذ الدرس كتب فعل" },
+  { id: "c118", sectionId: "s8", level: 5, pattern: "calm", anchor: "قصة أحبك",
+    q: "قصة الزوج الذي قال لزوجته «أُحِبُّكِ» فلم تفرح — لماذا لم تفرح، وبمَ فرحت؟",
+    a: "لأن «أحبك» لا تمنع أن يحب غيرها. ففرحت لما قال «إِيَّاكِ أُحِبُّ» لأنه قصر المحبة عليها.",
+    blocks: [{ type: "ans", s: "لأن", e: "غيرها.", core: true }, { type: "wajh", s: "ففرحت", e: "عليها." }],
+    marks: [{ t: "focus", w: "لماذا لم تفرح" }], src: "احبك لاجل حظ المه ان مراته" },
+  { id: "c119", sectionId: "s8", level: 2, pattern: "calm", anchor: "إعراب أحبك",
+    q: "إعراب «أُحِبُّكِ» — ما الفعل والفاعل والمفعول فيها؟",
+    a: "«أُحِبُّ» فعل مضارع، والفاعل ضمير مستتر تقديره «أنا». والكاف ضمير متصل مبني في محل نصب مفعول به.",
+    blocks: [{ type: "ans", s: "«أُحِبُّ»", e: "«أنا».", core: true }, { type: "ans", s: "والكاف", e: "به.", nolabel: true }],
+    marks: [{ t: "focus", w: "إعراب" }], src: "واحب ده فعل مضارع والفاعل مستتر تقديره انا" },
+  { id: "c120", sectionId: "s8", level: 3, pattern: "quran", anchor: "إياك نعبد",
+    q: "﴿إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ﴾\nما الذي أفاده تقديم «إيّاك»؟",
+    a: "القصر: لا نعبد سواك. ولو قيل «نعبدك» لم يمنع عبادة غيره.",
+    blocks: [{ type: "ans", s: "القصر:", e: "سواك.", core: true }, { type: "wajh", s: "ولو", e: "غيره." }],
+    marks: [{ t: "focus", w: "تقديم" }], src: "عشان كده لما نقرا في الفاتحه اياك" },
+  { id: "c121", sectionId: "s8", level: 3, pattern: "quran", anchor: "إليه مرجعكم",
+    q: "﴿إِلَيْهِ مَرْجِعُكُمْ﴾\nما الذي أفاده تقديم الجار والمجرور؟",
+    a: "القصر؛ لأن الجار والمجرور حقّه التأخير فقُدّم.",
+    blocks: [{ type: "ans", all: true, core: true }],
+    marks: [{ t: "focus", w: "تقديم" }], src: "الجار المجوب برض حق التاخير زي اليه مرجعكم" },
+  { id: "c122", sectionId: "s8", level: 3, pattern: "quran", anchor: "وعلى الله فليتوكل",
+    q: "﴿وَعَلَى اللَّهِ فَلْيَتَوَكَّلِ الْمُؤْمِنُونَ﴾\nما الذي أفاده تقديم «على الله»؟",
+    a: "القصر: لا يتوكل المؤمنون إلا على الله.",
+    blocks: [{ type: "ans", all: true, core: true }],
+    marks: [{ t: "focus", w: "تقديم" }], src: "وعلى الله فليتوكل المؤمنون عشان يفيد القصر" },
+  { id: "c123", sectionId: "s8", level: 4, pattern: "compare", anchor: "الهدية لك",
+    q: "«الهَدِيَّةُ لَكَ» و«لَكَ الهَدِيَّةُ» — ما الفرق في المعنى؟",
+    a: "«الهدية لك» يمكن أن تكون لغيرك أيضًا. و«لك الهدية» ليست لغيرك لأن التقديم أفاد القصر.",
+    blocks: [{ type: "cols", parts: [{ s: "«الهدية", e: "أيضًا." }, { s: "و«لك", e: "القصر." }] }],
+    marks: [{ t: "focus", w: "الفرق" }], src: "الهديه لك ممكن تبقى لغيره" }
+];
+
+var MAP_DATA = [
+  { id: "m1", sectionId: "orient", center: "الكلام وعلامات الاسم", nodes: [
+    { text: "لماذا ندرس النحو؟", target: "s1", children: [{ text: "التدبّر", target: "s1-tadabbur" }, { text: "منهج المذاكرة", target: "s1-method" }] },
+    { text: "تعريف الكلام", target: "s2", children: [{ text: "اللفظ", target: "s2-lafz" }, { text: "المركّب المفيد", target: "s2-murakkab" }, { text: "المنثور والمنظوم", target: "s2-nazm" }] },
+    { text: "أقسام الكلام", target: "s3", children: [] },
+    { text: "علامات الاسم", target: "s4", children: [{ text: "الخفض", target: "s4" }, { text: "التنوين", target: "s5" }, { text: "أل والإسناد", target: "s6" }, { text: "حروف الخفض", target: "s7" }] },
+    { text: "شرح النظم والقصر", target: "s8", children: [{ text: "القصر", target: "s8-qasr" }] }
+  ] }
+];
+
+(function () {
+  "use strict";
+  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  function ayaWrap(s) { return esc(s).replace(/﴿[^﴾]*﴾/g, function (m) { return '<span class="aya sem-aya">' + m + "</span>"; }); }
+
+  /* ---- الخريطة الذهنية ---- */
+  var mm = document.getElementById("mindmap");
+  if (mm) {
+    var m = MAP_DATA[0];
+    mm.innerHTML = '<div class="mm-center">' + esc(m.center) + '</div><div class="mm-branches">' + m.nodes.map(function (n) {
+      return '<div><a class="mm-node" href="#' + n.target + '">' + esc(n.text) + "</a>" +
+        (n.children.length ? '<div class="mm-kids">' + n.children.map(function (c) { return '<a href="#' + c.target + '">' + esc(c.text) + "</a>"; }).join("") + "</div>" : "") + "</div>";
+    }).join("") + "</div>";
+  }
+
+  /* ---- الأسئلة التفاعلية ---- */
+  var Q = {}; QUIZ_DATA.forEach(function (q) { Q[q.id] = q; });
+  var state = {};
+  function updateScore(sec) {
+    var el = document.querySelector('.score[data-sec="' + sec + '"]'); if (!el) return;
+    var all = QUIZ_DATA.filter(function (q) { return q.sectionId === sec; });
+    var ok = all.filter(function (q) { return state[q.id] === true; }).length;
+    var tried = all.filter(function (q) { return state[q.id] !== undefined; }).length;
+    el.textContent = tried ? ok + " / " + all.length : "—";
+  }
+  document.querySelectorAll(".quiz-slot").forEach(function (slot) {
+    slot.innerHTML = slot.getAttribute("data-q").split(",").map(function (id) {
+      var q = Q[id.trim()]; if (!q) return "";
+      return '<div class="quiz" data-id="' + q.id + '"><div class="qh"><span>سؤال للفهم</span>' + (q.ai ? '<span class="tr2">تدريب من إعداد الذكاء الاصطناعي</span>' : "") + '</div><div class="qq">' + ayaWrap(q.question) + '</div><div class="opts">' +
+        q.options.map(function (o, i) { return '<button type="button" class="op" data-i="' + i + '">' + ayaWrap(o) + "</button>"; }).join("") +
+        '</div><div class="fb"></div><button type="button" class="retry">إعادة المحاولة</button></div>';
+    }).join("");
+  });
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest ? e.target.closest(".quiz button") : null; if (!b) return;
+    var box = b.closest(".quiz"), q = Q[box.getAttribute("data-id")], fb = box.querySelector(".fb");
+    if (b.classList.contains("retry")) {
+      box.classList.remove("done-no"); box.querySelectorAll(".op").forEach(function (x) { x.classList.remove("ok", "no"); x.disabled = false; });
+      fb.className = "fb"; fb.innerHTML = ""; return;
+    }
+    if (box.classList.contains("answered") && state[q.id] === true) return;
+    var i = +b.getAttribute("data-i"), right = i === q.correctIndex;
+    box.querySelectorAll(".op").forEach(function (x) { x.disabled = true; });
+    b.classList.add(right ? "ok" : "no");
+    if (right) box.classList.add("answered"); else box.classList.add("done-no");
+    if (state[q.id] === undefined || right) state[q.id] = right;
+    fb.className = "fb show " + (right ? "ok" : "no");
+    fb.innerHTML = (right ? "✓ أحسنت. " : "✗ ليست هذه. ") + ayaWrap(q.explanation);
+    updateScore(q.sectionId);
+  });
+
+  /* ---- بطاقات المراجعة ---- */
+  var stage = document.getElementById("dk-stage"), pos = document.getElementById("dk-pos"), err = document.getElementById("dk-err");
+  var LABELS = { all: "الكل", s1: "١ لماذا النحو", s2: "٢ الكلام", s3: "٣ أقسامه", s4: "٤ الخفض", s5: "٥ التنوين", s6: "٦ أل والإسناد", s7: "٧ حروف الخفض", s8: "٨ النظم والقصر" };
+  var filter = "all", list = CARDS_DATA.slice(), idx = 0, flipped = false;
+  var fl = document.getElementById("dk-filters");
+  fl.innerHTML = Object.keys(LABELS).map(function (k) { return '<button type="button" data-f="' + k + '"' + (k === "all" ? ' class="on"' : "") + ">" + LABELS[k] + "</button>"; }).join("");
+  fl.addEventListener("click", function (e) {
+    var b = e.target.closest("button"); if (!b) return;
+    filter = b.getAttribute("data-f");
+    fl.querySelectorAll("button").forEach(function (x) { x.classList.toggle("on", x === b); });
+    list = CARDS_DATA.filter(function (c) { return filter === "all" || c.sectionId === filter; });
+    idx = 0; flipped = false; show();
+  });
+  function show() {
+    if (!window.ILM_ANKI) { stage.textContent = "تعذّر تحميل أداة البطاقات."; return; }
+    var c = list[idx];
+    try {
+      stage.innerHTML = ILM_ANKI.front(c) + (flipped ? '<div class="dk-back">' + ILM_ANKI.back(c) + "</div>" : '<div class="flip-hint">اضغط لإظهار الإجابة</div>');
+    } catch (ex) { stage.textContent = ex.message; }
+    pos.textContent = (idx + 1) + " / " + list.length;
+  }
+  stage.addEventListener("click", function () { flipped = !flipped; show(); });
+  stage.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flipped = !flipped; show(); } });
+  document.getElementById("dk-next").addEventListener("click", function () { idx = (idx + 1) % list.length; flipped = false; show(); });
+  document.getElementById("dk-prev").addEventListener("click", function () { idx = (idx - 1 + list.length) % list.length; flipped = false; show(); });
+  document.getElementById("dk-dl").addEventListener("click", function () {
+    err.textContent = "";
+    try { ILM_ANKI.download(CARDS_DATA); } catch (ex) { err.textContent = ex.message; }
+  });
+  show();
+})();
+</script>
+
+<!-- 4) الهايلايت (آخر سكريبت في الصفحة) -->
+<script src="../../ilm-highlight.js" data-lecture-id="moad_ajurrumiyyah_01"></script>
+</body>
+</html>
