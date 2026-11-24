@@ -1,7 +1,7 @@
 /* =========================================================
    app.js — تطبيق «مواد شرعية»
    متابعة خطة الكتب + الملخصات + هل أنا ماشي بوتيرة كويسة ولا متأخر
-   التخزين: localStorage دايمًا، ومزامنة Firebase لو دخلت (firebase-sync-moad.js)
+   التخزين: localStorage دايمًا + مزامنة البناء المنهجي (firebase-sync-manhaj.js → ManhajCloud)
    ========================================================= */
 (function () {
   "use strict";
@@ -136,7 +136,7 @@
   function persist(opts) {
     state.ts = Date.now();
     try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) {}
-    if (window.MoadCloud && window.MoadCloud.user) window.MoadCloud.save(state, state.ts);
+    if (cloud()) cloud().saveApp(state, state.ts);
     if (!opts || opts.render !== false) render();
   }
 
@@ -309,7 +309,33 @@
       var an = a.n == null ? 9999 : a.n, bn = b.n == null ? 9999 : b.n;
       return an - bn || a.file.localeCompare(b.file, "ar");
     });
+    list.forEach(function (s) {
+      s.id = lectureIdOf(book, s);
+      s.done = s.id ? localStorage.getItem("ilm_" + s.id) === "1" : false;
+      s.hl = s.id ? hlStats(s.id) : { marks: 0, notes: 0 };
+    });
     return list;
+  }
+
+  // معرّف صفحة الملخص (data-lecture-id): moad_{key}_{NN} — نفس اللي لازم يتكتب جوه الملف
+  function lectureIdOf(book, s) {
+    return s.n != null ? "moad_" + book.key + "_" + pad(s.n) : null;
+  }
+
+  // عدد التظليلات والتعليقات من تخزين ilm-highlight.js (ilm_hl_<id>)
+  function hlStats(id) {
+    try {
+      var raw = JSON.parse(localStorage.getItem("ilm_hl_" + id));
+      if (!raw) return { marks: 0, notes: 0 };
+      var groups = {};
+      Object.keys(raw.blocks || {}).forEach(function (k) {
+        var html = String(raw.blocks[k] || "");
+        var re = /data-hl-group="([^"]+)"/g, m;
+        while ((m = re.exec(html))) groups[m[1]] = 1;
+      });
+      var notes = Object.keys(raw.notes || {}).filter(function (k) { return raw.notes[k]; }).length;
+      return { marks: Object.keys(groups).length, notes: notes };
+    } catch (e) { return { marks: 0, notes: 0 }; }
   }
 
   function summaryHref(s) {
@@ -497,13 +523,15 @@
 
   function bookCard(b) {
     var st = peekBook(b.key);
-    var sums = summariesFor(b).length;
+    var sumList = summariesFor(b);
+    var sums = sumList.length;
+    var sumsDone = sumList.filter(function (x) { return x.done; }).length;
     return '<a class="book ' + STATUS[st.status].cls + '" href="#/book/' + b.key + '">' +
       '<span class="num">' + b.n + "</span>" +
       '<div class="book-body">' +
         '<div class="book-title">' + esc(b.title) + (b.finish ? ' <span class="finish" title="خط النهاية للعلم ده">✅</span>' : "") + "</div>" +
         '<div class="book-meta">' + esc(b.science) + " · " + fmtHours(b.hours) +
-          (sums ? ' · <span class="sums">📄 ' + sums + " ملخص</span>" : "") + "</div>" +
+          (sums ? ' · <span class="sums">📄 ' + sumsDone + "/" + sums + " ملخص</span>" : "") + "</div>" +
         (st.pct > 0 && st.pct < 100 ? bar(st.pct, "thin") : "") +
       "</div>" +
       '<div class="book-side">' + statusPill(st.status) + (st.pct > 0 && st.pct < 100 ? "<small>" + st.pct + "%</small>" : "") + "</div>" +
@@ -596,13 +624,17 @@
       "</section>";
 
     // الملخصات
-    html += '<section class="card summaries"><div class="card-head"><h3>الملخصات</h3>' +
+    var doneSums = sums.filter(function (x) { return x.done; }).length;
+    html += '<section class="card summaries"><div class="card-head"><h3>الملخصات' +
+      (sums.length ? ' <small class="muted">خلصت ' + doneSums + " من " + sums.length + "</small>" : "") + "</h3>" +
       '<button class="btn chip ghost" data-refresh>' + (tree.loading ? "بيحدّث…" : "↻ تحديث") + "</button></div>";
     if (sums.length) {
       html += '<ol class="sum-list">' + sums.map(function (s) {
-        return '<li><a href="' + esc(summaryHref(s)) + '" target="_blank" rel="noopener">' +
-          '<span class="sn">' + (s.n != null ? pad(s.n) : "•") + "</span>" +
-          '<span class="st">' + esc(s.title) + "</span>" +
+        var extra = (s.hl.marks ? '<span class="sh" title="تظليلات">🖍 ' + s.hl.marks + "</span>" : "") +
+          (s.hl.notes ? '<span class="sh" title="تعليقات">💬 ' + s.hl.notes + "</span>" : "");
+        return '<li><a class="' + (s.done ? "is-done" : "") + '" href="' + esc(summaryHref(s)) + '" target="_blank" rel="noopener">' +
+          '<span class="sn">' + (s.done ? "✓" : (s.n != null ? pad(s.n) : "•")) + "</span>" +
+          '<span class="st">' + esc(s.title) + (extra ? '<span class="sx">' + extra + "</span>" : "") + "</span>" +
           '<span class="se">' + esc(s.ext.toUpperCase()) + "</span></a></li>";
       }).join("") + "</ol>";
     } else {
@@ -644,7 +676,7 @@
   function renderSettings() {
     var s = state.settings;
     var p = computePace();
-    var user = window.MoadCloud && window.MoadCloud.user;
+    var user = window.ManhajCloud && window.ManhajCloud.user;
     return '<a class="back" href="#/">→ رجوع للخطة</a>' +
       '<section class="card"><h2>إعدادات الخطة</h2>' +
       '<form id="settings-form" class="form">' +
@@ -657,9 +689,9 @@
       '<p class="muted">بالإعدادات دي: الخطة ' + fmtNum(p.total, 0) + " ساعة، وتخلص في <strong>" + esc(fmtDate(p.plannedEnd)) + "</strong> (" + fmtSpan(p.plannedDays) + ").</p>" +
       "</section>" +
       '<section class="card"><h2>المزامنة</h2>' +
-        (user ? "<p>داخل باسم <strong>" + esc(user.email) + "</strong> — تقدمك بيتزامن تلقائيًا.</p>"
-              : "<p>التقدم محفوظ على الجهاز ده بس. ادخل بحسابك عشان يتزامن بين أجهزتك.</p>") +
-        '<button class="btn" type="button" data-open-login>' + (user ? "إدارة الحساب" : "دخول / حساب جديد") + "</button>" +
+        (user ? "<p>داخل باسم <strong>" + esc(user.email) + "</strong> — تقدمك وإنجاز الملخصات والهايلايت بيتزامنوا تلقائيًا.</p>"
+              : "<p>المزامنة لسه ما اشتغلتش (مستني الدخول أو الإنترنت). التقدم محفوظ على الجهاز لحد ما تشتغل.</p>") +
+        '<p class="muted small">نفس حساب ونظام مزامنة «البناء المنهجي». الخروج من شريحة الحساب تحت الشاشة.</p>' +
       "</section>" +
       '<section class="card"><h2>نسخة احتياطية</h2>' +
         '<div class="row gap"><button class="btn" type="button" data-export>⬇️ تصدير JSON</button>' +
@@ -754,7 +786,7 @@
   }
 
   document.addEventListener("click", function (e) {
-    var el = e.target.closest("[data-status],[data-filter],[data-log],[data-log-undo],[data-refresh],[data-open-login],[data-export],[data-reset],[data-jump],#sync-chip,[data-close]");
+    var el = e.target.closest("[data-status],[data-filter],[data-log],[data-log-undo],[data-refresh],[data-export],[data-reset],[data-jump],#sync-chip,[data-close]");
     if (!el) return;
     var r = route();
     if (el.hasAttribute("data-status") && r.name === "book") setStatus(r.key, el.getAttribute("data-status"));
@@ -766,8 +798,6 @@
     }
     else if (el.hasAttribute("data-log-undo")) undoLog(el.getAttribute("data-book"));
     else if (el.hasAttribute("data-refresh")) { discover(true); render(); }
-    else if (el.hasAttribute("data-open-login") || el.id === "sync-chip") openLogin();
-    else if (el.hasAttribute("data-close")) closeLogin();
     else if (el.hasAttribute("data-export")) exportData();
     else if (el.hasAttribute("data-reset")) {
       if (window.confirm("متأكد؟ هيتمسح كل التقدم والسجل والملاحظات (الإعدادات هتفضل).")) {
@@ -813,9 +843,6 @@
       if (!parseDate(f.get("startDate")) || !(h > 0) || !(rr >= 1)) { toast("راجع القيم"); return; }
       state.settings = { startDate: f.get("startDate"), hoursPerDay: h, realism: rr };
       persist(); toast("اتحفظت الإعدادات");
-    } else if (e.target.id === "login-form") {
-      e.preventDefault();
-      doLogin(new FormData(e.target));
     }
   });
 
@@ -842,82 +869,52 @@
     reader.readAsText(file);
   }
 
-  /* ---------------- المزامنة ---------------- */
-  var loginMode = "in";
-  var modal = document.getElementById("login-modal");
-
-  function openLogin() {
-    if (!window.MoadCloud) { toast("المزامنة لسه بتحمّل أو مفيش إنترنت"); return; }
-    refreshLoginUI();
-    modal.hidden = false;
-  }
-  function closeLogin() { modal.hidden = true; }
-  modal.addEventListener("click", function (e) { if (e.target === modal) closeLogin(); });
-  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !modal.hidden) closeLogin(); });
-
-  modal.querySelectorAll(".tab").forEach(function (t) {
-    t.addEventListener("click", function () {
-      loginMode = t.getAttribute("data-mode");
-      modal.querySelectorAll(".tab").forEach(function (x) { x.classList.toggle("active", x === t); });
-      document.getElementById("login-submit").textContent = loginMode === "in" ? "دخول" : "إنشاء حساب";
-    });
-  });
-  document.getElementById("logout-btn").addEventListener("click", function () {
-    window.MoadCloud.signOut().then(function () { toast("اتسجل الخروج — التقدم فاضل محفوظ على الجهاز"); refreshLoginUI(); });
-  });
-
-  function refreshLoginUI() {
-    var user = window.MoadCloud && window.MoadCloud.user;
-    document.getElementById("login-form").hidden = !!user;
-    modal.querySelector(".tabs").hidden = !!user;
-    document.getElementById("login-signed").hidden = !user;
-    if (user) document.getElementById("login-email").textContent = user.email;
-  }
-
-  function doLogin(f) {
-    var err = document.getElementById("login-error");
-    err.hidden = true;
-    var fn = loginMode === "in" ? window.MoadCloud.signIn : window.MoadCloud.signUp;
-    fn(String(f.get("email")).trim(), String(f.get("password")))
-      .then(function () { closeLogin(); toast("أهلًا! بيتزامن دلوقتي…"); })
-      .catch(function (e2) { err.textContent = e2.message; err.hidden = false; });
-  }
+  /* ---------------- المزامنة (نفس نظام البناء المنهجي) ----------------
+     firebase-sync-manhaj.js بيعمل شاشة الدخول وشريحة الحساب، وبيوفّر window.ManhajCloud.
+     حالة الخطة: ManhajCloud.loadApp / saveApp (حقل moadState في manhaj_users/{uid}).
+     إنجاز الملخصات: ilm-track.js (مفاتيح ilm_<id>)، والهايلايت: ilm-highlight.js جوه صفحة كل ملخص.
+  -------------------------------------------------------------------------------- */
+  function cloud() { return window.ManhajCloud && window.ManhajCloud.user && window.ManhajCloud.loadApp ? window.ManhajCloud : null; }
 
   function syncFromCloud() {
-    if (!window.MoadCloud || !window.MoadCloud.user) return;
-    window.MoadCloud.load().then(function (cloud) {
-      if (!cloud || !cloud.state) { if (state.ts) window.MoadCloud.save(state, state.ts); return; }
-      var cloudTs = +cloud.ts || 0;
+    var C = cloud();
+    if (!C) return;
+    C.loadApp().then(function (remote) {
+      if (!remote || !remote.state) { if (state.ts) C.saveApp(state, state.ts); return; }
+      var cloudTs = +remote.ts || 0;
       if (cloudTs > state.ts) {
-        state = normalize(cloud.state);
+        state = normalize(remote.state);
         state.ts = cloudTs;
         try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) {}
         render();
         toast("اتحدّث التقدم من السحابة");
       } else if (state.ts > cloudTs) {
-        window.MoadCloud.save(state, state.ts);
+        C.saveApp(state, state.ts);
       }
     }).catch(function () {});
   }
 
-  function setChip(stateName, msg) {
-    var chip = document.getElementById("sync-chip");
-    var labels = { off: "محلي", ok: "متزامن", saving: "بيحفظ…", error: "خطأ مزامنة" };
-    chip.className = "sync-chip is-" + stateName;
-    chip.querySelector(".label").textContent = labels[stateName] || "محلي";
-    chip.title = msg || (stateName === "off" ? "التقدم محفوظ على الجهاز ده بس — اضغط للدخول" : "المزامنة السحابية");
+  // ilm-track.js بيتحمّل بعد ما ManhajCloud يجهز، عشان يسحب إنجاز الملخصات من السحابة
+  // (لو اتحمّل قبله، syncOnce بتاعه بيلاقي ManhajCloud مش موجود فيرجع من غير مزامنة)
+  function loadIlmTrack() {
+    if (window.IlmTrack || document.getElementById("ilm-track-js")) return;
+    var s = document.createElement("script");
+    s.id = "ilm-track-js";
+    s.src = "ilm-track.js";
+    document.body.appendChild(s);
   }
+  window.addEventListener("ilm-track-synced", render);
 
-  window.addEventListener("moad-auth", function (e) {
-    setChip(e.detail.user ? "ok" : "off");
-    if (e.detail.user) syncFromCloud();
-    if (!modal.hidden) refreshLoginUI();
-    if (route().name === "settings") render();
-  });
-  window.addEventListener("moad-cloud-status", function (e) {
-    setChip(e.detail.state, e.detail.message);
-    if (e.detail.state === "error" && e.detail.message) toast(e.detail.message);
-  });
+  function onCloudReady() {
+    if (!window.ManhajCloud) return;
+    window.ManhajCloud.ready.then(function () {
+      syncFromCloud();
+      loadIlmTrack();
+      if (route().name === "settings") render();
+    });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", onCloudReady);
+  else onCloudReady();
   window.addEventListener("focus", syncFromCloud);
 
   render();

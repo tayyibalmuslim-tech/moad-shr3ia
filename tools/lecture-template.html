@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--
+    قالب ربط صفحة ملخص في مستودع «مواد شرعية» (moad-shr3ia)
+    ──────────────────────────────────────────────
+    المكان:   books/NN-key/NN.html          مثال: books/01-ajurrumiyyah/01.html
+    المعرّف:  moad_{key}_{NN}               مثال: moad_ajurrumiyyah_01
+              (التطبيق بيحسبه من اسم الفولدر ورقم الملف، فلازم يطابقه بالحرف)
+    المسارات: الملف على عمق فولدرين، فالسكريبتات بـ ../../
+    التصميم والمحتوى نفسه بآلية عمل المحاضرات — القالب ده للربط بس.
+  -->
+  <title>[عنوان الدرس] — [اسم الكتاب] | مواد شرعية</title>
+</head>
+<body data-lecture-id="moad_ajurrumiyyah_01">
+
+  <p class="ai-note">⚠️ المحتوى ده اتعمل بمساعدة الذكاء الاصطناعي وممكن يكون فيه أخطاء، يُرجى المراجعة.</p>
+
+  <!-- 1) تحديد الدرس كمكتمل (بيظهر ✓ جنبه في التطبيق) -->
+  <label id="ilm-completion-box">
+    <input type="checkbox" data-lecture-id="moad_ajurrumiyyah_01">
+    <span>تحديد هذا الدرس كمكتمل</span>
+  </label>
+
+  <!-- 2) منطقة الهايلايت والتعليقات -->
+  <main data-ilm-highlight-zone>
+    <h1>[عنوان الدرس]</h1>
+    <p>[المحتوى بآلية العمل…]</p>
+  </main>
+
+  <!-- 3) المزامنة (شاشة الدخول + ManhajCloud) ثم تتبع الإنجاز -->
+  <script type="module" src="../../firebase-sync-manhaj.js"></script>
+  <script src="../../ilm-track.js"></script>
+  <script>
+  (function () {
+    var cb = document.querySelector('#ilm-completion-box input');
+    var lid = cb.getAttribute('data-lecture-id');
+    function render(v) { cb.checked = !!v; }
+    // ilm-track بيتحمّل قبل وحدة المزامنة، فبنستنى لحد ما الصفحة تخلص تحميل
+    window.addEventListener('DOMContentLoaded', function () {
+      if (window.IlmTrack) render(window.IlmTrack.isDone(lid));
+      if (window.ManhajCloud) window.ManhajCloud.ready.then(function () {
+        if (window.IlmTrack) render(window.IlmTrack.isDone(lid));
+      });
+    });
+    window.addEventListener('ilm-track-synced', function () { render(window.IlmTrack.isDone(lid)); });
+    cb.addEventListener('change', function () { if (window.IlmTrack) window.IlmTrack.setDone(lid, cb.checked); });
+  })();
+  </script>
+
+  <!-- 4) الهايلايت (آخر سكريبت في الصفحة) -->
+  <script src="../../ilm-highlight.js" data-lecture-id="moad_ajurrumiyyah_01"></script>
+</body>
+</html>

@@ -223,6 +223,10 @@ select:focus, input:focus, textarea:focus{ outline:2px solid rgba(176,97,42,.35)
 .sum-list a:hover{ border-color:var(--copper); }
 .sn{ font-weight:800; color:var(--copper); }
 .st{ font-family:var(--f-title); font-size:17px; color:var(--ink); }
+.sum-list a.is-done{ background:#f4faf6; border-color:#bfdcca; }
+.sum-list a.is-done .sn{ color:var(--ok); }
+.sx{ display:inline-flex; gap:8px; margin-inline-start:8px; font-family:var(--f-body); font-size:12px; color:var(--muted); vertical-align:middle; }
+.card-head h3 small{ font-weight:400; font-size:12px; margin-inline-start:6px; }
 .se{ font-size:11px; color:var(--muted); border:1px solid var(--line); border-radius:6px; padding:0 6px; }
 .empty-sum{ background:#f7f3e9; border:1px dashed var(--line); border-radius:10px; padding:10px 12px; }
 .empty-sum p{ margin:0 0 4px; }
