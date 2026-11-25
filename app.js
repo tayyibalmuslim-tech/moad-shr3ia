@@ -858,11 +858,16 @@
   function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
   function openTest(id) {
     var T = window.MOAD_TESTS && window.MOAD_TESTS[id]; if (!T) return;
+    // «صح ولا خطأ» الأول ثم «اختر الإجابة»، والترتيب متلخبط جوه كل جزء
+    var tfQs = T.questions.filter(function (q) { return typeof q.tf === "boolean"; });
+    var mcQs = T.questions.filter(function (q) { return q.o; });
     TQ = { id: id, T: T, i: 0, score: 0, answered: false, wrong: [],
-      qs: shuffle(T.questions).map(function (q) {
+      qs: shuffle(tfQs).map(function (q) {
+        return { kind: "tf", q: q.q, e: q.e, opts: [{ t: "✓ صح", ok: q.tf === true }, { t: "✗ خطأ", ok: q.tf === false }] };
+      }).concat(shuffle(mcQs).map(function (q) {
         var opts = shuffle(q.o.map(function (o, k) { return { t: o, ok: k === q.c }; }));
-        return { q: q.q, e: q.e, opts: opts };
-      }) };
+        return { kind: "mc", q: q.q, e: q.e, opts: opts };
+      })) };
     var m = document.getElementById("test-modal");
     if (!m) { m = document.createElement("div"); m.id = "test-modal"; m.className = "tm"; m.setAttribute("role", "dialog"); m.setAttribute("aria-modal", "true"); document.body.appendChild(m); }
     m.hidden = false; document.body.classList.add("tm-open");
@@ -882,17 +887,21 @@
       var pct = Math.round(TQ.score / n * 100), msg = pct === 100 ? "ممتاز! الدرجة النهائية 🎉" : pct >= 85 ? "جميل جدًا، فاضل لمسات بسيطة 👏" : pct >= 60 ? "كويس، راجع الأسئلة اللي غلطت فيها وحاول تاني 💪" : "محتاج ترجع للملخص وتعيد المحاولة — ولا يهمك 🌱";
       var tr = state.tests[TQ.id];
       html = head + '<div class="tm-body tm-end"><div class="tm-score"><strong>' + TQ.score + "</strong><span>من " + n + "</span><em>" + pct + "%</em></div>" +
-        '<div class="bar"><span style="width:' + pct + '%"></span></div><p class="tm-msg">' + msg + "</p>" +
+        '<div class="bar"><span style="width:' + pct + '%"></span></div>' + (function () {
+          var tfN = TQ.qs.filter(function (q) { return q.kind === "tf"; }).length, mcN = n - tfN;
+          var tfW = TQ.wrong.filter(function (w) { return w.kind === "tf"; }).length, mcW = TQ.wrong.length - tfW;
+          return tfN && mcN ? '<p class="tm-split"><span class="tm-kind tf">صح ولا خطأ: ' + (tfN - tfW) + "/" + tfN + '</span><span class="tm-kind mc">اختر: ' + (mcN - mcW) + "/" + mcN + "</span></p>" : "";
+        })() + '<p class="tm-msg">' + msg + "</p>" +
         (tr ? '<p class="muted small">أفضل نتيجة ليك: ' + tr.best + "/" + tr.n + " — عدد المحاولات: " + tr.tries + "</p>" : "") +
         (TQ.wrong.length ? '<h4>راجع دول:</h4><ol class="tm-wrong">' + TQ.wrong.map(function (w) {
-          return "<li><b>" + esc(w.q) + "</b><span>✓ " + esc(w.ok) + "</span><small>" + esc(w.e) + "</small></li>";
+          return "<li><b>" + esc(w.q) + "</b><span>✓ " + (w.kind === "tf" ? "العبارة " + esc(w.ok) : esc(w.ok)) + "</span><small>" + esc(w.e) + "</small></li>";
         }).join("") + "</ol>" : "") +
         '<div class="tm-actions"><button type="button" data-tm="again" class="btn primary">أعد الاختبار</button><button type="button" class="btn ghost" data-tm="close">اقفل</button></div></div>';
     } else {
       var q = TQ.qs[TQ.i];
-      html = head + '<div class="tm-prog"><span>سؤال ' + (TQ.i + 1) + " من " + n + "</span><span>✓ " + TQ.score + "</span></div>" +
+      html = head + '<div class="tm-prog"><span>سؤال ' + (TQ.i + 1) + " من " + n + ' <em class="tm-kind ' + q.kind + '">' + (q.kind === "tf" ? "صح ولا خطأ؟" : "اختر الإجابة الصحيحة") + "</em></span><span>✓ " + TQ.score + "</span></div>" +
         '<div class="bar"><span style="width:' + (TQ.i / n * 100) + '%"></span></div>' +
-        '<div class="tm-body"><p class="tm-q">' + esc(q.q) + '</p><div class="tm-opts">' + q.opts.map(function (o, k) {
+        '<div class="tm-body"><p class="tm-q">' + esc(q.q) + '</p><div class="tm-opts' + (q.kind === "tf" ? " tf" : "") + '">' + q.opts.map(function (o, k) {
           return '<button type="button" class="tm-op" data-op="' + k + '">' + esc(o.t) + "</button>";
         }).join("") + '</div><div class="tm-fb" hidden></div>' +
         '<div class="tm-actions"><button type="button" class="btn primary" data-tm="next" hidden>' + (TQ.i + 1 < n ? "السؤال التالي ←" : "شوف النتيجة") + "</button></div></div>";
@@ -905,13 +914,13 @@
     var q = TQ.qs[TQ.i], right = q.opts[k].ok, m = document.getElementById("test-modal");
     TQ.answered = true;
     if (right) TQ.score++;
-    else TQ.wrong.push({ q: q.q, ok: q.opts.filter(function (o) { return o.ok; })[0].t, e: q.e });
+    else TQ.wrong.push({ q: q.q, ok: q.opts.filter(function (o) { return o.ok; })[0].t.replace(/^[✓✗] /, ""), e: q.e, kind: q.kind });
     m.querySelectorAll(".tm-op").forEach(function (b, j) {
       b.disabled = true;
       if (q.opts[j].ok) b.classList.add("ok"); else if (j === k) b.classList.add("no");
     });
     var fb = m.querySelector(".tm-fb"); fb.hidden = false; fb.className = "tm-fb " + (right ? "ok" : "no");
-    fb.innerHTML = "<b>" + (right ? "✓ صح" : "✗ مش دي") + "</b> " + esc(q.e);
+    fb.innerHTML = "<b>" + (right ? "✓ أحسنت" : "✗ مش دي") + "</b> " + esc(q.e);
     var nx = m.querySelector('[data-tm="next"]'); nx.hidden = false; nx.focus();
   }
   function finishTest() {
