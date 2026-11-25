@@ -695,10 +695,13 @@
         var T = s.id && window.MOAD_TESTS && window.MOAD_TESTS[s.id], tr = T && state.tests[s.id];
         var testBtn = T ? '<button type="button" class="lec-test' + (tr ? (tr.best === tr.n ? " full" : " tried") : "") + '" data-test="' + esc(s.id) + '" title="اختبار ' + T.questions.length + ' سؤال">' +
           '<b>📝 اختبار</b><small>' + (tr ? "أفضل " + tr.best + "/" + tr.n : T.questions.length + " سؤال") + "</small></button>" : "";
-        return '<li class="' + (s.done ? "is-done" : "") + (s.pending ? " is-pending" : "") + (T ? " has-test" : "") + '">' + check +
+        var MP = s.id && window.MOAD_MAPS && window.MOAD_MAPS[s.id];
+        var mapBtn = MP ? '<a class="lec-test lec-map" href="mindmap.html?id=' + encodeURIComponent(s.id) + '" title="الخريطة الذهنية بملء الشاشة"><b>🧠 خريطة</b><small>ذهنية</small></a>' : "";
+        var tools = (mapBtn || testBtn) ? '<span class="lec-tools">' + mapBtn + testBtn + "</span>" : "";
+        return '<li class="' + (s.done ? "is-done" : "") + (s.pending ? " is-pending" : "") + (tools ? " has-test" : "") + '">' + check +
           (s.pending ? '<span class="lec-body">' + body + "</span>"
                      : '<a class="lec-body" href="' + esc(summaryHref(s)) + '" target="_blank" rel="noopener">' + body + "</a>") +
-          testBtn + "</li>";
+          tools + "</li>";
       }).join("") + "</ol>";
     } else if (sums.length) {
       html += '<ol class="sum-list">' + sums.map(function (s) {

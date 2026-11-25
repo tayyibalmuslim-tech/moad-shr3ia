@@ -350,9 +350,13 @@ body.tm-open{ overflow:hidden; }
 .tm-wrong b{ display:block; color:var(--ink); }
 .tm-wrong span{ display:block; color:var(--ok); font-weight:700; margin-top:2px; }
 .tm-wrong small{ display:block; color:var(--muted); margin-top:2px; line-height:1.7; }
+.lec-tools{ display:flex; gap:6px; align-items:stretch; }
+a.lec-map{ text-decoration:none; }
+a.lec-map:hover{ border-color:var(--ink-2); }
 @media (max-width:560px){
   .lec-list li.has-test{ grid-template-columns:auto 1fr; }
-  .lec-test{ grid-column:2; flex-direction:row; justify-content:space-between; gap:8px; padding:6px 12px; }
+  .lec-tools{ grid-column:2; }
+  .lec-tools .lec-test{ flex:1; flex-direction:row; justify-content:space-between; gap:8px; padding:6px 12px; }
 }
 @media (max-width:480px){
   .tm{ padding:10px 6px; }
