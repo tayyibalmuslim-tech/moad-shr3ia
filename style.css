@@ -364,3 +364,12 @@ a.lec-map:hover{ border-color:var(--ink-2); }
   .tm-q{ font-size:17.5px; }
 }
 .lec-list a.lec-body{ grid-template-columns:1fr auto; }
+
+/* نوع السؤال في الاختبار */
+.tm-kind{ font-style:normal; font-size:12px; font-weight:800; border-radius:999px; padding:1px 9px; margin-inline-start:6px; }
+.tm-kind.tf{ background:#e8eefb; color:#2c4f8f; }
+.tm-kind.mc{ background:var(--copper-soft); color:#8a4a1c; }
+.tm-opts.tf{ flex-direction:row; }
+.tm-opts.tf .tm-op{ flex:1; text-align:center; font-size:18px; font-weight:800; padding:12px; }
+.tm-split{ display:flex; gap:6px; margin:10px 0 0; }
+.tm-split .tm-kind{ margin:0; font-size:13px; padding:3px 12px; }
