@@ -208,6 +208,44 @@ strong{color:var(--navy)}
 .nz-h{text-align:center;margin:10px 0 2px}.nz-h span{display:inline-block;font-family:'Reem Kufi','Cairo',sans-serif;color:var(--terra);font-size:16px;border-bottom:1px solid #eadfc8;padding:0 14px 2px}
 .nz-note{margin:10px 0 0;font-size:15px;color:#4a4237;background:#f8f3e8;border-radius:10px;padding:8px 12px}
 .nz-text{border-right:4px solid var(--terra)}
+/* ===== الخريطة الذهنية التفصيلية (للمراجعة) — div/span/button فقط، خارج الهايلايت ===== */
+.cmap.nohl{max-width:960px;margin:46px auto 0;padding:20px 18px 24px;background:#fff;border:1px solid var(--line);border-radius:20px}
+.cmap h2{margin:0 0 4px}
+.cmap .cm-sub{font-size:15px;color:var(--ink2);margin:0 0 12px}
+.cm-tools{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+.cm-tools button{font:inherit;font-size:14px;font-weight:700;border:1px solid #d6e0f3;background:var(--lapis-l);color:var(--navy);border-radius:10px;padding:3px 12px;cursor:pointer}
+.cm-root{display:inline-block;background:var(--navy);color:#fff;border-radius:14px;padding:8px 18px;font-family:'Reem Kufi','Cairo',sans-serif;font-size:20px;font-weight:800}
+.cm-kids{position:relative;margin:0 14px 0 0;padding:6px 0 0}
+.cm-node{position:relative;padding:6px 18px 0 0}
+.cm-kids>.cm-node::before{content:"";position:absolute;right:0;top:0;bottom:0;border-right:2px solid var(--bc,#c3d1ee)}
+.cm-kids>.cm-node:last-child::before{bottom:auto;height:26px}
+.cm-kids>.cm-node::after{content:"";position:absolute;right:0;top:26px;width:16px;border-top:2px solid var(--bc,#c3d1ee)}
+.cm-card{display:inline-flex;flex-direction:column;gap:2px;max-width:100%;background:#fff;border:1px solid var(--line);border-right:5px solid var(--bc,#c3d1ee);border-radius:12px;padding:6px 12px 7px;line-height:1.7}
+.cm-l1>.cm-card{background:var(--bl,#f4f6fb)}
+.cm-head{display:flex;align-items:center;gap:8px}
+.cm-t{font-weight:800;color:var(--navy);font-size:17px}
+.cm-l1>.cm-card .cm-t{font-family:'Reem Kufi','Cairo',sans-serif;font-size:19px;color:var(--bc)}
+.cm-tg{flex:0 0 auto;font:inherit;font-size:12px;font-weight:800;line-height:1;border:1px solid var(--line);background:#fff;color:var(--ink2);border-radius:7px;padding:4px 7px;cursor:pointer}
+.cm-n{font-size:15px;color:var(--ink2)}
+.cm-x{font-size:16.5px;color:#22325c;background:#f7f4ec;border-radius:7px;padding:1px 8px;align-self:flex-start}
+.cm-x .aya{color:var(--sem-aya)}
+.cm-go{font-size:12.5px;font-weight:700;text-decoration:none;color:var(--lapis);margin-inline-start:auto}
+.cm-node.closed>.cm-kids{display:none}
+@media (min-width:700px){
+  .cm-leafs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px;padding:8px 18px 4px 0;border-right:2px solid var(--bc,#c3d1ee);margin-top:6px}
+  .cm-leafs>.cm-node{padding:0}
+  .cm-leafs>.cm-node::before,.cm-leafs>.cm-node::after{display:none}
+  .cm-leafs>.cm-node>.cm-card{display:flex;height:100%}
+}
+.mm-more.nohl{margin:10px 0 0;font-size:15px;font-weight:700}
+@media (max-width:580px){
+  .cmap.nohl{margin:36px 8px 0;padding:16px 10px 20px}
+  .cm-kids{margin-right:4px}
+  .cm-node{padding-right:12px}
+  .cm-kids>.cm-node::after{width:10px}
+  .cm-card{display:flex}
+}
+@media print{.cm-tools,.cm-tg{display:none}.cm-node.closed>.cm-kids{display:block}}
 .foot{margin:40px 0 0;font-size:14px;color:var(--ink2);text-align:center}
 .study-tip{background:#eef4ff;border:1px solid #cddcf7;border-radius:12px;padding:8px 14px;font-size:15px;margin:0 0 14px;color:#2b3d66}
 
@@ -391,6 +429,7 @@ strong{color:var(--navy)}
     <div class="idea"><b>الفكرة المحورية</b><span class="tag-ed">صياغة تحريرية</span><br>الكلامُ عند النحاة لفظٌ مركّبٌ مفيدٌ بالوضع، وأقسامه ثلاثة: اسمٌ وفعلٌ وحرفٌ. والاسمُ يُعرَف بأربع علامات ذكرها المصنّف: الخفض، والتنوين، ودخول «أل»، ودخول حروف الخفض.</div>
     <div class="lab">خريطة المحاضرة</div>
     <div id="mindmap" class="mindmap ilm-export-section nohl"></div>
+    <div class="mm-more ilm-export-section nohl"><a href="#cmap">🧠 الخريطة الذهنية التفصيلية لمحتوى المحاضرة (للمراجعة) ↓</a></div>
     <div class="lab" style="margin-top:12px">ترتيب السير</div>
     <div class="order"><span>لماذا ندرس النحو؟</span><span>ما الكلام؟</span><span>أقسامه</span><span>علامات الاسم واحدةً واحدةً</span><span>النظم والقصر</span></div>
   </section>
@@ -911,6 +950,14 @@ strong{color:var(--navy)}
   </section>
 
 </main>
+
+  <!-- ================= الخريطة الذهنية التفصيلية (خارج منطقة الهايلايت) ================= -->
+  <section class="cmap ilm-export-section nohl" id="cmap">
+    <h2>الخريطة الذهنية للمحاضرة</h2>
+    <div class="cm-sub">كل محتوى المحاضرة في شجرة واحدة للمراجعة: اضغط ▾ لطيّ أي فرع، و«↩ القسم» يرجّعك لشرحه.</div>
+    <div class="cm-tools"><button type="button" data-cm="open">افتح الكل</button><button type="button" data-cm="l1">الفروع الرئيسية فقط</button><button type="button" data-cm="l2">مستويين</button></div>
+    <div id="cm-tree"></div>
+  </section>
 
   <!-- ================= بطاقات المراجعة (خارج منطقة الهايلايت) ================= -->
   <section class="deck ilm-export-section nohl" id="deck">
@@ -1660,7 +1707,260 @@ var MAP_DATA = [
     { text: "أقسام الكلام", target: "s3", children: [] },
     { text: "علامات الاسم", target: "s4", children: [{ text: "الخفض", target: "s4" }, { text: "التنوين", target: "s5" }, { text: "أل والإسناد", target: "s6" }, { text: "حروف الخفض", target: "s7" }] },
     { text: "شرح النظم والقصر", target: "s8", children: [{ text: "القصر", target: "s8-qasr" }] }
-  ] }
+  ] },
+  /* m2: الخريطة التفصيلية للمحتوى (text = العقدة، note = الشرح، ex = المثال، target = القسم) */
+  {
+ "id": "m2",
+ "sectionId": "cmap",
+ "center": "الكلام وعلامات الاسم",
+ "nodes": [
+  {
+   "text": "الكلام عند النحاة",
+   "note": "اللفظ المركّب المفيد بالوضع — أربعة شروط، كل شرط يُخرج شيئًا",
+   "ex": "زَيْدٌ عَالِمٌ",
+   "target": "s2",
+   "children": [
+    {
+     "text": "اللفظ",
+     "note": "الصوت الخارج من الفم المشتمل على بعض الحروف الهجائية. يُخرج الإشارة والكتابة: كلامٌ في اللغة لا في النحو",
+     "ex": "﴿إِلَّا رَمْزًا﴾",
+     "children": []
+    },
+    {
+     "text": "المركّب",
+     "note": "من كلمتين أو أكثر. يُخرج الكلمة المفردة",
+     "ex": "«زَيْدٌ» وحدها ليست كلامًا",
+     "children": []
+    },
+    {
+     "text": "المفيد",
+     "note": "ما أفاد فائدةً يحسن السكوت عليها، فلا يبقى السامع منتظرًا",
+     "ex": "«إِنْ حَضَرَ زَيْدٌ» ليس كلامًا",
+     "children": []
+    },
+    {
+     "text": "بالوضع",
+     "note": "ما تكلّمت به العرب. يُخرج ما ليس بلغة العرب",
+     "ex": "الفرنسية والإنجليزية",
+     "children": []
+    }
+   ]
+  },
+  {
+   "text": "أقسام الكلام",
+   "note": "ثلاثة: «اسْمٌ وَفِعْلٌ ثُمَّ حَرْفُ مَعْنَى»",
+   "target": "s3",
+   "children": [
+    {
+     "text": "الاسم",
+     "note": "يشمل المذكر والمؤنث، وعلاماته موضوع هذه المحاضرة",
+     "ex": "مُحَمَّدٌ — زَيْنَبُ — هِنْدٌ",
+     "children": []
+    },
+    {
+     "text": "الفعل",
+     "note": "علاماته في المحاضرة الثانية",
+     "children": []
+    },
+    {
+     "text": "الحرف الذي جاء لمعنى",
+     "note": "لكل حرف معنى",
+     "ex": "إِنَّ للتوكيد — كَأَنَّ للتشبيه — لَيْتَ للتمنّي",
+     "children": []
+    }
+   ]
+  },
+  {
+   "text": "علامات الاسم",
+   "note": "أربع في المتن، واثنتان زادهما الشيخ",
+   "children": [
+    {
+     "text": "١· الخفض (الجر)",
+     "note": "«الخفض» مصطلح الكوفيين و«الجر» مصطلح البصريين، والمعنى واحد. وكل مجرور اسم؛ لأن الفعل لا يُجَرّ",
+     "ex": "سَلَّمْتُ عَلَى أُسْتَاذِ الفَصْلِ الصَّالِحِ",
+     "target": "s4",
+     "children": [
+      {
+       "text": "بالحرف",
+       "note": "حرف الجر هو الذي جرّ الاسم",
+       "ex": "عَلَى أُسْتَاذِ ← جرّته «على»",
+       "children": []
+      },
+      {
+       "text": "بالإضافة",
+       "note": "جرّه المضاف قبله، ولا حرف جر. والتنوين والإضافة لا يجتمعان: احذف التنوين تصِر الكلمة مضافة",
+       "ex": "قَلَمٌ ← قَلَمُ الأُسْتَاذِ",
+       "children": []
+      },
+      {
+       "text": "بالتبعية",
+       "note": "صفة المجرور مجرورة؛ الصفة تتبع الموصوف",
+       "ex": "عَلَى رَجُلٍ صَالِحٍ",
+       "children": []
+      },
+      {
+       "text": "الثلاثة في البسملة",
+       "note": "بِـ«اسْمِ» بالحرف، و«اللهِ» بالإضافة، و«الرَّحْمٰنِ الرَّحِيمِ» بالتبعية",
+       "ex": "﴿بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ﴾",
+       "children": []
+      }
+     ]
+    },
+    {
+     "text": "٢· التنوين",
+     "note": "نونٌ ساكنة تلحق آخر الاسم لفظًا وتفارقه خطًّا: تُنطَق ولا تُكتَب. والفعل لا يُنوَّن",
+     "ex": "﴿مُّحَمَّدٌ رَّسُولُ اللَّهِ﴾ ← «مُحَمَّدُنْ»",
+     "target": "s5",
+     "children": [
+      {
+       "text": "تنوين التمكين",
+       "note": "في الاسم المعرب المنوّن؛ يدل على أن الاسم متمكّن في باب الاسمية",
+       "ex": "مُحَمَّدٌ — كِتَابٌ — لَيْلًا",
+       "children": []
+      },
+      {
+       "text": "تنوين التنكير",
+       "note": "في بعض الأسماء المبنية المحفوظة، يفرّق بين المعرفة والنكرة: بلا تنوين = معيّن، وبالتنوين = غير معيّن. ولا يدخل المعرب أبدًا",
+       "ex": "جَاءَ سِيبَوَيْهِ وَمَعَهُ سِيبَوَيْهٍ — صَهْ / صَهٍ",
+       "children": []
+      },
+      {
+       "text": "تنوين المقابلة",
+       "note": "في جمع المؤنث السالم؛ يقابل النون في جمع المذكر السالم",
+       "ex": "مُسْلِمَاتٌ ⟷ مُسْلِمُونَ",
+       "children": []
+      },
+      {
+       "text": "تنوين العوض",
+       "note": "يأتي عوضًا عن جملة محذوفة",
+       "ex": "حِينَئِذٍ = حِينَ إِذْ بَلَغَتِ الرُّوحُ الحُلْقُومَ",
+       "children": []
+      }
+     ]
+    },
+    {
+     "text": "٣· دخول «أل»",
+     "note": "أيّ كلمة دخلتها «أل» فهي اسم؛ لأن الفعل لا تدخله «أل»",
+     "ex": "المَسْجِدُ — القَلَمُ — الشَّمْسُ",
+     "target": "s6",
+     "children": []
+    },
+    {
+     "text": "٤· حروف الخفض",
+     "note": "تدخل على الاسم فتجرّه، ولكل حرف معنى",
+     "target": "s7",
+     "children": [
+      {
+       "text": "مِنْ",
+       "note": "الابتداء",
+       "ex": "سَافَرْتُ مِنْ مِصْرَ",
+       "children": []
+      },
+      {
+       "text": "إِلَى",
+       "note": "الانتهاء",
+       "ex": "إِلَى الإِسْكَنْدَرِيَّةِ",
+       "children": []
+      },
+      {
+       "text": "عَنْ",
+       "note": "المجاوزة",
+       "ex": "رَمَيْتُ السَّهْمَ عَنِ القَوْسِ",
+       "children": []
+      },
+      {
+       "text": "عَلَى",
+       "note": "الاستعلاء",
+       "ex": "جَلَسْتُ عَلَى الكُرْسِيِّ",
+       "children": []
+      },
+      {
+       "text": "فِي",
+       "note": "الظرفية. وحروف الجر ينوب بعضها عن بعض لغرض بلاغي",
+       "ex": "وَضَعْتُ القَلَمَ فِي جَيْبِي — ﴿فِي جُذُوعِ النَّخْلِ﴾",
+       "children": []
+      },
+      {
+       "text": "رُبَّ",
+       "note": "التقليل، وقد تفيد التكثير، ويُعرف من السياق",
+       "ex": "رُبَّ أَخٍ لَكَ لَمْ تَلِدْهُ أُمُّكَ",
+       "children": []
+      },
+      {
+       "text": "البَاءُ",
+       "note": "الاستعانة",
+       "ex": "كَتَبْتُ بِالقَلَمِ",
+       "children": []
+      },
+      {
+       "text": "الكَافُ",
+       "note": "التشبيه",
+       "ex": "هِنْدٌ كَالقَمَرِ",
+       "children": []
+      },
+      {
+       "text": "اللَّامُ",
+       "note": "المِلك",
+       "ex": "القَلَمُ لِمُحَمَّدٍ",
+       "children": []
+      },
+      {
+       "text": "حروف القسم",
+       "note": "الواو أمّها وتدخل على كل مقسَم به، والتاء لا تدخل إلا على لفظ الجلالة",
+       "ex": "وَاللهِ — بِاللهِ — تَاللهِ",
+       "children": []
+      },
+      {
+       "text": "زيادات النظم",
+       "note": "مُذْ ومُنْذُ لا تجرّان إلا الزمان، ولَعَلَّ جارّة في لغة عُقَيل، وحَتَّى تجرّ آخر الشيء",
+       "ex": "مُذْ يَوْمِ الجُمُعَةِ — حَتَّى رَأْسِهَا",
+       "children": []
+      }
+     ]
+    },
+    {
+     "text": "زيادة الشيخ: الإسناد",
+     "note": "أن تُخبر عن الكلمة فتجعلها فاعلًا. علامة معنوية، وهي أقوى علامات الاسم",
+     "ex": "التاء في شَرِبْتُ لا تقبل غيرها",
+     "target": "s6",
+     "children": []
+    },
+    {
+     "text": "زيادة الشيخ: النداء",
+     "note": "لا يدخل إلا على الأسماء",
+     "ex": "يَا نُوحُ — يَا إِبْرَاهِيمُ",
+     "target": "s6",
+     "children": []
+    }
+   ]
+  },
+  {
+   "text": "فوائد على الطريق",
+   "note": "مسائل جاءت أثناء الشرح",
+   "children": [
+    {
+     "text": "المعرب والمبني",
+     "note": "المعرب يتغيّر آخره بتغيّر موقعه، والمبني ثابت كالحائط",
+     "ex": "قَلَمٌ — قَلَمًا — قَلَمٍ / هٰؤُلَاءِ",
+     "children": []
+    },
+    {
+     "text": "نونان مختلفتان",
+     "note": "نون جمع المذكر عوضٌ عن تنوين المفرد، ونون الأفعال الخمسة علامة رفع",
+     "ex": "مُدَرِّسُونَ ≠ يَلْعَبُونَ",
+     "children": []
+    },
+    {
+     "text": "النظم والقصر",
+     "note": "النظم أيسر في الحفظ من النثر. والقصر: إثبات الحكم لشيء ونفيه عمّا عداه، بتقديم ما حقه التأخير",
+     "ex": "﴿إِيَّاكَ نَعْبُدُ﴾ = لا نعبد سواك",
+     "target": "s8",
+     "children": []
+    }
+   ]
+  }
+ ]
+}
 ];
 
 (function () {
@@ -1676,6 +1976,42 @@ var MAP_DATA = [
       return '<div><a class="mm-node" href="#' + n.target + '">' + esc(n.text) + "</a>" +
         (n.children.length ? '<div class="mm-kids">' + n.children.map(function (c) { return '<a href="#' + c.target + '">' + esc(c.text) + "</a>"; }).join("") + "</div>" : "") + "</div>";
     }).join("") + "</div>";
+  }
+
+  /* ---- الخريطة الذهنية التفصيلية ---- */
+  var ct = document.getElementById("cm-tree");
+  if (ct) {
+    var M2 = MAP_DATA[1];
+    var BR = [["#0f7a7a", "#e6f4f3"], ["#4a5a8a", "#edf0f7"], ["#c0612b", "#fbefe7"], ["#2a6f97", "#e8f1f7"]];
+    var node = function (n, depth, br) {
+      var kids = n.children || [];
+      var style = depth === 1 ? ' style="--bc:' + br[0] + ";--bl:" + br[1] + '"' : "";
+      return '<div class="cm-node cm-l' + depth + '" data-d="' + depth + '"' + style + '><div class="cm-card"><div class="cm-head">' +
+        (kids.length ? '<button type="button" class="cm-tg" aria-expanded="true" title="اطوِ / افتح">▾ ' + kids.length + "</button>" : "") +
+        '<span class="cm-t">' + esc(n.text) + "</span>" +
+        (n.target ? '<a class="cm-go" href="#' + n.target + '">↩ القسم</a>' : "") + "</div>" +
+        (n.note ? '<span class="cm-n">' + esc(n.note) + "</span>" : "") +
+        (n.ex ? '<span class="cm-x">' + ayaWrap(n.ex) + "</span>" : "") + "</div>" +
+        (kids.length ? '<div class="cm-kids' + (kids.length >= 3 && kids.every(function (k) { return !(k.children || []).length; }) ? " cm-leafs" : "") + '">' + kids.map(function (k) { return node(k, depth + 1, br); }).join("") + "</div>" : "") + "</div>";
+    };
+    ct.innerHTML = '<span class="cm-root">' + esc(M2.center) + '</span><div class="cm-kids">' +
+      M2.nodes.map(function (n, i) { return node(n, 1, BR[i % BR.length]); }).join("") + "</div>";
+    var setOpen = function (el, open) {
+      el.classList.toggle("closed", !open);
+      var b = el.querySelector(":scope > .cm-card .cm-tg");
+      if (b) { b.setAttribute("aria-expanded", open ? "true" : "false"); b.textContent = (open ? "▾ " : "◂ ") + el.querySelector(":scope > .cm-kids").children.length; }
+    };
+    document.getElementById("cmap").addEventListener("click", function (e) {
+      var tg = e.target.closest(".cm-tg");
+      if (tg) { var nd = tg.closest(".cm-node"); setOpen(nd, nd.classList.contains("closed")); return; }
+      var t = e.target.closest("[data-cm]"); if (!t) return;
+      var mode = t.getAttribute("data-cm");
+      ct.querySelectorAll(".cm-node").forEach(function (nd) {
+        if (!nd.querySelector(":scope > .cm-kids")) return;
+        var d = +nd.getAttribute("data-d");
+        setOpen(nd, mode === "open" || (mode === "l2" && d < 2));
+      });
+    });
   }
 
   /* ---- الأسئلة التفاعلية ---- */
