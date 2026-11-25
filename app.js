@@ -89,6 +89,7 @@
         realism: PLAN.defaults.realism
       },
       books: {},
+      tests: {},
       log: []
     };
   }
@@ -114,6 +115,12 @@
           end: parseDate(b.end) ? b.end : null,
           notes: typeof b.notes === "string" ? b.notes : ""
         };
+      });
+    }
+    if (s.tests && typeof s.tests === "object") {
+      Object.keys(s.tests).forEach(function (k) {
+        var t = s.tests[k] || {}, n = parseInt(t.n, 10) || 0;
+        if (n > 0) base.tests[k] = { best: clamp(parseInt(t.best, 10) || 0, 0, n), last: clamp(parseInt(t.last, 10) || 0, 0, n), n: n, tries: parseInt(t.tries, 10) || 1, at: t.at || null };
       });
     }
     if (Array.isArray(s.log)) {
@@ -685,10 +692,13 @@
           (s.fileTitle && s.fileTitle !== s.title ? '<small class="sf">الملخص: ' + esc(s.fileTitle) + "</small>" : "") +
           (extra ? '<span class="sx">' + extra + "</span>" : "") + "</span>" +
           '<span class="se">' + (s.pending ? "لسه" : "ملخص") + (s.dur ? " · " + esc(s.dur) : "") + "</span>";
-        return '<li class="' + (s.done ? "is-done" : "") + (s.pending ? " is-pending" : "") + '">' + check +
+        var T = s.id && window.MOAD_TESTS && window.MOAD_TESTS[s.id], tr = T && state.tests[s.id];
+        var testBtn = T ? '<button type="button" class="lec-test' + (tr ? (tr.best === tr.n ? " full" : " tried") : "") + '" data-test="' + esc(s.id) + '" title="اختبار ' + T.questions.length + ' سؤال">' +
+          '<b>📝 اختبار</b><small>' + (tr ? "أفضل " + tr.best + "/" + tr.n : T.questions.length + " سؤال") + "</small></button>" : "";
+        return '<li class="' + (s.done ? "is-done" : "") + (s.pending ? " is-pending" : "") + (T ? " has-test" : "") + '">' + check +
           (s.pending ? '<span class="lec-body">' + body + "</span>"
                      : '<a class="lec-body" href="' + esc(summaryHref(s)) + '" target="_blank" rel="noopener">' + body + "</a>") +
-          "</li>";
+          testBtn + "</li>";
       }).join("") + "</ol>";
     } else if (sums.length) {
       html += '<ol class="sum-list">' + sums.map(function (s) {
@@ -840,6 +850,87 @@
   }
 
   var toastTimer;
+  /* ===== اختبار المحاضرة (نافذة منبثقة) — البيانات في tests/*.js ===== */
+  var TQ = null;
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function openTest(id) {
+    var T = window.MOAD_TESTS && window.MOAD_TESTS[id]; if (!T) return;
+    TQ = { id: id, T: T, i: 0, score: 0, answered: false, wrong: [],
+      qs: shuffle(T.questions).map(function (q) {
+        var opts = shuffle(q.o.map(function (o, k) { return { t: o, ok: k === q.c }; }));
+        return { q: q.q, e: q.e, opts: opts };
+      }) };
+    var m = document.getElementById("test-modal");
+    if (!m) { m = document.createElement("div"); m.id = "test-modal"; m.className = "tm"; m.setAttribute("role", "dialog"); m.setAttribute("aria-modal", "true"); document.body.appendChild(m); }
+    m.hidden = false; document.body.classList.add("tm-open");
+    drawTest();
+  }
+  function closeTest() {
+    var m = document.getElementById("test-modal"); if (m) m.hidden = true;
+    document.body.classList.remove("tm-open"); TQ = null;
+  }
+  function drawTest() {
+    var m = document.getElementById("test-modal"); if (!m || !TQ) return;
+    var n = TQ.qs.length, head = '<div class="tm-head"><div><b>📝 ' + esc(TQ.T.title) + "</b>" +
+      '<small>أسئلة من إعداد الذكاء الاصطناعي على الملخص، وقد تحتوي أخطاء؛ راجع الشرح عند أي شك.</small></div>' +
+      '<button type="button" class="tm-x" data-tm="close" aria-label="اقفل">✕</button></div>';
+    var html;
+    if (TQ.i >= n) {
+      var pct = Math.round(TQ.score / n * 100), msg = pct === 100 ? "ممتاز! الدرجة النهائية 🎉" : pct >= 85 ? "جميل جدًا، فاضل لمسات بسيطة 👏" : pct >= 60 ? "كويس، راجع الأسئلة اللي غلطت فيها وحاول تاني 💪" : "محتاج ترجع للملخص وتعيد المحاولة — ولا يهمك 🌱";
+      var tr = state.tests[TQ.id];
+      html = head + '<div class="tm-body tm-end"><div class="tm-score"><strong>' + TQ.score + "</strong><span>من " + n + "</span><em>" + pct + "%</em></div>" +
+        '<div class="bar"><span style="width:' + pct + '%"></span></div><p class="tm-msg">' + msg + "</p>" +
+        (tr ? '<p class="muted small">أفضل نتيجة ليك: ' + tr.best + "/" + tr.n + " — عدد المحاولات: " + tr.tries + "</p>" : "") +
+        (TQ.wrong.length ? '<h4>راجع دول:</h4><ol class="tm-wrong">' + TQ.wrong.map(function (w) {
+          return "<li><b>" + esc(w.q) + "</b><span>✓ " + esc(w.ok) + "</span><small>" + esc(w.e) + "</small></li>";
+        }).join("") + "</ol>" : "") +
+        '<div class="tm-actions"><button type="button" data-tm="again" class="btn primary">أعد الاختبار</button><button type="button" class="btn ghost" data-tm="close">اقفل</button></div></div>';
+    } else {
+      var q = TQ.qs[TQ.i];
+      html = head + '<div class="tm-prog"><span>سؤال ' + (TQ.i + 1) + " من " + n + "</span><span>✓ " + TQ.score + "</span></div>" +
+        '<div class="bar"><span style="width:' + (TQ.i / n * 100) + '%"></span></div>' +
+        '<div class="tm-body"><p class="tm-q">' + esc(q.q) + '</p><div class="tm-opts">' + q.opts.map(function (o, k) {
+          return '<button type="button" class="tm-op" data-op="' + k + '">' + esc(o.t) + "</button>";
+        }).join("") + '</div><div class="tm-fb" hidden></div>' +
+        '<div class="tm-actions"><button type="button" class="btn primary" data-tm="next" hidden>' + (TQ.i + 1 < n ? "السؤال التالي ←" : "شوف النتيجة") + "</button></div></div>";
+    }
+    m.innerHTML = '<div class="tm-box">' + html + "</div>";
+    var f = m.querySelector(".tm-op") || m.querySelector("[data-tm]"); if (f) f.focus();
+  }
+  function answerTest(k) {
+    if (!TQ || TQ.answered) return;
+    var q = TQ.qs[TQ.i], right = q.opts[k].ok, m = document.getElementById("test-modal");
+    TQ.answered = true;
+    if (right) TQ.score++;
+    else TQ.wrong.push({ q: q.q, ok: q.opts.filter(function (o) { return o.ok; })[0].t, e: q.e });
+    m.querySelectorAll(".tm-op").forEach(function (b, j) {
+      b.disabled = true;
+      if (q.opts[j].ok) b.classList.add("ok"); else if (j === k) b.classList.add("no");
+    });
+    var fb = m.querySelector(".tm-fb"); fb.hidden = false; fb.className = "tm-fb " + (right ? "ok" : "no");
+    fb.innerHTML = "<b>" + (right ? "✓ صح" : "✗ مش دي") + "</b> " + esc(q.e);
+    var nx = m.querySelector('[data-tm="next"]'); nx.hidden = false; nx.focus();
+  }
+  function finishTest() {
+    var n = TQ.qs.length, old = state.tests[TQ.id];
+    state.tests[TQ.id] = { best: Math.max(old ? old.best : 0, TQ.score), last: TQ.score, n: n, tries: (old ? old.tries : 0) + 1, at: todayStr() };
+    persist({ render: false });
+    render();
+  }
+  document.addEventListener("click", function (e) {
+    var m = document.getElementById("test-modal"); if (!m || m.hidden || !TQ) return;
+    if (e.target === m) { closeTest(); return; }
+    var op = e.target.closest(".tm-op"); if (op) { answerTest(+op.getAttribute("data-op")); return; }
+    var a = e.target.closest("[data-tm]"); if (!a) return;
+    var act = a.getAttribute("data-tm");
+    if (act === "close") closeTest();
+    else if (act === "again") openTest(TQ.id);
+    else if (act === "next") { TQ.i++; TQ.answered = false; if (TQ.i >= TQ.qs.length) finishTest(); drawTest(); }
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && TQ) closeTest();
+  });
+
   function toast(msg) {
     var t = document.getElementById("toast");
     t.textContent = msg; t.hidden = false;
@@ -848,6 +939,8 @@
   }
 
   document.addEventListener("click", function (e) {
+    var tb = e.target.closest("[data-test]");
+    if (tb) { openTest(tb.getAttribute("data-test")); return; }
     var lt = e.target.closest("[data-lec-toggle]");
     if (lt) {
       var lid = lt.getAttribute("data-lec-toggle");

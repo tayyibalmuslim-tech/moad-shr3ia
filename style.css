@@ -304,3 +304,59 @@ a.lec-body:hover{ border-color:var(--copper); }
 .lec-list li.is-pending .st{ color:var(--muted); }
 .lec-list .sf{ display:block; font-family:inherit; font-size:12px; color:var(--muted); margin-top:2px; }
 .lec-list .se{ white-space:nowrap; }
+
+/* زرار اختبار المحاضرة داخل صف المحاضرة */
+.lec-list li.has-test{ grid-template-columns:auto 1fr auto; }
+.lec-test{ display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1px; min-width:78px; padding:4px 8px; border:1px solid var(--line); border-radius:10px; background:#fff; font:inherit; color:var(--ink); cursor:pointer; }
+.lec-test b{ font-size:13.5px; white-space:nowrap; }
+.lec-test small{ font-size:11.5px; color:var(--muted); white-space:nowrap; }
+.lec-test:hover{ border-color:var(--copper); }
+.lec-test.tried{ background:var(--copper-soft); border-color:#e6c6aa; }
+.lec-test.full{ background:#eaf6ef; border-color:#bfdcca; }
+.lec-test.full small{ color:var(--ok); font-weight:700; }
+
+/* نافذة الاختبار */
+body.tm-open{ overflow:hidden; }
+.tm{ position:fixed; inset:0; z-index:50; background:rgba(20,28,45,.55); display:flex; align-items:flex-start; justify-content:center; padding:24px 12px; overflow-y:auto; }
+.tm[hidden]{ display:none; }
+.tm-box{ width:100%; max-width:640px; background:var(--paper, #fbf8f1); border-radius:18px; padding:16px 18px 18px; box-shadow:0 20px 50px rgba(0,0,0,.25); }
+.tm-head{ display:flex; align-items:flex-start; gap:10px; margin-bottom:10px; }
+.tm-head > div{ flex:1; display:flex; flex-direction:column; gap:2px; }
+.tm-head b{ color:var(--ink); font-size:17px; }
+.tm-head small{ color:var(--muted); font-size:12.5px; }
+.tm-x{ border:0; background:transparent; font-size:20px; cursor:pointer; color:var(--muted); padding:2px 6px; }
+.tm-prog{ display:flex; justify-content:space-between; font-size:13.5px; font-weight:700; color:var(--ink-2); margin-bottom:6px; }
+.tm-body{ margin-top:14px; }
+.tm-q{ font-size:19px; font-weight:800; color:var(--ink); line-height:1.8; margin:0 0 12px; }
+.tm-opts{ display:flex; flex-direction:column; gap:8px; }
+.tm-op{ text-align:right; font:inherit; font-size:16.5px; line-height:1.7; padding:9px 14px; border:1px solid var(--line); border-radius:12px; background:#fff; color:var(--ink); cursor:pointer; }
+.tm-op:hover:not(:disabled){ border-color:var(--copper); }
+.tm-op:disabled{ cursor:default; }
+.tm-op.ok{ background:#e7f5ec; border-color:var(--ok); color:#1d5c3f; font-weight:700; }
+.tm-op.no{ background:#fbeceb; border-color:var(--bad); color:#8e2b24; }
+.tm-fb{ margin-top:12px; padding:10px 14px; border-radius:12px; font-size:15.5px; line-height:1.8; }
+.tm-fb.ok{ background:#eef8f2; color:#1d5c3f; }
+.tm-fb.no{ background:#fdf1ef; color:#7b2a23; }
+.tm-actions{ display:flex; gap:8px; justify-content:flex-start; margin-top:14px; }
+.tm-actions .btn[hidden]{ display:none; }
+.tm-score{ display:flex; align-items:baseline; gap:8px; margin-bottom:8px; }
+.tm-score strong{ font-size:44px; line-height:1; color:var(--ink); }
+.tm-score span{ color:var(--muted); font-weight:700; }
+.tm-score em{ margin-inline-start:auto; font-style:normal; font-weight:800; font-size:22px; color:var(--copper); }
+.tm-msg{ font-weight:700; color:var(--ink-2); }
+.tm-end h4{ margin:14px 0 6px; color:var(--ink); }
+.tm-wrong{ margin:0; padding-inline-start:20px; display:flex; flex-direction:column; gap:8px; }
+.tm-wrong li{ background:#fff; border:1px solid var(--line); border-radius:10px; padding:8px 12px; }
+.tm-wrong b{ display:block; color:var(--ink); }
+.tm-wrong span{ display:block; color:var(--ok); font-weight:700; margin-top:2px; }
+.tm-wrong small{ display:block; color:var(--muted); margin-top:2px; line-height:1.7; }
+@media (max-width:560px){
+  .lec-list li.has-test{ grid-template-columns:auto 1fr; }
+  .lec-test{ grid-column:2; flex-direction:row; justify-content:space-between; gap:8px; padding:6px 12px; }
+}
+@media (max-width:480px){
+  .tm{ padding:10px 6px; }
+  .tm-box{ padding:14px 12px; border-radius:14px; }
+  .tm-q{ font-size:17.5px; }
+}
+.lec-list a.lec-body{ grid-template-columns:1fr auto; }
