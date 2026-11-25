@@ -287,3 +287,20 @@ select:focus, input:focus, textarea:focus{ outline:2px solid rgba(176,97,42,.35)
   .book-title{ font-size:16.5px; }
   .card h2{ font-size:21px; }
 }
+
+/* كتاب له قائمة محاضرات: التقدم = المحاضرات اللي خلصت ÷ الإجمالي */
+.lec-progress{ display:flex; align-items:baseline; gap:8px; margin:4px 0 10px; }
+.lec-progress strong{ font-size:34px; line-height:1; color:var(--ink); font-weight:800; }
+.lec-progress span{ color:var(--muted); font-weight:700; }
+.lec-progress em{ margin-inline-start:auto; font-style:normal; font-weight:800; font-size:18px; color:var(--copper); }
+.lec-list li{ display:grid; grid-template-columns:auto 1fr; gap:8px; align-items:stretch; }
+.lec-check{ min-width:44px; border:1px solid var(--line); border-radius:10px; background:#fff; font:inherit; font-weight:800; color:var(--copper); cursor:pointer; }
+.lec-check:hover{ border-color:var(--copper); }
+.lec-check.on{ background:var(--ok); border-color:var(--ok); color:#fff; }
+.lec-body{ display:grid; grid-template-columns:1fr auto; align-items:center; gap:10px; padding:10px 12px; border:1px solid var(--line); border-radius:10px; text-decoration:none; color:inherit; background:#fff; min-width:0; }
+a.lec-body:hover{ border-color:var(--copper); }
+.lec-list li.is-done .lec-body{ background:#f4faf6; border-color:#bfdcca; }
+.lec-list li.is-pending .lec-body{ background:#faf8f3; border-style:dashed; }
+.lec-list li.is-pending .st{ color:var(--muted); }
+.lec-list .sf{ display:block; font-family:inherit; font-size:12px; color:var(--muted); margin-top:2px; }
+.lec-list .se{ white-space:nowrap; }
