@@ -145,7 +145,36 @@
     return state.books[key];
   }
   function peekBook(key) {
-    return state.books[key] || { status: "todo", pct: 0, start: null, end: null, notes: "" };
+    var st = state.books[key] || { status: "todo", pct: 0, start: null, end: null, notes: "" };
+    var b = BOOK_BY_KEY[key];
+    if (!b || !b.lectures || !b.lectures.length) return st;
+    // كتاب له قائمة محاضرات: التقدم = المحاضرات اللي خلصت ÷ الإجمالي (مش السلايدر)
+    var lp = lectureProgress(b);
+    var v = {}; for (var k in st) v[k] = st[k];
+    v.pct = lp.total ? Math.round(lp.done / lp.total * 100) : 0;
+    v.status = lp.done >= lp.total ? "done" : (lp.done > 0 ? "doing" : st.status === "doing" ? "doing" : "todo");
+    v.lecDone = lp.done; v.lecTotal = lp.total;
+    return v;
+  }
+
+  // إنجاز محاضرات الكتاب من مفاتيح ilm_moad_{key}_{NN} (نفس مفاتيح ilm-track.js)
+  function lectureProgress(b) {
+    var total = b.lectures.length, done = 0;
+    b.lectures.forEach(function (l) {
+      if (localStorage.getItem("ilm_moad_" + b.key + "_" + pad(l.n)) === "1") done++;
+    });
+    return { total: total, done: done };
+  }
+
+  function setLectureDone(id, val) {
+    if (window.IlmTrack) window.IlmTrack.setDone(id, val);
+    else {
+      try {
+        localStorage.setItem("ilm_" + id, val ? "1" : "0");
+        localStorage.setItem("ilm_sync_ts", String(Date.now()));
+      } catch (e) {}
+    }
+    render();
   }
 
   /* ---------------- الحسابات ---------------- */
@@ -305,9 +334,18 @@
       var info = parseSummaryName(p);
       list.push({ n: info.n, title: info.title, file: p, ext: info.ext.toLowerCase() });
     });
+    if (book.lectures) {
+      var byN = {};
+      list.forEach(function (s) { if (s.n != null && !byN[s.n]) byN[s.n] = s; });
+      book.lectures.forEach(function (l) {
+        var s = byN[l.n];
+        if (s) { s.fileTitle = s.title; s.title = l.title; s.dur = l.dur; }
+        else list.push({ n: l.n, title: l.title, dur: l.dur, file: null, ext: "", pending: true });
+      });
+    }
     list.sort(function (a, b) {
       var an = a.n == null ? 9999 : a.n, bn = b.n == null ? 9999 : b.n;
-      return an - bn || a.file.localeCompare(b.file, "ar");
+      return an - bn || (a.file || "").localeCompare(b.file || "", "ar");
     });
     list.forEach(function (s) {
       s.id = lectureIdOf(book, s);
@@ -531,7 +569,8 @@
       '<div class="book-body">' +
         '<div class="book-title">' + esc(b.title) + (b.finish ? ' <span class="finish" title="خط النهاية للعلم ده">✅</span>' : "") + "</div>" +
         '<div class="book-meta">' + esc(b.science) + " · " + fmtHours(b.hours) +
-          (sums ? ' · <span class="sums">📄 ' + sumsDone + "/" + sums + " ملخص</span>" : "") + "</div>" +
+          (b.lectures ? ' · <span class="sums">🎧 ' + st.lecDone + "/" + st.lecTotal + " محاضرة</span>"
+            : sums ? ' · <span class="sums">📄 ' + sumsDone + "/" + sums + " ملخص</span>" : "") + "</div>" +
         (st.pct > 0 && st.pct < 100 ? bar(st.pct, "thin") : "") +
       "</div>" +
       '<div class="book-side">' + statusPill(st.status) + (st.pct > 0 && st.pct < 100 ? "<small>" + st.pct + "%</small>" : "") + "</div>" +
@@ -600,6 +639,14 @@
       "</section>";
 
     // التقدم
+    if (b.lectures) {
+      var lpct = st.lecTotal ? st.lecDone / st.lecTotal * 100 : 0;
+      html += '<section class="card progress-card"><div class="card-head"><h3>تقدمك في الكتاب</h3>' + statusPill(st.status) + "</div>" +
+        '<div class="lec-progress"><strong>' + st.lecDone + '</strong><span>من ' + st.lecTotal + " محاضرة</span><em>" + fmtNum(lpct, 0) + "%</em></div>" +
+        bar(lpct) +
+        '<p class="muted small">النسبة بتتحسب لوحدها من المحاضرات اللي علّمت عليها «خلصت» — من صفحة الملخص، أو من زرار ✓ جنب المحاضرة في القايمة تحت.</p>' +
+        "</section>";
+    } else
     html += '<section class="card progress-card"><div class="card-head"><h3>تقدمك في الكتاب</h3>' + statusPill(st.status) + "</div>" +
       '<div class="seg big" role="group">' +
         ["todo", "doing", "done"].map(function (s) {
@@ -625,10 +672,25 @@
 
     // الملخصات
     var doneSums = sums.filter(function (x) { return x.done; }).length;
-    html += '<section class="card summaries"><div class="card-head"><h3>الملخصات' +
+    html += '<section class="card summaries"><div class="card-head"><h3>' + (b.lectures ? "المحاضرات" : "الملخصات") +
       (sums.length ? ' <small class="muted">خلصت ' + doneSums + " من " + sums.length + "</small>" : "") + "</h3>" +
       '<button class="btn chip ghost" data-refresh>' + (tree.loading ? "بيحدّث…" : "↻ تحديث") + "</button></div>";
-    if (sums.length) {
+    if (b.lectures) {
+      html += '<ol class="sum-list lec-list">' + sums.map(function (s) {
+        var extra = (s.hl.marks ? '<span class="sh" title="تظليلات">🖍 ' + s.hl.marks + "</span>" : "") +
+          (s.hl.notes ? '<span class="sh" title="تعليقات">💬 ' + s.hl.notes + "</span>" : "");
+        var check = s.id ? '<button type="button" class="lec-check' + (s.done ? " on" : "") + '" data-lec-toggle="' + esc(s.id) + '" aria-pressed="' + (s.done ? "true" : "false") +
+          '" title="' + (s.done ? "شيل علامة خلصت" : "علّم إنك خلصت المحاضرة") + '">' + (s.done ? "✓" : pad(s.n)) + "</button>" : "";
+        var body = '<span class="st">' + esc(s.title) +
+          (s.fileTitle && s.fileTitle !== s.title ? '<small class="sf">الملخص: ' + esc(s.fileTitle) + "</small>" : "") +
+          (extra ? '<span class="sx">' + extra + "</span>" : "") + "</span>" +
+          '<span class="se">' + (s.pending ? "لسه" : "ملخص") + (s.dur ? " · " + esc(s.dur) : "") + "</span>";
+        return '<li class="' + (s.done ? "is-done" : "") + (s.pending ? " is-pending" : "") + '">' + check +
+          (s.pending ? '<span class="lec-body">' + body + "</span>"
+                     : '<a class="lec-body" href="' + esc(summaryHref(s)) + '" target="_blank" rel="noopener">' + body + "</a>") +
+          "</li>";
+      }).join("") + "</ol>";
+    } else if (sums.length) {
       html += '<ol class="sum-list">' + sums.map(function (s) {
         var extra = (s.hl.marks ? '<span class="sh" title="تظليلات">🖍 ' + s.hl.marks + "</span>" : "") +
           (s.hl.notes ? '<span class="sh" title="تعليقات">💬 ' + s.hl.notes + "</span>" : "");
@@ -786,6 +848,12 @@
   }
 
   document.addEventListener("click", function (e) {
+    var lt = e.target.closest("[data-lec-toggle]");
+    if (lt) {
+      var lid = lt.getAttribute("data-lec-toggle");
+      setLectureDone(lid, localStorage.getItem("ilm_" + lid) !== "1");
+      return;
+    }
     var el = e.target.closest("[data-status],[data-filter],[data-log],[data-log-undo],[data-refresh],[data-export],[data-reset],[data-jump],#sync-chip,[data-close]");
     if (!el) return;
     var r = route();
