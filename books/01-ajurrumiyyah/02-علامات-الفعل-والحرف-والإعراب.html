@@ -225,6 +225,24 @@ strong{color:var(--navy)}
   .src .k{flex-basis:100%}
 }
 @media print{.top .chips,#ilm-completion-box,.quiz,.deck{display:none}}
+/* ===== الخريطة الذهنية (خريطة منطقية يمين←شمال) — iframe لعارض التطبيق mindmap.html، خارج الهايلايت ===== */
+.cmap.nohl{max-width:1100px;margin:46px auto 0;padding:20px 18px 22px;background:#fff;border:1px solid var(--line);border-radius:20px}
+.cmap h2{margin:0 0 4px}
+.cmap .cm-sub{font-size:15px;color:var(--ink2);margin:0 0 12px;line-height:1.8}
+.cm-frame{position:relative;height:min(76vh,760px);min-height:420px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#f4f0e4}
+.cm-frame iframe{display:block;width:100%;height:100%;border:0}
+.cm-touch{display:none;z-index:2;position:absolute;inset:auto 0 0 0;margin:0 auto 14px;width:max-content;align-items:center;gap:6px;font:inherit;font-size:15px;font-weight:800;color:#fff;background:rgba(29,43,79,.88);border:0;border-radius:12px;padding:8px 16px;cursor:pointer}
+.cm-frame:not(.live)::after{content:"";position:absolute;inset:46px 0 0 0;display:none}
+.cm-tools{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
+.cm-full{font-size:14px;font-weight:800;text-decoration:none;background:var(--navy);color:#fff;border-radius:10px;padding:4px 14px}
+@media (pointer:coarse){
+  .cm-frame:not(.live) .cm-touch{display:flex}
+  .cm-frame:not(.live)::after{display:block}
+}
+.cm-frame.live{outline:3px solid var(--lapis);outline-offset:-3px}
+@media (max-width:580px){.cmap.nohl{margin:36px 8px 0;padding:16px 10px 18px}.cm-frame{height:72vh}}
+@media print{.cmap{display:none}}
+.mm-more.nohl{margin:10px 0 0;font-size:15px;font-weight:700}
 </style>
 <style id="anki-card-css">
 /* ===== anki/final.css — قسم mz- (آلية العمل 5.11 — 9-م و9-ص) =====
@@ -391,6 +409,7 @@ strong{color:var(--navy)}
     <div class="idea"><b>الفكرة المحورية</b><span class="tag-ed">صياغة تحريرية</span><br>الفعل يُعرف بقبول «قد» والسين و«سوف» وتاء التأنيث الساكنة، والحرف يُعرف بألّا يقبل شيئًا من علامات الاسم والفعل. ثم الإعراب: تغيّر أواخر الكلمات بسبب العوامل الداخلة عليها، وله أربعة أقسام يتقاسمها الاسم والفعل المضارع.</div>
     <div class="lab">خريطة المحاضرة</div>
     <div id="mindmap" class="mindmap ilm-export-section nohl"></div>
+    <div class="mm-more ilm-export-section nohl"><a href="#cmap">🧠 الخريطة الذهنية التفصيلية لمحتوى المحاضرة (للمراجعة) ↓</a></div>
     <div class="lab" style="margin-top:12px">ترتيب السير</div>
     <div class="order"><span>علامات الفعل</span><span>علامة الحرف</span><span>تعريف الإعراب</span><span>أقسامه وعلاماته</span><span>الأبيات</span><span>فوائد من الأسئلة</span></div>
   </section>
@@ -884,6 +903,14 @@ strong{color:var(--navy)}
 
 </main>
 
+  <!-- ================= الخريطة الذهنية التفصيلية (خارج منطقة الهايلايت) ================= -->
+  <section class="cmap ilm-export-section nohl" id="cmap">
+    <h2>الخريطة الذهنية للمحاضرة</h2>
+    <div class="cm-sub">خريطة منطقية من اليمين للشمال: اضغط على أي عنوان يظهر شرحه ومثاله، وعلى الرقم اللي جنبه لطيّ الفرع أو فتحه. للتكبير: Ctrl مع عجلة الماوس، أو صباعين على الموبايل.</div>
+    <div class="cm-frame" id="cm-frame"><iframe src="../../mindmap.html?id=moad_ajurrumiyyah_02&amp;embed=1" title="الخريطة الذهنية للمحاضرة" loading="lazy"></iframe><button type="button" class="cm-touch" id="cm-touch">👆 اضغط هنا لتحريك الخريطة</button></div>
+    <div class="cm-tools"><a class="cm-full" href="../../mindmap.html?id=moad_ajurrumiyyah_02">⛶ افتح الخريطة بملء الشاشة</a></div>
+  </section>
+
   <!-- ================= بطاقات المراجعة (خارج منطقة الهايلايت) ================= -->
   <section class="deck ilm-export-section nohl" id="deck">
     <h2>بطاقات المراجعة (Anki)</h2>
@@ -924,6 +951,7 @@ strong{color:var(--navy)}
 <!-- 2) أداة البطاقات المشتركة (9-ص): الوسم والرزمة وGUID تُبنى آليًا من data.js -->
 <script src="../../data.js"></script>
 <script src="../../ilm-anki.js" data-lecture="02"></script>
+<script src="../../maps/ajurrumiyyah.js"></script>
 
 <!-- 3) بيانات الصفحة وطبقة التفاعل -->
 <script>
@@ -1583,7 +1611,9 @@ var MAP_DATA = [
     { text: "أقسام الإعراب", target: "s6", children: [{ text: "الجزم", target: "s6-jazm" }] },
     { text: "الأبيات والضرورة", target: "s7", children: [{ text: "الضرورة الشعرية", target: "s7-darura" }] },
     { text: "فوائد الأسئلة", target: "s8", children: [{ text: "كلّا", target: "s8-kalla" }, { text: "قبل وبعد", target: "s8-qabl" }] }
-  ] }
+  ] },
+  /* m2: الخريطة التفصيلية للمحتوى — بياناتها في maps/ajurrumiyyah.js (مصدر واحد للصفحة ولعارض الخرائط) */
+  (window.MOAD_MAPS || {})["moad_ajurrumiyyah_02"] || null
 ];
 
 (function () {
@@ -1672,5 +1702,15 @@ var MAP_DATA = [
 
 <!-- 4) الهايلايت (آخر سكريبت في الصفحة) -->
 <script src="../../ilm-highlight.js" data-lecture-id="moad_ajurrumiyyah_02"></script>
+<script>
+(function () {
+  /* ---- الخريطة الذهنية: على الموبايل التحريك بيتفعّل بالضغط، عشان سكرول الصفحة ما يتلخبطش ---- */
+  var cmF = document.getElementById("cm-frame"), cmT = document.getElementById("cm-touch");
+  if (cmF && cmT) {
+    cmT.addEventListener("click", function () { cmF.classList.add("live"); });
+    document.addEventListener("touchstart", function (e) { if (!cmF.contains(e.target)) cmF.classList.remove("live"); }, { passive: true });
+  }
+})();
+</script>
 </body>
 </html>
