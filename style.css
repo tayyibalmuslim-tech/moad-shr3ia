@@ -16,6 +16,11 @@
   --lv-basic:#2f7a57; --lv-basic-soft:#e1f0e7;
   --lv-mid:#a8770f;   --lv-mid-soft:#f6ecd3;
   --lv-adv:#9e3b3a;   --lv-adv-soft:#f5e1df;
+  /* ألوان المراحل الأربع */
+  --lv-s1:#2f7a57; --lv-s1-soft:#e1f0e7;
+  --lv-s2:#2c66a8; --lv-s2-soft:#e0ebf7;
+  --lv-s3:#a8770f; --lv-s3-soft:#f6ecd3;
+  --lv-s4:#9e3b3a; --lv-s4-soft:#f5e1df;
 
   --st-todo:#7d7a71;  --st-todo-soft:#ecebe6;
   --st-doing:#2c66a8; --st-doing-soft:#e0ebf7;
@@ -398,3 +403,26 @@ a.lec-map:hover{ border-color:var(--ink-2); }
 /* علوم القسم (التزكية): شبكة كروت */
 .group-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:10px; }
 .group-card .sr-meta{ line-height:1.8; }
+
+/* ---------- المراحل والمستويات ---------- */
+.lvl.lv-s1, .pill.lv-s1{ background:var(--lv-s1-soft); color:var(--lv-s1); }
+.lvl.lv-s2, .pill.lv-s2{ background:var(--lv-s2-soft); color:var(--lv-s2); }
+.lvl.lv-s3, .pill.lv-s3{ background:var(--lv-s3-soft); color:var(--lv-s3); }
+.lvl.lv-s4, .pill.lv-s4{ background:var(--lv-s4-soft); color:var(--lv-s4); }
+.level-title.lv-s1{ color:var(--lv-s1); } .level-title.lv-s2{ color:var(--lv-s2); }
+.level-title.lv-s3{ color:var(--lv-s3); } .level-title.lv-s4{ color:var(--lv-s4); }
+.pill.lv-sub{ background:#efe9da; color:var(--ink); }
+.sublevel-title{ font-size:14px; margin:12px 0 6px; padding-inline-start:10px; border-inline-start:3px solid currentColor; }
+.sublevel-title small{ color:var(--muted); font-weight:400; margin-inline-start:6px; }
+.sublevel-title.lv-s1{ color:var(--lv-s1); } .sublevel-title.lv-s2{ color:var(--lv-s2); }
+.sublevel-title.lv-s3{ color:var(--lv-s3); } .sublevel-title.lv-s4{ color:var(--lv-s4); }
+
+/* ---------- كتب المنهج في التبويبات ---------- */
+.side-list{ list-style:none; margin:0; padding:0; display:grid; gap:6px; }
+.side-list li{ display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:10px; padding:8px 10px; border:1px solid var(--line); border-radius:10px; background:#fff; }
+.side-list li.st-done{ background:#f4faf6; }
+.side-list .t{ font-family:var(--f-title); font-size:16px; color:var(--ink); display:flex; flex-direction:column; line-height:1.5; }
+.side-list .t small{ font-family:var(--f-body); font-size:12px; }
+.side-list button.pill{ border:0; cursor:pointer; font-family:inherit; }
+.side-list li.st-done .num{ background:var(--st-done); color:#fff; }
+.side-list li.st-doing .num{ background:var(--st-doing); color:#fff; }

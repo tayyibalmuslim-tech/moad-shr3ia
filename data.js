@@ -1,26 +1,37 @@
 // =========================================================
-// data.js — بيانات خطة «مواد شرعية» (المسار الشافعي)
-// كل كتاب له key ثابت: عليه يتبني حفظ التقدم، وفولدر الملخصات books/NN-key/
+// data.js — بيانات خطة «مواد شرعية»: بناء طالب علم متكامل
+// الفقه وأصوله والقواعد: المذهب الشافعي — العقيدة: المسار الأثري (منهج أهل الحديث)
+// الهيكل: 4 مراحل، كل مرحلة مقسومة لمستويات، وفي المستوى الواحد كتاب واحد بس لكل علم.
+// كل كتاب له key ثابت: عليه يتبني حفظ التقدم، وفولدر الملخصات books/<key>/
 // لو غيّرت ترتيب أو اسم كتاب، ما تغيّرش الـ key عشان تقدمك ما يضيعش.
 // =========================================================
 const PLAN = {
   title: "مواد شرعية",
-  subtitle: "خطة تقييم الأقوال الفقهية والاستدلالات — المسار الشافعي",
+  subtitle: "بناء طالب علم متكامل — الفقه الشافعي والعقيدة الأثرية",
   repo: { owner: "tayyibalmuslim-tech", name: "moad-shr3ia", branch: "main" },
 
   // القيم الافتراضية (تتعدّل من صفحة الإعدادات جوه التطبيق)
   defaults: { startDate: "2026-11-25", hoursPerDay: 2, realism: 1.3 },
 
-  levels: [
-    { id: "basic", name: "أساسي", desc: "التأسيس: مفاتيح العلوم" },
-    { id: "mid",   name: "متوسط", desc: "البناء: الكتب المتوسطة" },
-    { id: "adv",   name: "متقدم", desc: "التمكين والتطبيق" }
+  // المراحل الأربع ومستوياتها — الكتاب بيتربط بالمستوى (level)، والمستوى بمرحلته
+  stages: [
+    { id: "s1", name: "مرحلة التأسيس الأولى", short: "التأسيس الأولى", desc: "مفاتيح العلوم وفرض العين", levels: [{ id: "s1l1", name: "مقدمات" }, { id: "s1l2", name: "آلة ١" }, { id: "s1l3", name: "آلة ٢" }, { id: "s1l4", name: "مقاصد ١" }] },
+    { id: "s2", name: "مرحلة التأسيس الثانية", short: "التأسيس الثانية", desc: "تثبيت الأساس وتوسيعه", levels: [{ id: "s2l1", name: "آلة ٣" }, { id: "s2l2", name: "آلة ٤" }, { id: "s2l3", name: "مقاصد ٢" }, { id: "s2l4", name: "مقاصد ٣" }] },
+    { id: "s3", name: "مرحلة التمكين الأولى", short: "التمكين الأولى", desc: "الكتب المتوسطة والمطوّلة الأولى", levels: [{ id: "s3l1", name: "آلة ٥" }, { id: "s3l2", name: "آلة ٦" }, { id: "s3l3", name: "مقاصد ٤" }, { id: "s3l4", name: "مقاصد ٥" }, { id: "s3l5", name: "تخصص ١: أدوات التقييم" }] },
+    { id: "s4", name: "مرحلة التمكين الثانية", short: "التمكين الثانية", desc: "المطوّلات والتخصص", levels: [{ id: "s4l1", name: "آلة ٧" }, { id: "s4l2", name: "آلة ٨" }, { id: "s4l3", name: "مقاصد ٦" }, { id: "s4l4", name: "مقاصد ٧" }, { id: "s4l5", name: "تخصص ٢: الترجيح والفرق" }] }
   ],
 
-  // hours: الساعات التقديرية (قراءة + سماع شرح + مراجعة) — null = مرجع مستمر
-  // finish: ✅ الكتاب اللي لما تخلصه تعتبر خلصت العلم ده لهدفك
+  // hours: الساعات التقديرية (قراءة + سماع شرح + مراجعة) — null = مرجع أو ورد مستمر (خارج حساب الوتيرة)
+  // finish: ✅ آخر كتاب في العلم ده جوه الخطة
+  // track: القسم الكبير اللي العلم تابع له (لغة / قرآن / سنة / عقيدة / فقه وأصوله / معقولات / تخصص)
   books: [
-    { n: 1,  key: "ajurrumiyyah",       level: "basic", title: "الآجرومية (بشرح مسموع)", science: "النحو", hours: 30, track: "لغة", alt: "«التحفة السنية» شرح الآجرومية", note: "مفتاح كل العلوم، ابدأ بيه",
+    // ── مرحلة التأسيس الأولى ──
+    { n: 1, key: "hifz", level: "s1l1", title: "حفظ القرآن الكريم (ورد مستمر)", science: "حفظ القرآن", hours: null, track: "قرآن", alt: "", note: "ورد يومي ثابت طول الخطة، ومش داخل في حساب الوتيرة" },
+    { n: 2, key: "thalathat-usul", level: "s1l1", title: "«ثلاثة الأصول» لمحمد بن عبد الوهاب (بشرح)", science: "العقيدة", hours: 15, track: "عقيدة", alt: "", note: "" },
+    { n: 3, key: "arbain", level: "s1l1", title: "«الأربعون النووية» (بشرح)", science: "متون الحديث", hours: 30, track: "سنة", alt: "", note: "" },
+    { n: 4, key: "safina", level: "s1l1", title: "«سفينة النجاة» لسالم بن سمير الحضرمي (بشرح)", science: "الفقه الشافعي", hours: 15, track: "فقه وأصوله", alt: "«المقدمة الحضرمية» لبافضل", note: "فقه العبادات الأساسي بسرعة — فرض عين قبل أبي شجاع" },
+    { n: 5, key: "tuhfat-atfal", level: "s1l2", title: "«تحفة الأطفال» للجمزوري", science: "التجويد", hours: 15, track: "قرآن", alt: "", note: "مع تطبيق عملي على شيخ" },
+    { n: 6, key: "ajurrumiyyah", level: "s1l2", title: "الآجرومية (بشرح مسموع)", science: "النحو", hours: 30, track: "لغة", alt: "«التحفة السنية» شرح الآجرومية", note: "مفتاح كل العلوم",
       // قائمة محاضرات الشرح (الأستاذ الدكتور محمد حسن عثمان — قناة «شيخ العمود»):
       // لو الكتاب له lectures، نسبة الإنجاز بتتحسب تلقائيًا = المحاضرات اللي خلصت ÷ إجمالي المحاضرات
       // (إنجاز المحاضرة = مفتاح ilm_moad_{key}_{NN}، نفس اللي بتعلّمه صفحة الملخص أو زرار ✓ في التطبيق)
@@ -44,41 +55,84 @@ const PLAN = {
         { n: 17, title: "التمييز والاستثناء", dur: "1:35:37" },
         { n: 18, title: "ختام المتن", dur: "1:03:07" }
       ] },
-    { n: 2,  key: "abu-shuja",          level: "basic", title: "متن أبي شجاع بشرح «فتح القريب»", science: "الفقه المذهبي", hours: 80, track: "فقه", alt: "شرح أوسع: «الإقناع في حل ألفاظ أبي شجاع» للخطيب الشربيني", note: "بالتوازي مع الآجرومية: فقه عبادتك فرض عين" },
-    { n: 3,  key: "tatbiq-sarfi",       level: "basic", title: "«التطبيق الصرفي» لعبده الراجحي", science: "الصرف", hours: 40, track: "لغة", alt: "«متن البناء» بشرح", note: "بعد الآجرومية" },
-    { n: 4,  key: "waraqat",            level: "basic", title: "«الورقات» للجويني (بشرح)", science: "أصول الفقه", hours: 30, track: "منهج وآلة", alt: "شرح المحلي على الورقات", note: "أول باب لفهم الاستدلال" },
-    { n: 5,  key: "bayquniyyah",        level: "basic", title: "«المنظومة البيقونية» (بشرح)", science: "مصطلح الحديث", hours: 15, track: "ثبوت", alt: "", note: "قصيرة: تعرّفك ألفاظ الصحة والضعف" },
-    { n: 6,  key: "faraid-bahiyyah",    level: "basic", title: "«الفرائد البهية في نظم القواعد الفقهية» للأهدل", science: "القواعد الفقهية", hours: 20, track: "منهج وآلة", alt: "«منظومة القواعد الفقهية» للسعدي", note: "القواعد اللي بيتبني عليها الفقه" },
-    { n: 7,  key: "dawabit-marifah",    level: "basic", title: "«ضوابط المعرفة» لعبد الرحمن حبنكة الميداني", science: "المنطق وأصول الاستدلال", hours: 50, track: "منهج وآلة", alt: "«السلم المنورق» بشرح", note: "بيعلّمك تكتشف المغالطة في الاستدلال" },
-    { n: 8,  key: "umdat-ahkam",        level: "basic", title: "«عمدة الأحكام» لعبد الغني المقدسي (بشرح)", science: "أحاديث الأحكام", hours: 100, track: "مصادر", alt: "", note: "آخر المستوى: بيطبق اللغة والأصول على الأحاديث" },
+    { n: 7, key: "tatbiq-sarfi", level: "s1l2", title: "«التطبيق الصرفي» لعبده الراجحي", science: "الصرف", hours: 40, track: "لغة", alt: "«بناء الأفعال» بشرح", note: "" },
+    { n: 8, key: "durus-balagha", level: "s1l2", title: "«دروس البلاغة» لحفني ناصف وآخرين", science: "البلاغة", hours: 25, track: "لغة", alt: "«مائة المعاني والبيان» لابن الشحنة", note: "" },
+    { n: 9, key: "waraqat", level: "s1l2", title: "«الورقات» للجويني (بشرح)", science: "أصول الفقه", hours: 30, track: "فقه وأصوله", alt: "شرح المحلي على الورقات", note: "أول باب لفهم الاستدلال" },
+    { n: 10, key: "qawaid-imla", level: "s1l3", title: "«قواعد الإملاء» لعبد السلام هارون", science: "الإملاء", hours: 10, track: "لغة", alt: "«بهجة الطلاب»", note: "" },
+    { n: 11, key: "jazariyyah", level: "s1l3", title: "«المقدمة الجزرية» لابن الجزري (بشرح)", science: "التجويد", hours: 25, finish: true, track: "قرآن", alt: "", note: "" },
+    { n: 12, key: "qatr-nada", level: "s1l3", title: "«قطر الندى» لابن هشام", science: "النحو", hours: 80, track: "لغة", alt: "«متممة الآجرومية»", note: "" },
+    { n: 13, key: "usul-tafsir", level: "s1l3", title: "«مقدمة في أصول التفسير» لابن تيمية (بشرح)", science: "علوم القرآن", hours: 15, track: "قرآن", alt: "«علم التفسير» من النقاية للسيوطي", note: "" },
+    { n: 14, key: "bayquniyyah", level: "s1l3", title: "«المنظومة البيقونية» (بشرح)", science: "علوم الحديث", hours: 15, track: "سنة", alt: "«علم الحديث» من النقاية للسيوطي", note: "" },
+    { n: 15, key: "abu-shuja", level: "s1l4", title: "متن أبي شجاع بشرح «فتح القريب» لابن قاسم الغزي", science: "الفقه الشافعي", hours: 80, track: "فقه وأصوله", alt: "شرح أوسع: «الإقناع» للخطيب الشربيني", note: "«فتح القريب» هو «شرح ابن القاسم»، فالمستويين في كتاب واحد" },
+    { n: 16, key: "kitab-tawhid", level: "s1l4", title: "«كتاب التوحيد» لمحمد بن عبد الوهاب (بشرح)", science: "العقيدة", hours: 40, track: "عقيدة", alt: "", note: "" },
+    { n: 17, key: "jalalayn", level: "s1l4", title: "«تفسير الجلالين»", science: "التفسير", hours: 120, track: "قرآن", alt: "", note: "قراءة مع الرجوع للغريب — أول مرور على تفسير القرآن كله" },
 
-    { n: 9,  key: "qatr-nada",          level: "mid", title: "«قطر الندى» لابن هشام", science: "النحو", hours: 80, track: "لغة", alt: "«شذور الذهب» لابن هشام", note: "الحد الأدنى في النحو للفقيه" },
-    { n: 10, key: "lubb-usul",          level: "mid", title: "«لب الأصول» لزكريا الأنصاري بشرحه «غاية الوصول»", science: "أصول الفقه", hours: 80, track: "منهج وآلة", alt: "لو صعب: «الأصول من علم الأصول» لابن عثيمين كتمهيد", note: "مختصر «جمع الجوامع»، تمهيد مباشر لشرح المحلي — بالتوازي مع قطر الندى" },
-    { n: 11, key: "zubad",              level: "mid", title: "«صفوة الزبد» لابن رسلان بشرح «غاية البيان» للرملي", science: "الفقه المذهبي", hours: 120, track: "فقه", alt: "متن نثري بدله: «عمدة السالك» لابن النقيب أو «الياقوت النفيس» للشاطري", note: "نظم حوالي 1000 بيت: ادرسه فهم بالشرح والحفظ اختياري بالتوازي — مرجع محفوظ للمذهب بين أبي شجاع والمنهاج. مقدمته في العقيدة على طريقة الأشاعرة" },
-    { n: 12, key: "taysir-mustalah",    level: "mid", title: "«تيسير مصطلح الحديث» لمحمود الطحان", science: "مصطلح الحديث", hours: 40, track: "ثبوت", alt: "", note: "تمهيد لنزهة النظر" },
-    { n: 13, key: "balagha-wadiha",     level: "mid", title: "«البلاغة الواضحة» لعلي الجارم ومصطفى أمين", science: "البلاغة", hours: 50, track: "لغة", alt: "", note: "مدخل سهل للبلاغة" },
-    { n: 14, key: "nuzhat-nazar",       level: "mid", title: "«نزهة النظر» لابن حجر", science: "مصطلح الحديث", hours: 60, track: "ثبوت", alt: "", note: "بعد تيسير المصطلح" },
-    { n: 15, key: "mabahith-quran",     level: "mid", title: "«مباحث في علوم القرآن» لمناع القطان", science: "علوم القرآن", hours: 50, track: "مصادر", alt: "", note: "الناسخ والمنسوخ وأسباب النزول" },
-    { n: 16, key: "ilm-maqasid",        level: "mid", title: "«علم المقاصد الشرعية» لنور الدين الخادمي", science: "مقاصد الشريعة", hours: 30, track: "منهج وآلة", alt: "", note: "مدخل للمقاصد قبل ابن عاشور" },
-    { n: 17, key: "athar-ikhtilaf",     level: "mid", title: "«أثر الاختلاف في القواعد الأصولية في اختلاف الفقهاء» لمصطفى الخن", science: "تخريج الفروع على الأصول", hours: 60, track: "تطبيق", alt: "", note: "قبل بداية المجتهد: بيوريك الخلاف جاي منين" },
-    { n: 18, key: "bidayat-mujtahid",   level: "mid", title: "«بداية المجتهد» لابن رشد", science: "الفقه المقارن", hours: 250, track: "فقه", alt: "", note: "لو عايز تختصر: ابدأ بأبواب العبادات" },
+    // ── مرحلة التأسيس الثانية ──
+    { n: 18, key: "izzi", level: "s2l1", title: "«تصريف العزّي» للزنجاني (بشرح)", science: "الصرف", hours: 30, track: "لغة", alt: "«المقصود» بشرح", note: "" },
+    { n: 19, key: "qiraat-quraniyya", level: "s2l1", title: "«القراءات القرآنية» (مدخل)", science: "القراءات", hours: 30, track: "قرآن", alt: "", note: "تاريخ القراءات وثبوتها قبل متونها" },
+    { n: 20, key: "mabahith-quran", level: "s2l1", title: "«مباحث في علوم القرآن» لمناع القطان", science: "علوم القرآن", hours: 50, track: "قرآن", alt: "«مقدمة تفسير ابن جزي» و«مواقع العلوم في مواقع النجوم»", note: "" },
+    { n: 21, key: "nuzhat-nazar", level: "s2l1", title: "«نخبة الفكر» بشرحها «نزهة النظر» لابن حجر", science: "علوم الحديث", hours: 60, track: "سنة", alt: "", note: "" },
+    { n: 22, key: "luma", level: "s2l1", title: "«اللمع» للشيرازي", science: "أصول الفقه", hours: 60, track: "فقه وأصوله", alt: "", note: "حلقة الوصل بين الورقات ولب الأصول" },
+    { n: 23, key: "wasitiyyah", level: "s2l1", title: "«العقيدة الواسطية» لابن تيمية (بشرح)", science: "العقيدة", hours: 40, track: "عقيدة", alt: "", note: "" },
+    { n: 24, key: "qawaid-bida", level: "s2l2", title: "«قواعد في معرفة البدع»", science: "أصول البدع", hours: 15, track: "عقيدة", alt: "", note: "" },
+    { n: 25, key: "ilm-maqasid", level: "s2l2", title: "«علم المقاصد الشرعية» لنور الدين الخادمي", science: "مقاصد الشريعة", hours: 30, track: "فقه وأصوله", alt: "«مدخل إلى علم المقاصد»", note: "" },
+    { n: 26, key: "mutaradifat", level: "s2l2", title: "«رسالة في المترادفات»", science: "المفردات", hours: 10, track: "لغة", alt: "", note: "" },
+    { n: 27, key: "banat-suad", level: "s2l2", title: "«بانت سعاد» لكعب بن زهير (بشرح)", science: "الأدب", hours: 10, track: "لغة", alt: "", note: "" },
+    { n: 28, key: "ibn-aqil", level: "s2l2", title: "ألفية ابن مالك بشرح ابن عقيل", science: "النحو", hours: 200, track: "لغة", alt: "«أوضح المسالك» لابن هشام", note: "فهم من غير حفظ كامل" },
+    { n: 29, key: "zubad", level: "s2l3", title: "«صفوة الزبد» لابن رسلان بشرح «غاية البيان» للرملي", science: "الفقه الشافعي", hours: 120, track: "فقه وأصوله", alt: "متن نثري بدله: «عمدة السالك» لابن النقيب أو «منهج الطلاب»", note: "نظم حوالي 1000 بيت: الحفظ اختياري بالتوازي. مقدمته في العقيدة على طريقة الأشاعرة — ارجع فيها لشيخ" },
+    { n: 30, key: "rahbiyyah", level: "s2l3", title: "«الرحبية» (بشرح)", science: "الفرائض", hours: 30, track: "فقه وأصوله", alt: "«البرهانية»", note: "" },
+    { n: 31, key: "umdat-ahkam", level: "s2l3", title: "«عمدة الأحكام» لعبد الغني المقدسي (بشرح)", science: "أحاديث الأحكام", hours: 100, track: "سنة", alt: "", note: "" },
+    { n: 32, key: "lamiyyat-arab", level: "s2l3", title: "«لامية العرب» للشنفرى (بشرح)", science: "الأدب", hours: 10, track: "لغة", alt: "", note: "" },
+    { n: 33, key: "sullam-wusul", level: "s2l4", title: "«سلّم الوصول» لحافظ الحكمي (بشرح)", science: "العقيدة", hours: 40, track: "عقيدة", alt: "«العقيدة الطحاوية» بشرح ابن أبي العز", note: "" },
+    { n: 34, key: "riyad", level: "s2l4", title: "«رياض الصالحين» للنووي", science: "متون الحديث", hours: 100, track: "سنة", alt: "", note: "" },
+    { n: 35, key: "faraid-bahiyyah", level: "s2l4", title: "«الفرائد البهية في نظم القواعد الفقهية» للأهدل", science: "القواعد الفقهية", hours: 20, track: "فقه وأصوله", alt: "«منظومة القواعد الفقهية» للسعدي", note: "" },
 
-    { n: 19, key: "ibn-aqil",           level: "adv", title: "شرح ابن عقيل على ألفية ابن مالك", science: "النحو", hours: 200, finish: true, track: "لغة", alt: "«أوضح المسالك» لابن هشام", note: "فهم من غير حفظ كامل، بالتوازي مع شرح المحلي" },
-    { n: 20, key: "mahalli-jawami",     level: "adv", title: "شرح المحلي على «جمع الجوامع» لابن السبكي", science: "أصول الفقه", hours: 300, finish: true, track: "منهج وآلة", alt: "للمقارنة: «روضة الناظر» مع «مذكرة الشنقيطي» (حنبلي)", note: "أهم كتاب في الخطة، ادرسه مع شيخ" },
-    { n: 21, key: "shadha-arf",         level: "adv", title: "«شذا العرف في فن الصرف» للحملاوي", science: "الصرف", hours: 80, finish: true, track: "لغة", alt: "«لامية الأفعال» بشرح", note: "" },
-    { n: 22, key: "mughni-labib",       level: "adv", title: "«مغني اللبيب» لابن هشام: الباب الأول (معاني الحروف)", science: "النحو", hours: 60, finish: true, track: "لغة", alt: "", note: "عليه بيتبني خلاف زي باء ﴿برؤوسكم﴾" },
-    { n: 23, key: "adab-bahth",         level: "adv", title: "«آداب البحث والمناظرة» للشنقيطي", science: "المنطق والمناظرة", hours: 40, finish: true, track: "منهج وآلة", alt: "", note: "إزاي تعترض على الاستدلال بانضباط" },
-    { n: 24, key: "ibn-salah",          level: "adv", title: "«مقدمة ابن الصلاح»", science: "مصطلح الحديث", hours: 120, finish: true, track: "ثبوت", alt: "«تدريب الراوي» للسيوطي", note: "" },
-    { n: 25, key: "usul-takhrij",       level: "adv", title: "«أصول التخريج ودراسة الأسانيد» للطحان", science: "التخريج ودراسة الأسانيد", hours: 50, finish: true, track: "ثبوت", alt: "الأعلى: «شرح علل الترمذي» لابن رجب", note: "تحكم على الحديث بنفسك" },
-    { n: 26, key: "jawahir-balagha",    level: "adv", title: "«جواهر البلاغة» للهاشمي", science: "البلاغة", hours: 100, finish: true, track: "لغة", alt: "", note: "ركّز على علم المعاني" },
-    { n: 27, key: "rawai-bayan",        level: "adv", title: "«روائع البيان في تفسير آيات الأحكام» للصابوني", science: "آيات الأحكام", hours: 100, finish: true, track: "مصادر", alt: "الأعلى: «أحكام القرآن» لابن العربي", note: "" },
-    { n: 28, key: "subul-salam",        level: "adv", title: "«سبل السلام» للصنعاني (شرح بلوغ المرام)", science: "أحاديث الأحكام", hours: 350, finish: true, track: "مصادر", alt: "الأعلى: «نيل الأوطار» للشوكاني", note: "الصنعاني بيميل للترجيح المستقل عن المذاهب" },
-    { n: 29, key: "minhaj-talibin",     level: "adv", title: "«منهاج الطالبين» للنووي بشرح مختصر", science: "الفقه المذهبي", hours: 250, finish: true, track: "فقه", alt: "«كنز الراغبين» للمحلي، وللتوسع «مغني المحتاج» للخطيب الشربيني", note: "" },
-    { n: 30, key: "ashbah-suyuti",      level: "adv", title: "«الأشباه والنظائر» للسيوطي", science: "القواعد الفقهية", hours: 120, finish: true, track: "منهج وآلة", alt: "«المنثور في القواعد» للزركشي", note: "" },
-    { n: 31, key: "maqasid-ibn-ashur",  level: "adv", title: "«مقاصد الشريعة الإسلامية» لابن عاشور", science: "مقاصد الشريعة", hours: 60, finish: true, track: "منهج وآلة", alt: "الأعلى: «الموافقات» للشاطبي", note: "" },
-    { n: 32, key: "ijma-ibn-mundhir",   level: "adv", title: "«الإجماع» لابن المنذر", science: "الإجماع", hours: 20, finish: true, track: "مصادر", alt: "«مراتب الإجماع» لابن حزم", note: "مرجع تتأكد منه قبل ما تقبل أي قول" },
-    { n: 33, key: "miftah-wusul",       level: "adv", title: "«مفتاح الوصول إلى بناء الفروع على الأصول» للتلمساني", science: "تخريج الفروع على الأصول", hours: 60, finish: true, track: "تطبيق", alt: "«تخريج الفروع على الأصول» للزنجاني", note: "" },
-    { n: 34, key: "majmu-nawawi",       level: "adv", title: "«المجموع شرح المهذب» للنووي", science: "الفقه المقارن", hours: null, finish: true, track: "تطبيق", alt: "«المغني» لابن قدامة (حنبلي)", note: "مرجع مستمر في كل مسألة، مش للقراءة كاملة" }
+    // ── مرحلة التمكين الأولى ──
+    { n: 36, key: "shadha-arf", level: "s3l1", title: "«شذا العرف في فن الصرف» للحملاوي", science: "الصرف", hours: 80, track: "لغة", alt: "«لامية الأفعال» بشرح", note: "" },
+    { n: 37, key: "balagha-wadiha", level: "s3l1", title: "«البلاغة الواضحة» لعلي الجارم ومصطفى أمين", science: "البلاغة", hours: 50, track: "لغة", alt: "«الجوهر المكنون» بشرح", note: "" },
+    { n: 38, key: "fasih", level: "s3l1", title: "«الفصيح» لثعلب", science: "المفردات", hours: 15, track: "لغة", alt: "", note: "" },
+    { n: 39, key: "muallaqat", level: "s3l1", title: "«المعلقات العشر» (بشرح)", science: "الأدب", hours: 40, finish: true, track: "لغة", alt: "", note: "" },
+    { n: 40, key: "tawassul", level: "s3l1", title: "«قاعدة جليلة في التوسل والوسيلة» لابن تيمية", science: "العقيدة", hours: 25, track: "عقيدة", alt: "", note: "" },
+    { n: 41, key: "lubb-usul", level: "s3l2", title: "«لب الأصول» لزكريا الأنصاري بشرحه «غاية الوصول»", science: "أصول الفقه", hours: 80, track: "فقه وأصوله", alt: "", note: "مختصر «جمع الجوامع»، وتمهيد مباشر لشرح المحلي. مؤلفه أشعري، وفيه مسائل كلامية — ارجع فيها لشيخ" },
+    { n: 42, key: "maqasid-ibn-ashur", level: "s3l2", title: "«مقاصد الشريعة الإسلامية» لابن عاشور", science: "مقاصد الشريعة", hours: 60, track: "فقه وأصوله", alt: "", note: "" },
+    { n: 43, key: "ikhtisar-ulum", level: "s3l2", title: "«اختصار علوم الحديث» لابن كثير بشرح «الباعث الحثيث»", science: "علوم الحديث", hours: 60, track: "سنة", alt: "«تدريب الراوي» للسيوطي أو «مقدمة ابن الصلاح»", note: "" },
+    { n: 44, key: "sullam-munawraq", level: "s3l2", title: "«السلم المنورق» للأخضري (بشرح)", science: "المنطق", hours: 30, finish: true, track: "معقولات", alt: "«إيساغوجي» بشرح", note: "مفتاح مصطلحات المنطق في «جمع الجوامع»" },
+    { n: 45, key: "minhaj-talibin", level: "s3l3", title: "«منهاج الطالبين» للنووي بشرح مختصر", science: "الفقه الشافعي", hours: 250, finish: true, track: "فقه وأصوله", alt: "«كنز الراغبين» للمحلي، وللتوسع «مغني المحتاج» للخطيب الشربيني", note: "" },
+    { n: 46, key: "subul-salam", level: "s3l3", title: "«بلوغ المرام» بشرح «سبل السلام» للصنعاني", science: "أحاديث الأحكام", hours: 350, track: "سنة", alt: "", note: "الصنعاني بيميل للترجيح المستقل عن المذاهب" },
+    { n: 47, key: "ibn-juzay", level: "s3l3", title: "«التسهيل لعلوم التنزيل» لابن جزي", science: "التفسير", hours: 150, track: "قرآن", alt: "«تفسير الإيجي»", note: "" },
+    { n: 48, key: "tadmuriyyah", level: "s3l4", title: "«الرسالة التدمرية» لابن تيمية (بشرح)", science: "العقيدة", hours: 40, track: "عقيدة", alt: "«الفتوى الحموية الكبرى» — نفس الباب، فواحدة تكفي في المستوى ده", note: "" },
+    { n: 49, key: "usul-tisa", level: "s3l4", title: "«الأصول التسعة» (قراءة سرد)", science: "متون الحديث", hours: 400, finish: true, track: "سنة", alt: "", note: "البخاري ومسلم والسنن الأربعة والموطأ والمسند والدارمي — قراءة مع المراجعة، مش دراسة بشرح" },
+    { n: 50, key: "athar-ikhtilaf", level: "s3l5", title: "«أثر الاختلاف في القواعد الأصولية في اختلاف الفقهاء» لمصطفى الخن", science: "تخريج الفروع على الأصول", hours: 60, track: "تخصص", alt: "", note: "بيوريك الخلاف الفقهي جاي منين" },
+    { n: 51, key: "adab-bahth", level: "s3l5", title: "«آداب البحث والمناظرة» للشنقيطي", science: "آداب البحث والمناظرة", hours: 40, finish: true, track: "تخصص", alt: "«الرسالة الولدية» ثم «رسالة الآداب»", note: "إزاي تعترض على الاستدلال بانضباط" },
+    { n: 52, key: "usul-takhrij", level: "s3l5", title: "«أصول التخريج ودراسة الأسانيد» للطحان", science: "التخريج ودراسة الأسانيد", hours: 50, finish: true, track: "تخصص", alt: "الأعلى: «شرح علل الترمذي» لابن رجب", note: "تحكم على الحديث بنفسك" },
+    { n: 53, key: "tarikh-tashri", level: "s3l5", title: "«تاريخ التشريع الإسلامي» لمناع القطان", science: "تاريخ التشريع", hours: 30, finish: true, track: "تخصص", alt: "", note: "نشأة المذاهب وأسباب الخلاف تاريخيًا (إضافة على المنهج الأصلي)" },
+    { n: 54, key: "rawai-bayan", level: "s3l5", title: "«روائع البيان في تفسير آيات الأحكام» للصابوني", science: "آيات الأحكام", hours: 100, finish: true, track: "تخصص", alt: "الأعلى: «أحكام القرآن» لابن العربي", note: "" },
+    { n: 55, key: "maqalat", level: "s3l5", title: "«مقالات الإسلاميين» لأبي الحسن الأشعري", science: "الفرق والمذاهب", hours: 40, track: "تخصص", alt: "«الملل والنحل» للشهرستاني", note: "عرض أقوال الفرق من مصدر قديم (إضافة على المنهج الأصلي)" },
+
+    // ── مرحلة التمكين الثانية ──
+    { n: 56, key: "mahalli-jawami", level: "s4l1", title: "شرح المحلي على «جمع الجوامع» لابن السبكي", science: "أصول الفقه", hours: 300, finish: true, track: "فقه وأصوله", alt: "«منهاج الوصول» للبيضاوي", note: "أهم كتاب أصول في الخطة — ادرسه مع شيخ، وخاتمته في أصول الدين على طريقة الأشاعرة" },
+    { n: 57, key: "muwafaqat", level: "s4l1", title: "«الموافقات» للشاطبي", science: "مقاصد الشريعة", hours: 200, finish: true, track: "فقه وأصوله", alt: "«قواعد الأحكام» (القواعد الكبرى) للعز بن عبد السلام", note: "" },
+    { n: 58, key: "itisam", level: "s4l1", title: "«الاعتصام» للشاطبي", science: "أصول البدع", hours: 100, finish: true, track: "عقيدة", alt: "", note: "" },
+    { n: 59, key: "alfiyyat-iraqi", level: "s4l1", title: "«ألفية العراقي» (التبصرة والتذكرة) بشرح", science: "علوم الحديث", hours: 150, finish: true, track: "سنة", alt: "«ألفية السيوطي»", note: "" },
+    { n: 60, key: "siyasa-shariyya", level: "s4l1", title: "«السياسة الشرعية» لابن تيمية", science: "السياسة الشرعية", hours: 20, finish: true, track: "فقه وأصوله", alt: "الأعلى: «الأحكام السلطانية» للماوردي و«غياث الأمم» للجويني", note: "" },
+    { n: 61, key: "talkhis", level: "s4l2", title: "«التلخيص في علوم البلاغة» للقزويني (بشرح)", science: "البلاغة", hours: 100, finish: true, track: "لغة", alt: "«جواهر البلاغة» للهاشمي", note: "" },
+    { n: 62, key: "itqan", level: "s4l2", title: "«الإتقان في علوم القرآن» للسيوطي", science: "علوم القرآن", hours: 120, finish: true, track: "قرآن", alt: "«البرهان» للزركشي", note: "" },
+    { n: 63, key: "kifayat-mutahaffiz", level: "s4l2", title: "«كفاية المتحفظ» لابن الأجدابي", science: "المفردات", hours: 20, finish: true, track: "لغة", alt: "«عمدة الكتّاب»", note: "" },
+    { n: 64, key: "kitab-imla", level: "s4l2", title: "«كتاب الإملاء» لحسين والي", science: "الإملاء", hours: 15, finish: true, track: "لغة", alt: "", note: "" },
+    { n: 65, key: "shafiyah", level: "s4l2", title: "«الشافية» لابن الحاجب (بشرح)", science: "الصرف", hours: 100, finish: true, track: "لغة", alt: "", note: "" },
+    { n: 66, key: "mughni-labib", level: "s4l2", title: "«مغني اللبيب» لابن هشام", science: "النحو", hours: 60, finish: true, track: "لغة", alt: "«تسهيل الفوائد» لابن مالك", note: "الباب الأول (معاني الحروف) أهمه للفقيه، والباقي حسب الوقت" },
+    { n: 67, key: "ashbah-suyuti", level: "s4l3", title: "«الأشباه والنظائر» للسيوطي", science: "القواعد الفقهية", hours: 120, finish: true, track: "فقه وأصوله", alt: "«المنثور في القواعد» للزركشي", note: "" },
+    { n: 68, key: "muntaqa", level: "s4l3", title: "«منتقى الأخبار» بشرح «نيل الأوطار» للشوكاني", science: "أحاديث الأحكام", hours: 300, finish: true, track: "سنة", alt: "", note: "" },
+    { n: 69, key: "tahqiqat-mardiyya", level: "s4l3", title: "«التحقيقات المرضية في المباحث الفرضية» لصالح الفوزان", science: "الفرائض", hours: 40, finish: true, track: "فقه وأصوله", alt: "", note: "" },
+    { n: 70, key: "lalakai", level: "s4l3", title: "«شرح أصول اعتقاد أهل السنة والجماعة» للالكائي", science: "العقيدة", hours: 100, track: "عقيدة", alt: "", note: "" },
+    { n: 71, key: "shatibiyyah", level: "s4l4", title: "«الشاطبية» (حرز الأماني) للشاطبي", science: "القراءات", hours: 200, finish: true, track: "قرآن", alt: "", note: "بعدها «الدرة المضية» لابن الجزري لو عايز تكمّل العشر" },
+    { n: 72, key: "ibn-kathir", level: "s4l4", title: "«تفسير ابن كثير»", science: "التفسير", hours: 300, finish: true, track: "قرآن", alt: "", note: "" },
+    { n: 73, key: "iqtida", level: "s4l4", title: "«اقتضاء الصراط المستقيم» لابن تيمية", science: "العقيدة", hours: 60, finish: true, track: "عقيدة", alt: "", note: "" },
+    { n: 74, key: "bidayat-mujtahid", level: "s4l5", title: "«بداية المجتهد» لابن رشد", science: "الفقه المقارن", hours: 250, finish: true, track: "تخصص", alt: "", note: "لو عايز تختصر: ابدأ بأبواب العبادات" },
+    { n: 75, key: "ijma-ibn-mundhir", level: "s4l5", title: "«الإجماع» لابن المنذر", science: "الإجماع", hours: 20, finish: true, track: "تخصص", alt: "«مراتب الإجماع» لابن حزم", note: "مرجع تتأكد منه قبل ما تقبل أي قول" },
+    { n: 76, key: "miftah-wusul", level: "s4l5", title: "«مفتاح الوصول إلى بناء الفروع على الأصول» للتلمساني", science: "تخريج الفروع على الأصول", hours: 60, finish: true, track: "تخصص", alt: "«تخريج الفروع على الأصول» للزنجاني", note: "" },
+    { n: 77, key: "minhaj-sunnah", level: "s4l5", title: "«مختصر منهاج السنة» لابن تيمية", science: "الفرق والمذاهب", hours: 80, finish: true, track: "تخصص", alt: "", note: "" },
+    { n: 78, key: "majmu-nawawi", level: "s4l5", title: "«المجموع شرح المهذب» للنووي", science: "مراجع المذهب", hours: null, track: "تخصص", alt: "«المغني» لابن قدامة (حنبلي)", note: "مرجع مستمر في كل مسألة، مش للقراءة كاملة" }
   ],
 
   // ---------------------------------------------------------
@@ -86,16 +140,11 @@ const PLAN = {
   // استخدم القائمة دي بس لو عايز تدي ملف عنوان مختلف عن اسمه.
   // مثال:
   // "ajurrumiyyah": [
-  //   { n: 1, title: "مقدمة الآجرومية وباب الكلام", file: "books/01-ajurrumiyyah/01.html" }
+  //   { n: 1, title: "مقدمة الآجرومية وباب الكلام", file: "books/ajurrumiyyah/01.html" }
   // ]
   // ---------------------------------------------------------
   summaries: {},
 
-  // ---------------------------------------------------------
-  // أقسام مستقلة عن خطة الكتب (تبويبات في الهيدر): مش داخلة في حساب الوتيرة
-  // كل قسم له فولدر ملخصات؛ أي ملف يترفع فيه باسم رقم الدرس (01.html …) بيظهر لوحده
-  // معرّف صفحة الملخص (data-lecture-id): moad_{key}_{NN} — مثال: moad_tazkiya_01
-  // ---------------------------------------------------------
   sections: {
     tazkiya: { key: "tazkiya", folder: "tazkiya", icon: "🌿", title: "تزكية",
       desc: "كل اللي بيزكّي القلب ويقرّب من الله: أعمال القلوب، ومعرفة الله، وتدبر القرآن، وسير الصالحين، والأخلاق — العلم اللي بيخلّي الطلب كله لله.",
@@ -104,20 +153,59 @@ const PLAN = {
       // ودروس العلم المتفرقة (ملفات مباشرة في فولدره) معرّفها moad_{key}_{NN}
       groups: [
         { n: 1, key: "tz-tazkiya",  icon: "🌱", title: "التزكية",
-          desc: "تزكية النفس وأعمال القلوب: الإخلاص، والتوبة، والصبر، والشكر، والمراقبة، وعلاج آفات النفس.", series: [] },
+          desc: "تزكية النفس وأعمال القلوب: الإخلاص، والتوبة، والصبر، والشكر، والمراقبة، وعلاج آفات النفس.", books: [
+            { key: "sb-wasiyya-sughra", title: "«الوصية الصغرى» لابن تيمية" },
+            { key: "sb-kalim-tayyib", title: "«الكلم الطيب» لابن تيمية" },
+            { key: "sb-kifayat-mutaabbid", title: "«كفاية المتعبد وتحفة المتزهد» للمنذري" },
+            { key: "sb-tabukiyya", title: "«الرسالة التبوكية» لابن القيم" },
+            { key: "sb-ubudiyya", title: "«العبودية» لابن تيمية" },
+            { key: "sb-daa-dawa", title: "«الداء والدواء» لابن القيم" },
+            { key: "sb-minhaj-qasidin", title: "«مختصر منهاج القاصدين» لابن قدامة", alt: "«طريق الهجرتين» أو «إغاثة اللهفان» لابن القيم" },
+            { key: "sb-ibn-rajab", title: "مصنفات ابن رجب" },
+            { key: "sb-ibn-abi-dunya", title: "مصنفات ابن أبي الدنيا وكتب الزهد" },
+            { key: "sb-ibn-jawzi", title: "مصنفات ابن الجوزي" },
+            { key: "sb-madarij", title: "«مدارج السالكين» لابن القيم" }
+          ], series: [] },
         { n: 2, key: "tz-ilm-billah", icon: "✨", title: "العلم بالله",
           desc: "معرفة الله بأسمائه وصفاته وأفعاله وآثارها في القلب — أصل الخشية والمحبة والتوكل.", series: [] },
         { n: 3, key: "tz-suwar",    icon: "📖", title: "مدارسات سور القرآن",
           desc: "مدارسة السور سورة سورة: مقاصدها وموضوعاتها وهداياتها العملية.", series: [] },
         { n: 4, key: "tz-siyar",    icon: "📜", title: "سير ومناقب",
-          desc: "سير الأنبياء والصحابة والتابعين والعلماء والصالحين، ومناقبهم ومواقفهم.", series: [] },
+          desc: "سير الأنبياء والصحابة والتابعين والعلماء والصالحين، ومناقبهم ومواقفهم.", books: [
+            { key: "sb-fadail-sahaba", title: "«فضائل الصحابة» للإمام أحمد" },
+            { key: "sb-sifat-safwa", title: "«صفة الصفوة» لابن الجوزي" },
+            { key: "sb-siyar-nubala", title: "«سير أعلام النبلاء» للذهبي" }
+          ], series: [] },
         { n: 5, key: "tz-akhlaq",   icon: "🤝", title: "الأخلاق والآداب",
-          desc: "الأخلاق والآداب الشرعية: مع الله، ومع النفس، ومع الناس في البيت والشغل والطريق.", series: [] }
+          desc: "الأخلاق والآداب الشرعية: مع الله، ومع النفس، ومع الناس في البيت والشغل والطريق.", books: [
+            { key: "sb-adab-ishra", title: "«آداب العِشرة» للغزي" },
+            { key: "sb-makarim", title: "«مكارم الأخلاق»" },
+            { key: "sb-rawdat-uqala", title: "«روضة العقلاء» لابن حبان" },
+            { key: "sb-muntaqa-makarim", title: "«منتقى مكارم الأخلاق»" },
+            { key: "sb-adab-mufrad", title: "«الأدب المفرد» للبخاري" },
+            { key: "sb-bahjat-majalis", title: "«بهجة المجالس» لابن عبد البر" }
+          ], series: [] },
+        { n: 6, key: "tz-talab",    icon: "🎓", title: "طلب العلم وآدابه",
+          desc: "تعظيم العلم، وأخلاق العلماء وحملة القرآن، وآداب الطالب مع شيخه ودرسه وكتابه.", books: [
+            { key: "sb-taazim-ilm", title: "«خلاصة تعظيم العلم» لصالح العصيمي" },
+            { key: "sb-akhlaq-ulama", title: "«أخلاق العلماء» للآجري" },
+            { key: "sb-akhlaq-hamalat", title: "«أخلاق حملة القرآن» للآجري" },
+            { key: "sb-tadhkirat-sami", title: "«تذكرة السامع والمتكلم» لابن جماعة", alt: "«عُدة الطلب»" },
+            { key: "sb-jami-bayan", title: "«جامع بيان العلم وفضله» لابن عبد البر" },
+            { key: "sb-jami-khatib", title: "«الجامع لأخلاق الراوي وآداب السامع» للخطيب البغدادي" }
+          ], series: [] }
       ] },
     sira:    { key: "sira", folder: "sira", icon: "🕌", title: "السيرة النبوية",
       desc: "سيرة النبي ﷺ: من المولد للبعثة، والهجرة، والغزوات، والشمائل — القدوة العملية للفقه والسلوك.",
       tip: "اقرأ السيرة بسؤال: «إيه اللي أطبّقه من الموقف ده النهارده؟».",
       // سلاسل الشرح جوه القسم: كل سلسلة لها فولدر sira/NN-key/ ومعرّف درسها moad_{key}_{NN}
+      books: [
+        { key: "sb-urjuza-mayiyya", title: "«الأرجوزة الميئية في ذكر حال أشرف البرية»" },
+        { key: "sb-fusul-sira", title: "«الفصول في سيرة الرسول» لابن كثير" },
+        { key: "sb-shamail", title: "«مختصر الشمائل المحمدية» للترمذي" },
+        { key: "sb-tahdhib-ibn-hisham", title: "«تهذيب سيرة ابن هشام»", alt: "«ألفية العراقي في السيرة» (الدرر السنية)" },
+        { key: "sb-zad-maad", title: "«زاد المعاد» لابن القيم" }
+      ],
       series: [
         { n: 1, key: "sira-sirjani", title: "السيرة النبوية", by: "د. راغب السرجاني", channel: "أرشيف الشيخ راغب السرجاني",
           note: "سلسلة كاملة من المقدمة لحد الوفاة، بتركيز على بناء الأمة والدروس العملية من كل مرحلة.",
@@ -193,29 +281,42 @@ Object.keys(PLAN.sections).forEach(function (k) {
   });
 });
 
-// مسار فولدر الكتاب: books/01-ajurrumiyyah
+// المستويات مفرودة بالترتيب (المرحلة ← المستوى)، وكل مستوى عارف مرحلته
+PLAN.levels = [];
+PLAN.stages.forEach(function (st, si) {
+  st.levels.forEach(function (l, li) {
+    l.stage = st.id; l.stageIndex = si; l.index = li;
+    l.label = st.short + " · المستوى " + (li + 1);
+    PLAN.levels.push(l);
+  });
+});
+
+// مسار فولدر الكتاب: books/ajurrumiyyah (من غير رقم، عشان تغيير الترتيب ما يكسرش الروابط)
 PLAN.books.forEach(function (b) {
-  b.folder = "books/" + String(b.n).padStart(2, "0") + "-" + b.key;
+  b.folder = "books/" + b.key;
+  b.stage = b.level.slice(0, 2);
 });
 
 // =========================================================
 // جسر أداة بطاقات Anki المشتركة ilm-anki.js (آلية العمل 5.11 — البند 9-ص)
 // الأداة نسخة مطابقة من مستودع Albinaa_Almanhaji ولا تُعدَّل هنا.
 // الجسر ده بيبني لها SITE_DATA من PLAN، فيطلع الوسم والرزمة آليًا:
-//   الوسم:  مواد_شرعية::المستوى_الأساسي::النحو::الآجرومية::محاضرة_01  + أولوية_N
+//   الوسم:  مواد_شرعية::مرحلة_التأسيس_الأولى::النحو::الآجرومية::محاضرة_01  + أولوية_N
 //   الرزمة: فوائد::🔴🔴🔴::مواد شرعية::<رزمة الأولوية>
 // اسم الكتاب في الوسم = عنوانه بعد حذف ما بين القوسين وعلامات «»، ولو عايز اسم أقصر
 // ضيف للكتاب حقل ankiName. ما تغيّرش أي حاجة هنا بعد استيراد بطاقات، عشان الوسوم تفضل ثابتة.
 // =========================================================
 var SITE_DATA = (function () {
-  var LEVEL_NAMES = { basic: "المستوى الأساسي", mid: "المستوى المتوسط", adv: "المستوى المتقدم" };
+  // الوسم بيستخدم اسم المرحلة (مثلًا: مواد_شرعية::مرحلة_التأسيس_الأولى::النحو::الآجرومية::محاضرة_01)
+  var LEVEL_NAMES = {};
+  PLAN.stages.forEach(function (st) { LEVEL_NAMES[st.id] = st.name; });
   var stages = {};
   PLAN.books.forEach(function (b) {
     var lectures = [];
     for (var i = 1; i <= 99; i++) lectures.push({ id: "moad_" + b.key + "_" + String(i).padStart(2, "0") });
     stages["moad" + b.n] = {
       name: b.science,
-      level: LEVEL_NAMES[b.level],
+      level: LEVEL_NAMES[b.stage],
       subjects: [{ key: b.key, name: b.ankiName || b.title.replace(/\([^)]*\)/g, "").replace(/[«»]/g, "").trim(), lectures: lectures }]
     };
   });

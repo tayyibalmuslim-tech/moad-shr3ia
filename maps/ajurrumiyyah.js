@@ -8,7 +8,7 @@ window.MOAD_MAPS = window.MOAD_MAPS || {};
 window.MOAD_MAPS["moad_ajurrumiyyah_01"] = {
  "title": "المحاضرة 01 — الكلام وعلامات الاسم",
  "book": "ajurrumiyyah",
- "lecture": "books/01-ajurrumiyyah/01-الكلام-وعلامات-الاسم.html",
+ "lecture": "books/ajurrumiyyah/01-الكلام-وعلامات-الاسم.html",
  "center": "الكلام وعلامات الاسم",
  "nodes": [
   {
@@ -262,7 +262,7 @@ window.MOAD_MAPS["moad_ajurrumiyyah_01"] = {
 window.MOAD_MAPS["moad_ajurrumiyyah_02"] = {
  "title": "المحاضرة 02 — علامات الفعل والحرف والإعراب",
  "book": "ajurrumiyyah",
- "lecture": "books/01-ajurrumiyyah/02-علامات-الفعل-والحرف-والإعراب.html",
+ "lecture": "books/ajurrumiyyah/02-علامات-الفعل-والحرف-والإعراب.html",
  "center": "علامات الفعل والحرف والإعراب",
  "nodes": [
   {

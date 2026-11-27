@@ -16,6 +16,8 @@
   BOOKS.forEach(function (b) { BOOK_BY_KEY[b.key] = b; });
   var LEVEL_BY_ID = {};
   PLAN.levels.forEach(function (l) { LEVEL_BY_ID[l.id] = l; });
+  var STAGE_BY_ID = {};
+  PLAN.stages.forEach(function (st) { STAGE_BY_ID[st.id] = st; });
 
   var STATUS = {
     todo:  { label: "لم يبدأ", cls: "st-todo" },
@@ -52,7 +54,7 @@
     return String(v);
   }
   function fmtHours(h) {
-    if (h == null) return "مرجع";
+    if (h == null) return "مستمر";
     if (h < 1 && h > 0) return Math.round(h * 60) + " دقيقة";
     return fmtNum(h) + " ساعة";
   }
@@ -89,6 +91,7 @@
         realism: PLAN.defaults.realism
       },
       books: {},
+      side: {},
       tests: {},
       log: []
     };
@@ -116,6 +119,9 @@
           notes: typeof b.notes === "string" ? b.notes : ""
         };
       });
+    }
+    if (s.side && typeof s.side === "object") {
+      Object.keys(s.side).forEach(function (k) { if (STATUS[s.side[k]]) base.side[k] = s.side[k]; });
     }
     if (s.tests && typeof s.tests === "object") {
       Object.keys(s.tests).forEach(function (k) {
@@ -187,19 +193,22 @@
   /* ---------------- الحسابات ---------------- */
   function totals() {
     var total = 0, done = 0;
-    var levels = {};
+    var levels = {}, stages = {};
     PLAN.levels.forEach(function (l) { levels[l.id] = { total: 0, done: 0, count: 0, finished: 0 }; });
+    PLAN.stages.forEach(function (st) { stages[st.id] = { total: 0, done: 0, count: 0, finished: 0 }; });
     BOOKS.forEach(function (b) {
       var st = peekBook(b.key);
-      var lv = levels[b.level];
-      lv.count++;
-      if (st.status === "done") lv.finished++;
+      [levels[b.level], stages[b.stage]].forEach(function (lv) {
+        lv.count++;
+        if (st.status === "done") lv.finished++;
+        if (b.hours == null) return;
+        var d = b.hours * st.pct / 100;
+        lv.total += b.hours; lv.done += d;
+      });
       if (b.hours == null) return;
-      var d = b.hours * st.pct / 100;
-      total += b.hours; done += d;
-      lv.total += b.hours; lv.done += d;
+      total += b.hours; done += b.hours * st.pct / 100;
     });
-    return { total: total, done: done, levels: levels };
+    return { total: total, done: done, levels: levels, stages: stages };
   }
 
   function bookMinutes(key) {
@@ -414,7 +423,9 @@
 
   function levelPill(id) {
     var l = LEVEL_BY_ID[id];
-    return '<span class="pill lv-' + id + '">' + esc(l ? l.name : id) + "</span>";
+    if (!l) return '<span class="pill">' + esc(id) + "</span>";
+    return '<span class="pill lv-' + l.stage + '">' + esc(l.label) + "</span>" +
+      '<span class="pill lv-sub">' + esc(l.name) + "</span>";
   }
 
   function bookOptions(selected) {
@@ -427,10 +438,10 @@
       });
       html += "</optgroup>";
     }
-    PLAN.levels.forEach(function (l) {
+    PLAN.stages.forEach(function (l) {
       html += '<optgroup label="' + esc(l.name) + '">';
       BOOKS.forEach(function (b) {
-        if (b.level !== l.id || peekBook(b.key).status === "doing") return;
+        if (b.stage !== l.id || b.hours == null || peekBook(b.key).status === "doing") return;
         html += '<option value="' + b.key + '"' + (b.key === selected ? " selected" : "") + ">" + b.n + ". " + esc(b.title) + "</option>";
       });
       html += "</optgroup>";
@@ -489,11 +500,15 @@
         stat(p.diff >= 0 ? "الفرق (لصالحك)" : "الفرق (عليك)", fmtNum(Math.abs(p.diff)) + " ساعة", p.diff >= 0 ? "pos" : "neg") +
       "</div>" +
       '<ul class="pace-lines">' +
-        "<li>المفروض تكون دلوقتي في: <a href=\"#/book/" + p.expectedBook.key + "\">" + p.expectedBook.n + ". " + esc(p.expectedBook.title) + "</a></li>" +
+        "<li>المفروض تكون دلوقتي في: <a href=\"#/book/" + p.expectedBook.key + "\">" + p.expectedBook.n + ". " + esc(p.expectedBook.title) + "</a>" +
+          ' <span class="muted small">(' + esc(LEVEL_BY_ID[p.expectedBook.level].label) + ")</span></li>" +
         "<li>الانتهاء المخطط: <strong>" + esc(fmtDate(p.plannedEnd)) + "</strong>" +
           (p.projectedEnd ? " — بمعدلك الحالي: <strong>" + esc(fmtDate(p.projectedEnd)) + "</strong>" : ' — <span class="muted">التوقع بمعدلك بيظهر بعد أسبوع من البداية</span>') + "</li>";
     if (p.phase === "behind" && p.neededPerDay) {
-      html += "<li class=\"hint\">عشان تلحق ميعادك: محتاج حوالي <strong>" + fmtNum(p.neededPerDay) + " ساعة دراسة يوميًا</strong> بدل " + fmtNum(s.hoursPerDay) +
+      var extraMin = Math.ceil((p.neededPerDay - s.hoursPerDay) * 60);
+      html += "<li class=\"hint\">عشان تلحق ميعادك: " + (extraMin < 60
+          ? "زوّد حوالي <strong>" + Math.max(extraMin, 1) + " دقيقة</strong> على مذاكرتك اليومية"
+          : "محتاج حوالي <strong>" + fmtNum(p.neededPerDay) + " ساعة دراسة يوميًا</strong> بدل " + fmtNum(s.hoursPerDay)) +
         "، أو عدّل الخطة من <a href=\"#/settings\">الإعدادات</a>.</li>";
     }
     html += "</ul></section>";
@@ -546,12 +561,13 @@
     var pct = t.total ? t.done / t.total * 100 : 0;
     var html = '<section class="card overview"><div class="card-head"><h3>الإنجاز الكلي</h3><strong class="big">' + fmtNum(pct) + "%</strong></div>" +
       bar(pct) + '<div class="levels">';
-    PLAN.levels.forEach(function (l) {
-      var lv = t.levels[l.id];
+    var eff = state.settings.hoursPerDay / state.settings.realism;
+    PLAN.stages.forEach(function (l) {
+      var lv = t.stages[l.id];
       var lp = lv.total ? lv.done / lv.total * 100 : 0;
-      html += '<a class="lvl lv-' + l.id + '" href="#level-' + l.id + '" data-jump="level-' + l.id + '">' +
+      html += '<a class="lvl lv-' + l.id + '" href="#stage-' + l.id + '" data-jump="stage-' + l.id + '">' +
         '<div class="lvl-head"><span>' + esc(l.name) + "</span><span>" + fmtNum(lp) + "%</span></div>" +
-        bar(lp, "lv") + '<small class="muted">' + lv.finished + " من " + lv.count + " كتاب · " + fmtNum(lv.total, 0) + " ساعة</small></a>";
+        bar(lp, "lv") + '<small class="muted">' + lv.finished + " من " + lv.count + " كتاب · " + fmtNum(lv.total, 0) + " ساعة · حوالي " + fmtSpan(lv.total / eff) + "</small></a>";
     });
     return html + "</div></section>";
   }
@@ -594,18 +610,24 @@
           segBtn("all", "الكل") + segBtn("doing", "جارٍ") + segBtn("todo", "لم يبدأ") + segBtn("done", "تم") +
         "</div></div>";
     var any = false;
-    PLAN.levels.forEach(function (l) {
-      var list = BOOKS.filter(function (b) {
-        if (b.level !== l.id) return false;
-        var st = peekBook(b.key).status;
-        if (ui.filter !== "all" && st !== ui.filter) return false;
-        if (q && (b.title + " " + b.science + " " + b.track).indexOf(q) === -1) return false;
-        return true;
+    PLAN.stages.forEach(function (stg) {
+      var inner = "";
+      stg.levels.forEach(function (l, li) {
+        var list = BOOKS.filter(function (b) {
+          if (b.level !== l.id) return false;
+          var st = peekBook(b.key).status;
+          if (ui.filter !== "all" && st !== ui.filter) return false;
+          if (q && (b.title + " " + b.science + " " + b.track).indexOf(q) === -1) return false;
+          return true;
+        });
+        if (!list.length) return;
+        inner += '<h4 class="sublevel-title lv-' + stg.id + '">المستوى ' + (li + 1) + " <small>" + esc(l.name) + "</small></h4>" +
+          list.map(bookCard).join("");
       });
-      if (!list.length) return;
+      if (!inner) return;
       any = true;
-      html += '<div class="level-block" id="level-' + l.id + '"><h3 class="level-title lv-' + l.id + '">' + esc(l.name) +
-        ' <small>' + esc(l.desc) + "</small></h3>" + list.map(bookCard).join("") + "</div>";
+      html += '<div class="level-block" id="stage-' + stg.id + '"><h3 class="level-title lv-' + stg.id + '">' + esc(stg.name) +
+        ' <small>' + esc(stg.desc) + "</small></h3>" + inner + "</div>";
     });
     if (!any) html += '<p class="empty">مفيش كتب بالفلتر ده.</p>';
     return html + "</section>";
@@ -833,6 +855,20 @@
     return html + treeErrorNote() + folderButtons(node, "ارفع درس") + "</section>";
   }
 
+  // كتب المنهج داخل علم أو قسم (ورد جانبي): الضغط على الحالة بيلفّ لم يبدأ ← جارٍ ← تم
+  function sideBooksCard(list) {
+    if (!list || !list.length) return "";
+    var d = list.filter(function (x) { return state.side[x.key] === "done"; }).length;
+    return '<section class="card side-books"><div class="card-head"><h3>كتب المنهج <small class="muted">خلصت ' + d + " من " + list.length + "</small></h3></div>" +
+      '<ol class="side-list">' + list.map(function (x, i) {
+        var st = state.side[x.key] || "todo";
+        return '<li class="' + STATUS[st].cls + '"><span class="num">' + (i + 1) + "</span>" +
+          '<span class="t">' + esc(x.title) + (x.alt ? '<small class="muted">أو ' + esc(x.alt) + "</small>" : "") + "</span>" +
+          '<button type="button" class="pill ' + STATUS[st].cls + '" data-side="' + esc(x.key) + '" title="اضغط لتغيير الحالة">' + STATUS[st].label + "</button></li>";
+      }).join("") + "</ol>" +
+      '<p class="muted small">ورد جانبي بالترتيب ده، ومش داخل في حساب الوتيرة.</p></section>';
+  }
+
   function renderSection(key) {
     var sec = (PLAN.sections || {})[key];
     if (!sec) return '<p class="empty">القسم ده مش موجود. <a href="#/">ارجع للرئيسية</a></p>';
@@ -848,6 +884,7 @@
         (all.length ? progressLine(all, "درس") : "") +
       "</section>";
     var groups = sec.groups || [], series = sec.series || [];
+    html += sideBooksCard(sec.books);
     if (groups.length) html += '<section class="card"><div class="card-head"><h3>العلوم <small class="muted">' + groups.length + " علوم</small></h3></div>" + groupCards(base, groups) + "</section>";
     if (series.length) html += '<section class="card"><div class="card-head"><h3>السلاسل <small class="muted">اختار الشرح اللي ماشي عليه</small></h3></div>' + seriesCards(base, series) + "</section>";
     if (summariesFor(sec).length || (!groups.length && !series.length))
@@ -870,6 +907,7 @@
         "<p>" + esc(g.desc) + "</p>" +
         (all.length ? progressLine(all, "درس") : "") +
       "</section>";
+    html += sideBooksCard(g.books);
     if (series.length) html += '<section class="card"><div class="card-head"><h3>السلاسل <small class="muted">اختار الشرح اللي ماشي عليه</small></h3></div>' + seriesCards(base, series) + "</section>";
     if (summariesFor(g).length || !series.length)
       html += looseLessons(g, series.length ? "دروس متفرقة" : "الدروس", "لسه مفيش دروس في «" + esc(g.title) + "».");
@@ -1159,6 +1197,14 @@
     if (lt) {
       var lid = lt.getAttribute("data-lec-toggle");
       setLectureDone(lid, localStorage.getItem("ilm_" + lid) !== "1");
+      return;
+    }
+    var sb = e.target.closest("[data-side]");
+    if (sb) {
+      var sk = sb.getAttribute("data-side"), cur = state.side[sk] || "todo";
+      state.side[sk] = cur === "todo" ? "doing" : cur === "doing" ? "done" : "todo";
+      if (state.side[sk] === "todo") delete state.side[sk];
+      persist();
       return;
     }
     var el = e.target.closest("[data-status],[data-filter],[data-log],[data-log-undo],[data-refresh],[data-export],[data-reset],[data-jump],#sync-chip,[data-close]");
