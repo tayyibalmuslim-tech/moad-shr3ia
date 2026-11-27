@@ -754,45 +754,64 @@
   }
 
   /* ---------------- أقسام التزكية والسيرة ---------------- */
-  function renderSection(key) {
-    var sec = (PLAN.sections || {})[key];
-    if (!sec) return '<p class="empty">القسم ده مش موجود. <a href="#/">ارجع للرئيسية</a></p>';
-    discover(false);
-    var sums = summariesFor(sec);
-    var doneSums = sums.filter(function (x) { return x.done; }).length;
-    var all = sums.slice();
-    (sec.series || []).forEach(function (sr) { all = all.concat(summariesFor(sr)); });
-    var allDone = all.filter(function (x) { return x.done; }).length;
-    var pct = all.length ? allDone / all.length * 100 : 0;
+  /* شجرة الأقسام: قسم ← (علوم groups) ← سلاسل series ← محاضرات، + دروس متفرقة في كل فولدر */
+  function nodeLessons(node) {
+    var all = summariesFor(node);
+    (node.series || []).forEach(function (sr) { all = all.concat(summariesFor(sr)); });
+    (node.groups || []).forEach(function (g) { all = all.concat(nodeLessons(g)); });
+    return all;
+  }
+  function progressLine(all, unit) {
+    var d = all.filter(function (x) { return x.done; }).length;
+    var p = all.length ? d / all.length * 100 : 0;
+    return '<div class="lec-progress"><strong>' + d + '</strong><span>من ' + all.length + " " + unit + "</span><em>" + fmtNum(p, 0) + "%</em></div>" + bar(p);
+  }
+  function treeErrorNote() {
+    return (tree.error && tree.error !== "local")
+      ? '<p class="muted small">⚠️ ماقدرتش أقرا الفولدر من GitHub دلوقتي (' + (tree.error === "rate" ? "تخطيت حد الطلبات، جرب بعد شوية" : "مشكلة اتصال") + ").</p>" : "";
+  }
+  function folderButtons(node, label) {
+    return '<div class="row gap">' +
+      '<a class="btn" href="' + esc(uploadHref(node)) + '" target="_blank" rel="noopener">⬆️ ' + label + "</a>" +
+      '<a class="btn ghost" href="' + esc(folderHref(node)) + '" target="_blank" rel="noopener">افتح الفولدر</a>' +
+      '<code class="path">' + esc(node.folder) + "/</code></div>";
+  }
 
-    var html = '<section class="card book-head section-head">' +
-        '<div class="row"><span class="pill sec-pill">' + sec.icon + " قسم مستقل</span>" +
-          '<span class="muted small">مش داخل في حساب وتيرة الخطة</span></div>' +
-        "<h1>" + esc(sec.icon + " " + sec.title) + "</h1>" +
-        "<p>" + esc(sec.desc) + "</p>" +
-        (sec.tip ? '<p class="note">💡 ' + esc(sec.tip) + "</p>" : "") +
-        (all.length ? '<div class="lec-progress"><strong>' + allDone + '</strong><span>من ' + all.length + " درس</span><em>" + fmtNum(pct, 0) + "%</em></div>" + bar(pct) : "") +
-      "</section>";
+  function seriesCards(base, series) {
+    return '<div class="series-list">' + series.map(function (sr) {
+      var ss = summariesFor(sr);
+      var d = ss.filter(function (x) { return x.done; }).length;
+      var p = ss.length ? d / ss.length * 100 : 0;
+      var mins = seriesMinutes(sr);
+      return '<a class="series-card" href="' + base + "/" + encodeURIComponent(sr.key) + '">' +
+        '<span class="sr-top"><strong>' + esc(sr.title) + "</strong><em>" + fmtNum(p, 0) + "%</em></span>" +
+        (sr.by ? '<span class="sr-by">' + esc(sr.by) + "</span>" : "") +
+        '<span class="sr-meta">🎧 ' + d + " من " + ss.length + " محاضرة" + (mins ? " · حوالي " + fmtNum(mins / 60, 0) + " ساعة" : "") + "</span>" +
+        bar(p) + "</a>";
+    }).join("") + "</div>";
+  }
 
-    var series = sec.series || [];
-    if (series.length) {
-      html += '<section class="card"><div class="card-head"><h3>السلاسل <small class="muted">اختار الشرح اللي ماشي عليه</small></h3></div>' +
-        '<div class="series-list">' + series.map(function (sr) {
-          var ss = summariesFor(sr);
-          var d = ss.filter(function (x) { return x.done; }).length;
-          var p = ss.length ? d / ss.length * 100 : 0;
-          var mins = seriesMinutes(sr);
-          return '<a class="series-card" href="#/' + esc(key) + "/" + encodeURIComponent(sr.key) + '">' +
-            '<span class="sr-top"><strong>' + esc(sr.title) + "</strong><em>" + fmtNum(p, 0) + "%</em></span>" +
-            '<span class="sr-by">' + esc(sr.by) + "</span>" +
-            '<span class="sr-meta">🎧 ' + d + " من " + ss.length + " محاضرة" + (mins ? " · حوالي " + fmtNum(mins / 60, 0) + " ساعة" : "") + "</span>" +
-            bar(p) + "</a>";
-        }).join("") + "</div></section>";
-      if (!sums.length) return html;
-    }
+  function groupCards(base, groups) {
+    return '<div class="group-grid">' + groups.map(function (g) {
+      var all = nodeLessons(g);
+      var d = all.filter(function (x) { return x.done; }).length;
+      var p = all.length ? d / all.length * 100 : 0;
+      var ns = (g.series || []).length;
+      var meta = ns ? ns + (ns === 1 ? " سلسلة" : ns === 2 ? " سلسلتين" : " سلاسل") + " · " + d + " من " + all.length + " درس"
+                    : (all.length ? d + " من " + all.length + " درس" : "لسه مفيش دروس");
+      return '<a class="series-card group-card" href="' + base + "/" + encodeURIComponent(g.key) + '">' +
+        '<span class="sr-top"><strong>' + esc(g.icon + " " + g.title) + "</strong>" + (all.length ? "<em>" + fmtNum(p, 0) + "%</em>" : "") + "</span>" +
+        '<span class="sr-meta">' + esc(g.desc) + "</span>" +
+        '<span class="sr-by">' + esc(meta) + "</span>" +
+        (all.length ? bar(p) : "") + "</a>";
+    }).join("") + "</div>";
+  }
 
-    html += '<section class="card summaries"><div class="card-head"><h3>' + (series.length ? "دروس متفرقة" : "الدروس") +
-      (sums.length ? ' <small class="muted">خلصت ' + doneSums + " من " + sums.length + "</small>" : "") + "</h3>" +
+  function looseLessons(node, title, emptyMsg) {
+    var sums = summariesFor(node);
+    var done = sums.filter(function (x) { return x.done; }).length;
+    var html = '<section class="card summaries"><div class="card-head"><h3>' + title +
+      (sums.length ? ' <small class="muted">خلصت ' + done + " من " + sums.length + "</small>" : "") + "</h3>" +
       '<button class="btn chip ghost" data-refresh>' + (tree.loading ? "بيحدّث…" : "↻ تحديث") + "</button></div>";
     if (sums.length) {
       html += '<ol class="sum-list lec-list">' + sums.map(function (s) {
@@ -807,17 +826,73 @@
           '<a class="lec-body" href="' + esc(summaryHref(s)) + '" target="_blank" rel="noopener">' + body + "</a></li>";
       }).join("") + "</ol>";
     } else {
-      html += '<div class="empty-sum"><p>لسه مفيش دروس في قسم «' + esc(sec.title) + '».</p>' +
-        '<p class="muted small">الملخص بيتعمل بآلية عمل المحاضرات (ملف HTML لكل درس)، ويترفع في فولدر <code>' + esc(sec.folder) + "/</code> باسم رقم الدرس، زي <code>01.html</code> أو <code>01-الإخلاص.html</code>، وهيظهر هنا لوحده. معرّف الصفحة: <code>moad_" + esc(sec.key) + "_01</code>.</p></div>";
+      html += '<div class="empty-sum"><p>' + emptyMsg + "</p>" +
+        '<p class="muted small">الملخص بيتعمل بآلية عمل المحاضرات (ملف HTML لكل درس)، ويترفع في فولدر <code>' + esc(node.folder) + "/</code> باسم رقم الدرس، زي <code>01.html</code> أو <code>01-الإخلاص.html</code>، وهيظهر هنا لوحده. معرّف الصفحة: <code>moad_" + esc(node.key) + "_01</code>." +
+        (node.section && node.group == null && node !== PLAN.sections[node.section] ? " ولو عندك سلسلة محاضرات كاملة (زي سلسلة السيرة)، ابعتلي قايمتها وتتضاف هنا كسلسلة." : "") + "</p></div>";
     }
-    if (tree.error && tree.error !== "local") {
-      html += '<p class="muted small">⚠️ ماقدرتش أقرا الفولدر من GitHub دلوقتي (' + (tree.error === "rate" ? "تخطيت حد الطلبات، جرب بعد شوية" : "مشكلة اتصال") + ").</p>";
-    }
-    html += '<div class="row gap">' +
-      '<a class="btn" href="' + esc(uploadHref(sec)) + '" target="_blank" rel="noopener">⬆️ ارفع درس</a>' +
-      '<a class="btn ghost" href="' + esc(folderHref(sec)) + '" target="_blank" rel="noopener">افتح الفولدر</a>' +
-      '<code class="path">' + esc(sec.folder) + "/</code></div></section>";
+    return html + treeErrorNote() + folderButtons(node, "ارفع درس") + "</section>";
+  }
+
+  function renderSection(key) {
+    var sec = (PLAN.sections || {})[key];
+    if (!sec) return '<p class="empty">القسم ده مش موجود. <a href="#/">ارجع للرئيسية</a></p>';
+    discover(false);
+    var all = nodeLessons(sec);
+    var base = "#/" + key;
+    var html = '<section class="card book-head section-head">' +
+        '<div class="row"><span class="pill sec-pill">' + sec.icon + " قسم مستقل</span>" +
+          '<span class="muted small">مش داخل في حساب وتيرة الخطة</span></div>' +
+        "<h1>" + esc(sec.icon + " " + sec.title) + "</h1>" +
+        "<p>" + esc(sec.desc) + "</p>" +
+        (sec.tip ? '<p class="note">💡 ' + esc(sec.tip) + "</p>" : "") +
+        (all.length ? progressLine(all, "درس") : "") +
+      "</section>";
+    var groups = sec.groups || [], series = sec.series || [];
+    if (groups.length) html += '<section class="card"><div class="card-head"><h3>العلوم <small class="muted">' + groups.length + " علوم</small></h3></div>" + groupCards(base, groups) + "</section>";
+    if (series.length) html += '<section class="card"><div class="card-head"><h3>السلاسل <small class="muted">اختار الشرح اللي ماشي عليه</small></h3></div>' + seriesCards(base, series) + "</section>";
+    if (summariesFor(sec).length || (!groups.length && !series.length))
+      html += looseLessons(sec, (groups.length || series.length) ? "دروس متفرقة" : "الدروس", "لسه مفيش دروس في قسم «" + esc(sec.title) + "».");
     return html;
+  }
+
+  function renderGroup(secKey, gKey) {
+    var sec = PLAN.sections[secKey];
+    var g = (sec.groups || []).filter(function (x) { return x.key === gKey; })[0];
+    discover(false);
+    var all = nodeLessons(g);
+    var base = "#/" + secKey + "/" + encodeURIComponent(g.key);
+    var series = g.series || [];
+    var html = '<a class="back" href="#/' + esc(secKey) + '">→ رجوع لقسم «' + esc(sec.title) + "»</a>" +
+      '<section class="card book-head section-head">' +
+        '<div class="row"><span class="pill sec-pill">' + sec.icon + " " + esc(sec.title) + "</span>" +
+          '<span class="muted small">علم ' + g.n + " من " + sec.groups.length + "</span></div>" +
+        "<h1>" + esc(g.icon + " " + g.title) + "</h1>" +
+        "<p>" + esc(g.desc) + "</p>" +
+        (all.length ? progressLine(all, "درس") : "") +
+      "</section>";
+    if (series.length) html += '<section class="card"><div class="card-head"><h3>السلاسل <small class="muted">اختار الشرح اللي ماشي عليه</small></h3></div>' + seriesCards(base, series) + "</section>";
+    if (summariesFor(g).length || !series.length)
+      html += looseLessons(g, series.length ? "دروس متفرقة" : "الدروس", "لسه مفيش دروس في «" + esc(g.title) + "».");
+    // تنقل بين العلوم
+    var i = sec.groups.indexOf(g), prev = sec.groups[i - 1], next = sec.groups[i + 1];
+    html += '<nav class="pager">' +
+      (prev ? '<a href="#/' + secKey + "/" + prev.key + '">→ ' + esc(prev.icon + " " + prev.title) + "</a>" : "<span></span>") +
+      (next ? '<a href="#/' + secKey + "/" + next.key + '">' + esc(next.icon + " " + next.title) + " ←</a>" : "<span></span>") +
+      "</nav>";
+    return html;
+  }
+
+  // مسار جوه قسم: #/sec/x  (x علم أو سلسلة) أو #/sec/group/series
+  function renderSub(secKey, parts) {
+    var sec = (PLAN.sections || {})[secKey];
+    var notFound = '<p class="empty">الصفحة دي مش موجودة. <a href="#/' + esc(secKey) + '">ارجع للقسم</a></p>';
+    if (!sec) return notFound;
+    var g = (sec.groups || []).filter(function (x) { return x.key === parts[0]; })[0];
+    if (g && parts.length === 1) return renderGroup(secKey, g.key);
+    var pool = g ? (g.series || []) : (sec.series || []);
+    var sr = pool.filter(function (x) { return x.key === parts[g ? 1 : 0]; })[0];
+    if (!sr || parts.length > (g ? 2 : 1)) return notFound;
+    return renderSeries(sec, sr, g);
   }
 
   function durMinutes(d) {
@@ -829,10 +904,8 @@
     return (sr.lectures || []).reduce(function (a, l) { return a + durMinutes(l.dur); }, 0);
   }
 
-  function renderSeries(secKey, key) {
-    var sec = (PLAN.sections || {})[secKey];
-    var sr = sec && (sec.series || []).filter(function (x) { return x.key === key; })[0];
-    if (!sr) return '<p class="empty">السلسلة دي مش موجودة. <a href="#/' + esc(secKey) + '">ارجع للقسم</a></p>';
+  function renderSeries(sec, sr, g) {
+    var secKey = sec.key;
     discover(false);
     var sums = summariesFor(sr);
     var done = sums.filter(function (x) { return x.done; }).length;
@@ -841,9 +914,10 @@
     var left = sums.reduce(function (a, x) { return a + (x.done ? 0 : durMinutes(x.dur)); }, 0);
     var next = sums.filter(function (x) { return !x.done; })[0];
 
-    var html = '<a class="back" href="#/' + esc(secKey) + '">→ رجوع لـ' + esc(sec.title) + "</a>" +
+    var html = (g ? '<a class="back" href="#/' + esc(secKey) + "/" + esc(g.key) + '">→ رجوع لـ«' + esc(g.title) + "»</a>"
+                  : '<a class="back" href="#/' + esc(secKey) + '">→ رجوع لقسم «' + esc(sec.title) + "»</a>") +
       '<section class="card book-head section-head">' +
-        '<div class="row"><span class="pill sec-pill">' + sec.icon + " " + esc(sec.title) + "</span>" +
+        '<div class="row"><span class="pill sec-pill">' + (g ? esc(g.icon + " " + g.title) : sec.icon + " " + esc(sec.title)) + "</span>" +
           '<span class="muted small">' + esc(sr.channel || "") + "</span></div>" +
         "<h1>" + esc(sr.title) + " — " + esc(sr.by) + "</h1>" +
         '<div class="meta-grid">' +
@@ -909,7 +983,7 @@
     if (h === "/settings") return { name: "settings" };
     if (h === "/tazkiya" || h === "/sira") return { name: "section", key: h.slice(1) };
     var sm = h.match(/^\/(tazkiya|sira)\/(.+)$/);
-    if (sm) return { name: "series", sec: sm[1], key: decodeURIComponent(sm[2]) };
+    if (sm) return { name: "sub", sec: sm[1], key: sm[2], parts: sm[2].split("/").map(decodeURIComponent) };
     return { name: "home" };
   }
 
@@ -925,11 +999,11 @@
     if (r.name === "book") app.innerHTML = renderBook(r.key);
     else if (r.name === "settings") app.innerHTML = renderSettings();
     else if (r.name === "section") app.innerHTML = renderSection(r.key);
-    else if (r.name === "series") app.innerHTML = renderSeries(r.sec, r.key);
+    else if (r.name === "sub") app.innerHTML = renderSub(r.sec, r.parts);
     else app.innerHTML = renderHome();
 
     document.querySelectorAll("[data-nav]").forEach(function (a) {
-      a.classList.toggle("active", a.getAttribute("data-nav") === (r.name === "settings" ? "settings" : r.name === "section" ? r.key : r.name === "series" ? r.sec : "home"));
+      a.classList.toggle("active", a.getAttribute("data-nav") === (r.name === "settings" ? "settings" : r.name === "section" ? r.key : r.name === "sub" ? r.sec : "home"));
     });
     if (keepScroll) window.scrollTo(0, y); else window.scrollTo(0, 0);
     if (focusId === "q") {

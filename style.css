@@ -394,3 +394,7 @@ a.lec-map:hover{ border-color:var(--ink-2); }
 .sr-top em{ margin-inline-start:auto; font-style:normal; font-weight:800; color:var(--copper); }
 .sr-by{ font-weight:700; color:var(--ink-2); font-size:14px; }
 .sr-meta{ color:var(--muted); font-size:13px; margin-bottom:4px; }
+
+/* علوم القسم (التزكية): شبكة كروت */
+.group-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:10px; }
+.group-card .sr-meta{ line-height:1.8; }
