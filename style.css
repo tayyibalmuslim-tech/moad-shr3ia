@@ -373,3 +373,14 @@ a.lec-map:hover{ border-color:var(--ink-2); }
 .tm-opts.tf .tm-op{ flex:1; text-align:center; font-size:18px; font-weight:800; padding:12px; }
 .tm-split{ display:flex; gap:6px; margin:10px 0 0; }
 .tm-split .tm-kind{ margin:0; font-size:13px; padding:3px 12px; }
+
+/* أقسام التزكية والسيرة (تبويبات الهيدر) */
+.section-head h1{ margin:8px 0 6px; }
+.section-head p{ margin:0 0 10px; line-height:1.9; }
+.sec-pill{ background:#e7efe4; color:#2f5d3a; }
+.topnav a{ white-space:nowrap; }
+@media (max-width:420px){
+  .brand-text{ display:none; }            /* على الموبايل: علامة «م» بس عشان التبويبات الأربعة تيجي في سطر واحد */
+  .topnav{ gap:2px; }
+  .topnav a{ padding:6px 8px; font-size:13px; }
+}

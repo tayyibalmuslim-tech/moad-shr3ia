@@ -304,7 +304,7 @@
       })
       .then(function (json) {
         tree.files = (json.tree || []).filter(function (t) {
-          return t.type === "blob" && t.path.indexOf("books/") === 0;
+          return t.type === "blob" && /^(books|tazkiya|sira)\//.test(t.path);
         }).map(function (t) { return t.path; });
         tree.at = Date.now();
         tree.error = null;
@@ -747,6 +747,53 @@
     return "وقتك على الكتاب قريب من التقدير. 👌";
   }
 
+  /* ---------------- أقسام التزكية والسيرة ---------------- */
+  function renderSection(key) {
+    var sec = (PLAN.sections || {})[key];
+    if (!sec) return '<p class="empty">القسم ده مش موجود. <a href="#/">ارجع للرئيسية</a></p>';
+    discover(false);
+    var sums = summariesFor(sec);
+    var doneSums = sums.filter(function (x) { return x.done; }).length;
+    var pct = sums.length ? doneSums / sums.length * 100 : 0;
+
+    var html = '<section class="card book-head section-head">' +
+        '<div class="row"><span class="pill sec-pill">' + sec.icon + " قسم مستقل</span>" +
+          '<span class="muted small">مش داخل في حساب وتيرة الخطة</span></div>' +
+        "<h1>" + esc(sec.icon + " " + sec.title) + "</h1>" +
+        "<p>" + esc(sec.desc) + "</p>" +
+        (sec.tip ? '<p class="note">💡 ' + esc(sec.tip) + "</p>" : "") +
+        (sums.length ? '<div class="lec-progress"><strong>' + doneSums + '</strong><span>من ' + sums.length + " درس</span><em>" + fmtNum(pct, 0) + "%</em></div>" + bar(pct) : "") +
+      "</section>";
+
+    html += '<section class="card summaries"><div class="card-head"><h3>الدروس' +
+      (sums.length ? ' <small class="muted">خلصت ' + doneSums + " من " + sums.length + "</small>" : "") + "</h3>" +
+      '<button class="btn chip ghost" data-refresh>' + (tree.loading ? "بيحدّث…" : "↻ تحديث") + "</button></div>";
+    if (sums.length) {
+      html += '<ol class="sum-list lec-list">' + sums.map(function (s) {
+        var extra = (s.hl.marks ? '<span class="sh" title="تظليلات">🖍 ' + s.hl.marks + "</span>" : "") +
+          (s.hl.notes ? '<span class="sh" title="تعليقات">💬 ' + s.hl.notes + "</span>" : "");
+        var check = s.id ? '<button type="button" class="lec-check' + (s.done ? " on" : "") + '" data-lec-toggle="' + esc(s.id) + '" aria-pressed="' + (s.done ? "true" : "false") +
+          '" title="' + (s.done ? "شيل علامة خلصت" : "علّم إنك خلصت الدرس") + '">' + (s.done ? "✓" : pad(s.n)) + "</button>"
+          : '<span class="lec-check" aria-hidden="true">•</span>';
+        var body = '<span class="st">' + esc(s.title) + (extra ? '<span class="sx">' + extra + "</span>" : "") + "</span>" +
+          '<span class="se">' + esc(s.ext.toUpperCase()) + "</span>";
+        return '<li class="' + (s.done ? "is-done" : "") + '">' + check +
+          '<a class="lec-body" href="' + esc(summaryHref(s)) + '" target="_blank" rel="noopener">' + body + "</a></li>";
+      }).join("") + "</ol>";
+    } else {
+      html += '<div class="empty-sum"><p>لسه مفيش دروس في قسم «' + esc(sec.title) + '».</p>' +
+        '<p class="muted small">الملخص بيتعمل بآلية عمل المحاضرات (ملف HTML لكل درس)، ويترفع في فولدر <code>' + esc(sec.folder) + "/</code> باسم رقم الدرس، زي <code>01.html</code> أو <code>01-الإخلاص.html</code>، وهيظهر هنا لوحده. معرّف الصفحة: <code>moad_" + esc(sec.key) + "_01</code>.</p></div>";
+    }
+    if (tree.error && tree.error !== "local") {
+      html += '<p class="muted small">⚠️ ماقدرتش أقرا الفولدر من GitHub دلوقتي (' + (tree.error === "rate" ? "تخطيت حد الطلبات، جرب بعد شوية" : "مشكلة اتصال") + ").</p>";
+    }
+    html += '<div class="row gap">' +
+      '<a class="btn" href="' + esc(uploadHref(sec)) + '" target="_blank" rel="noopener">⬆️ ارفع درس</a>' +
+      '<a class="btn ghost" href="' + esc(folderHref(sec)) + '" target="_blank" rel="noopener">افتح الفولدر</a>' +
+      '<code class="path">' + esc(sec.folder) + "/</code></div></section>";
+    return html;
+  }
+
   /* ---------------- الإعدادات ---------------- */
   function renderSettings() {
     var s = state.settings;
@@ -784,6 +831,7 @@
     var h = location.hash.replace(/^#/, "");
     if (h.indexOf("/book/") === 0) return { name: "book", key: decodeURIComponent(h.slice(6)) };
     if (h === "/settings") return { name: "settings" };
+    if (h === "/tazkiya" || h === "/sira") return { name: "section", key: h.slice(1) };
     return { name: "home" };
   }
 
@@ -798,10 +846,11 @@
 
     if (r.name === "book") app.innerHTML = renderBook(r.key);
     else if (r.name === "settings") app.innerHTML = renderSettings();
+    else if (r.name === "section") app.innerHTML = renderSection(r.key);
     else app.innerHTML = renderHome();
 
     document.querySelectorAll("[data-nav]").forEach(function (a) {
-      a.classList.toggle("active", a.getAttribute("data-nav") === (r.name === "settings" ? "settings" : "home"));
+      a.classList.toggle("active", a.getAttribute("data-nav") === (r.name === "settings" ? "settings" : r.name === "section" ? r.key : "home"));
     });
     if (keepScroll) window.scrollTo(0, y); else window.scrollTo(0, 0);
     if (focusId === "q") {
