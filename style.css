@@ -384,3 +384,13 @@ a.lec-map:hover{ border-color:var(--ink-2); }
   .topnav{ gap:2px; }
   .topnav a{ padding:6px 8px; font-size:13px; }
 }
+
+/* سلاسل الشرح جوه قسم (زي سيرة د. راغب السرجاني) */
+.series-list{ display:grid; gap:10px; }
+.series-card{ display:flex; flex-direction:column; gap:4px; padding:12px 14px; border:1px solid var(--line); border-radius:12px; text-decoration:none; color:inherit; background:#fffdf8; }
+.series-card:hover{ border-color:var(--copper); }
+.sr-top{ display:flex; align-items:baseline; gap:8px; }
+.sr-top strong{ font-family:var(--f-title); font-size:19px; color:var(--ink); }
+.sr-top em{ margin-inline-start:auto; font-style:normal; font-weight:800; color:var(--copper); }
+.sr-by{ font-weight:700; color:var(--ink-2); font-size:14px; }
+.sr-meta{ color:var(--muted); font-size:13px; margin-bottom:4px; }
