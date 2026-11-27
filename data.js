@@ -98,8 +98,22 @@ const PLAN = {
   // ---------------------------------------------------------
   sections: {
     tazkiya: { key: "tazkiya", folder: "tazkiya", icon: "🌿", title: "تزكية",
-      desc: "تزكية النفس وأعمال القلوب: الإخلاص، والتوبة، والصبر، والشكر، والمراقبة — العلم اللي بيخلّي الطلب كله لله.",
-      tip: "خليها وِرد ثابت جنب الخطة، ولو ربع ساعة في اليوم: «قد أفلح من زكاها»." },
+      desc: "كل اللي بيزكّي القلب ويقرّب من الله: أعمال القلوب، ومعرفة الله، وتدبر القرآن، وسير الصالحين، والأخلاق — العلم اللي بيخلّي الطلب كله لله.",
+      tip: "خليها وِرد ثابت جنب الخطة، ولو ربع ساعة في اليوم: «قد أفلح من زكاها».",
+      // علوم القسم: كل علم له فولدر tazkiya/NN-key/ وجواه سلاسل (series) زي سلسلة السيرة
+      // ودروس العلم المتفرقة (ملفات مباشرة في فولدره) معرّفها moad_{key}_{NN}
+      groups: [
+        { n: 1, key: "tz-tazkiya",  icon: "🌱", title: "التزكية",
+          desc: "تزكية النفس وأعمال القلوب: الإخلاص، والتوبة، والصبر، والشكر، والمراقبة، وعلاج آفات النفس.", series: [] },
+        { n: 2, key: "tz-ilm-billah", icon: "✨", title: "العلم بالله",
+          desc: "معرفة الله بأسمائه وصفاته وأفعاله وآثارها في القلب — أصل الخشية والمحبة والتوكل.", series: [] },
+        { n: 3, key: "tz-suwar",    icon: "📖", title: "مدارسات سور القرآن",
+          desc: "مدارسة السور سورة سورة: مقاصدها وموضوعاتها وهداياتها العملية.", series: [] },
+        { n: 4, key: "tz-siyar",    icon: "📜", title: "سير ومناقب",
+          desc: "سير الأنبياء والصحابة والتابعين والعلماء والصالحين، ومناقبهم ومواقفهم.", series: [] },
+        { n: 5, key: "tz-akhlaq",   icon: "🤝", title: "الأخلاق والآداب",
+          desc: "الأخلاق والآداب الشرعية: مع الله، ومع النفس، ومع الناس في البيت والشغل والطريق.", series: [] }
+      ] },
     sira:    { key: "sira", folder: "sira", icon: "🕌", title: "السيرة النبوية",
       desc: "سيرة النبي ﷺ: من المولد للبعثة، والهجرة، والغزوات، والشمائل — القدوة العملية للفقه والسلوك.",
       tip: "اقرأ السيرة بسؤال: «إيه اللي أطبّقه من الموقف ده النهارده؟».",
@@ -161,11 +175,21 @@ const PLAN = {
 };
 
 // مسار فولدر كل سلسلة جوه قسمها: sira/01-sira-sirjani
+// ومسار كل علم جوه قسمه: tazkiya/02-tz-ilm-billah — وسلاسله جواه: tazkiya/02-tz-ilm-billah/01-<key>
 Object.keys(PLAN.sections).forEach(function (k) {
   var sec = PLAN.sections[k];
+  function nn(x) { return String(x.n).padStart(2, "0") + "-" + x.key; }
   (sec.series || []).forEach(function (sr) {
     sr.section = k;
-    sr.folder = sec.folder + "/" + String(sr.n).padStart(2, "0") + "-" + sr.key;
+    sr.folder = sec.folder + "/" + nn(sr);
+  });
+  (sec.groups || []).forEach(function (g) {
+    g.section = k;
+    g.folder = sec.folder + "/" + nn(g);
+    (g.series || []).forEach(function (sr) {
+      sr.section = k; sr.group = g.key;
+      sr.folder = g.folder + "/" + nn(sr);
+    });
   });
 });
 

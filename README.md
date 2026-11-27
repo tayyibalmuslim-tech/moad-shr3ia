@@ -21,7 +21,7 @@ ilm-highlight.js         الهايلايت والتعليقات وبطاقات 
 ilm-anki.js              مولّد ومصدِّر بطاقات Anki الموحّد (نسخة مطابقة من البناء المنهجي — آلية العمل 9-ص)
 tools/check-anki.js           فحص اتساق بطاقات Anki في كل الملخصات قبل الرفع
 tools/lecture-template.html   قالب ربط صفحة الملخص بالأنظمة دي
-tazkiya/                 دروس تبويب «تزكية» (قسم مستقل، مش داخل في الوتيرة) — المعرّف moad_tazkiya_NN
+tazkiya/                 تبويب «تزكية» (قسم مستقل) — 5 علوم: 01-tz-tazkiya، 02-tz-ilm-billah، 03-tz-suwar، 04-tz-siyar، 05-tz-akhlaq
 sira/                    دروس تبويب «سيرة» (قسم مستقل، مش داخل في الوتيرة) — المعرّف moad_sira_NN
 books/
   01-ajurrumiyyah/       فولدر ملخصات كل كتاب (README جوه كل فولدر)
